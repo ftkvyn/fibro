@@ -1,0 +1,63 @@
+
+
+<script>
+ $(function(){
+ 	loadData(); 	
+ });
+
+ function sendData(){
+ 	var model = {};
+ 	model.name = $('#name').val();
+ 	model.floatValue = $('#float').val();
+ 	model.intValue = $('#int').val();
+ 	$.post('/api/dummy', model)
+ 	.success(function(data)
+ 	{
+ 		loadData();
+ 	})
+ 	.error(function(data)
+ 	{
+ 		console.log(data);	
+ 		alert(data.responseText);	
+ 	});
+ }
+
+ function loadData(){
+ 	$('#items').empty();
+ 	$.get('/api/dummy')
+ 	.success(function(data)
+ 	{
+ 		for (var i = data.length - 1; i >= 0; i--) {
+ 			$('#items').append('<li title="' + data[i].id + '">' 
+ 				+ data[i].name 
+ 				+ ' '
+ 				+ data[i].floatValue
+ 				+ ' '
+ 				+ data[i].intValue
+ 				+ '</li>');
+ 		}; 		
+ 	})
+ 	.error(function(data)
+ 	{
+ 		console.log(data);	
+ 	});
+ }
+</script>
+
+<h1>Test page</h1>
+
+<div class='row'>
+	<div class='col-md-4'>
+		<input type="text" class="form-control" id="name" placeholder="Enter name">
+		<input type="text" class="form-control" id="float" placeholder="Enter float">
+		<input type="number" class="form-control" id="int" placeholder="Enter int">
+
+		<button class='btn btn-default' onclick='sendData()'>Send</button><br/>
+	</div>
+	<div class='col-md-4'>
+		<ul id='items'>
+
+		</ul>
+	</div>
+</div>
+

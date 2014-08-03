@@ -36,6 +36,10 @@ module.exports.routes = {
     view: 'homepage'
   },
 
+  '/test': {
+    view: 'test'
+  },
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
