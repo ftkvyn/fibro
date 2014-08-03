@@ -3,6 +3,21 @@
 <script>
  $(function(){
  	loadData(); 	
+
+ 	$('body').on('click', 'li', function(){
+ 		var id = $(this).find('input').val();
+ 		$.ajax({
+		    url: '/api/dummy/' + id,
+		    type: 'DELETE',
+		    success: function(data) {
+		        loadData(); 
+		    },
+		    error:function(data) {
+		        console.log(data);	
+ 				alert(data.responseText);
+		    }
+		});
+ 	})
  });
 
  function sendData(){
@@ -34,6 +49,7 @@
  				+ data[i].floatValue
  				+ ' '
  				+ data[i].intValue
+ 				+ '<input type="hidden" value="' + data[i].id + '">'
  				+ '</li>');
  		}; 		
  	})
@@ -55,6 +71,7 @@
 		<button class='btn btn-default' onclick='sendData()'>Send</button><br/>
 	</div>
 	<div class='col-md-4'>
+		Click on item to delete it.
 		<ul id='items'>
 
 		</ul>
