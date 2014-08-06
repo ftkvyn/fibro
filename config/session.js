@@ -31,9 +31,9 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // cookie: {
-  //   maxAge: 24 * 60 * 60 * 1000
-  // }
+  cookie: {
+    maxAge: 10 * 24 * 60 * 60 * 1000
+  },
 
   /***************************************************************************
   *                                                                          *
@@ -41,7 +41,7 @@ module.exports.session = {
   * session store that can be shared across multiple Sails.js servers        *
   ***************************************************************************/
 
-  // adapter: 'redis',
+  adapter: 'redis',
 
   /***************************************************************************
   *                                                                          *
@@ -52,11 +52,11 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // host: 'localhost',
-  // port: 6379,
-  // ttl: <redis session TTL in seconds>,
-  // db: 0,
-  // pass: <redis auth password>
+  host: 'pub-redis-17557.eu-west-1-1.2.ec2.garantiadata.com',
+  port: 17557,
+  //ttl: <redis session TTL in seconds>,
+  db: 'redis-fibro-app',
+  pass: 'bn3T0K3d8nRVJdzc'
   // prefix: 'sess:'
 
 

@@ -40,6 +40,10 @@ module.exports.routes = {
     view: 'homepage'
   },
 
+  'get /auth/facebook': 'AuthController.fb_authenticate',
+
+  'get /auth/facebook/callback': 'AuthController.fb_authenticate_callback',
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
