@@ -23,6 +23,8 @@ module.exports = {
 	},
 	fb_id: {
 	    type: 'string',
+      	required: true,
+      	unique: true
 	}
   }
 };

@@ -47,27 +47,7 @@
       console.error('npm install rc --save');
       rc = function () { return {}; };
     }
-  }
-
-
-
-  var passport = require('passport')
-  , FacebookStrategy = require('passport-facebook').Strategy;
-
-  passport.use(new FacebookStrategy({
-      clientID: process.env.FB_APP_ID,
-      clientSecret: process.env.FB_APP_SECRET,
-      callbackURL: "/test"
-    },
-    function(accessToken, refreshToken, profile, done) {
-
-      console.log(profile);
-      // User.findOrCreate(..., function(err, user) {
-      //   if (err) { return done(err); }
-      //   done(null, user);
-      // });
-    }
-  ));
+  }  
 
   // Start server
   sails.lift(rc('sails'));

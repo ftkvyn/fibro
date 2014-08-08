@@ -40,9 +40,15 @@ module.exports.routes = {
     view: 'homepage'
   },
 
+  '/profile': {
+    view: 'profile'
+  },
+
   'get /auth/facebook': 'AuthController.fb_authenticate',
 
   'get /auth/facebook/callback': 'AuthController.fb_authenticate_callback',
+
+  'get /auth/logout': 'AuthController.logout',
 
   /***************************************************************************
   *                                                                          *

@@ -8,6 +8,7 @@
  * For more information on configuration, check out:
  * http://sailsjs.org/#/documentation/reference/sails.config/sails.config.http.html
  */
+var passport = require('passport');
 
 module.exports.http = {
 
@@ -84,4 +85,28 @@ module.exports.http = {
   ***************************************************************************/
 
   // cache: 31557600000
+
+  customMiddleware: function(app){
+
+        // Passport
+        app.use(passport.initialize());
+        app.use(passport.session());
+
+        app.use(function(req, res, next){
+            if(req.session){
+              var user = req.session.user;
+              res.locals({user:user});
+              // console.log('Setting locals'); 
+              // console.log(res.locals); 
+            }
+            else{
+              // console.log('No session');              
+              // console.log('============');
+              //console.log(res);
+            }
+
+            next();
+        });
+
+    }
 };

@@ -7,7 +7,8 @@
   "dependencies": {
     "sails": "~0.10.1",
     "sails-mysql": "~0.10.0",
-    "connect-redis": "~1.4.5",
+    "connect-mongo": "~0.4.1",
+    "connect-redis": "~1.4.5",    
     "passport":"~0.2.0",
     "passport-facebook":"~1.0.3",
     "passport-local":"~1.0.0",

@@ -57,6 +57,20 @@
  	{
  		console.log(data);	
  	});
+
+ 	$.get('/api/user')
+ 	.success(function(data)
+ 	{
+ 		for (var i = data.length - 1; i >= 0; i--) {
+ 			$('#items').append('<li>' 
+ 				+ data[i].id 
+ 				+ '</li>');
+ 		}; 		
+ 	})
+ 	.error(function(data)
+ 	{
+ 		console.log(data);	
+ 	});
  }
 </script>
 
@@ -69,7 +83,12 @@
 		<input type="number" class="form-control" id="int" placeholder="Enter int">
 
 		<button class='btn btn-default' onclick='sendData()'>Send</button><br/>
-		<a href="/auth/facebook">FB login</a>
+		<% if (user) { %>
+		    Hello, <strong><%= user.name %></strong><br/>
+		    <a href="/auth/logout">Logout</a>
+		<% } else {%>
+			<a href="/auth/facebook">Login with Facebook</a>
+		<% } %>
 	</div>
 	<div class='col-md-4'>
 		Click on item to delete it.

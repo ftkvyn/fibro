@@ -12,6 +12,8 @@
  * http://sailsjs.org/#/documentation/reference/sails.config/sails.config.session.html
  */
 
+var redisSessionUri = 'redis://rediscloud:bn3T0K3d8nRVJdzc@pub-redis-17557.eu-west-1-1.2.ec2.garantiadata.com:17557';
+
 module.exports.session = {
 
   /***************************************************************************
@@ -42,6 +44,7 @@ module.exports.session = {
   ***************************************************************************/
 
   adapter: 'redis',
+  url: redisSessionUri,
 
   /***************************************************************************
   *                                                                          *
@@ -52,11 +55,11 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  host: 'pub-redis-17557.eu-west-1-1.2.ec2.garantiadata.com',
-  port: 17557,
-  //ttl: <redis session TTL in seconds>,
-  db: 'redis-fibro-app',
-  pass: 'bn3T0K3d8nRVJdzc'
+  // host: 'pub-redis-17557.eu-west-1-1.2.ec2.garantiadata.com',
+  // port: 17557,
+  // ttl: 20,
+  // db: 'redis-fibro-app',
+  // pass: 'bn3T0K3d8nRVJdzc',
   // prefix: 'sess:'
 
 
@@ -67,10 +70,11 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // adapter: 'mongo',
-  // host: 'localhost',
-  // port: 27017,
-  // db: 'sails',
+  //adapter: 'mongo',
+  //url: sessionUri,
+  // host: 'ds053479.mongolab.com',
+  // port: 53479,
+  // db: 'heroku_app28099255',
   // collection: 'sessions',
 
   /***************************************************************************
@@ -82,8 +86,8 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // username: '',
-  // password: '',
+  // username: 'heroku_app28099255',
+  // password: '_app280',
   // auto_reconnect: false,
   // ssl: false,
   // stringify: true

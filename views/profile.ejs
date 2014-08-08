@@ -1,0 +1,10 @@
+<% if (user) { %>
+	<p><strong><%- user.name %></strong>, You are logged in! Your id is 
+		<strong><%- user.id %></strong> 
+		and your Facebook Id is <strong><%- user.fb_id %></strong>
+		, your email is <strong><%- user.email %></strong></p>
+	<p><a href="/auth/logout">Logout</a></p>
+<% } else {%>
+		You are not logged in. <a href="/auth/facebook">Login with Facebook</a>
+<% } %>
+
