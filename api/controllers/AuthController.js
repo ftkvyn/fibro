@@ -28,7 +28,7 @@ module.exports = {
             //console.log('User is in the session');
             //console.log(user);
             //console.log(req.session);
-            res.redirect('/' + user.id);
+            res.redirect('/profile/' + user.id);
         })(req, res, next);
   },
 
