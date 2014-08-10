@@ -24,11 +24,15 @@ module.exports = {
   fb_authenticate_callback: function (req, res, next) {
      passport.authenticate('facebook',
         function (err, user, info) {
+          if(user){
             req.session.user = user;
-            //console.log('User is in the session');
-            //console.log(user);
-            //console.log(req.session);
             res.redirect('/profile/' + user.id);
+          }
+          else{
+            console.log(info);
+            console.log(err);
+            res.serverError(info);
+          }
         })(req, res, next);
   },
 

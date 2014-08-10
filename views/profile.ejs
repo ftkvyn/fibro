@@ -3,7 +3,7 @@
 		<strong><%- user.name %></strong><br/>
 		<% if (user.fb_id) { %>
 			<img src='http://graph.facebook.com/<%- user.fb_id %>/picture?type=normal'	alt='image'/><br/>
-			<a href="http://facebook.com/<%- user.fb_id %>"><%- user.name %> on facebook</a>
+			<a target="_blank" href="http://facebook.com/<%- user.fb_id %>"><%- user.name %> on facebook</a>
 			<br/>
 		<% } %>
 		Email: <strong><%- user.email %></strong>
