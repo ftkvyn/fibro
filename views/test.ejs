@@ -1,70 +1,30 @@
 
+<script id="user-template" type="text/x-handlebars-template">
+  <li>
+
+  	<a href='/profile/{{id}}'><img src='{{#if fb_id}}http://graph.facebook.com/{{fb_id}}/picture{{else}}/images/anonymous.jpg{{/if}}' 
+  	alt='image'/> {{name}}</a>
+  </li>
+</script>
+
 
 <script>
+var source   = $("#user-template").html();
+var template = Handlebars.compile(source);
+
  $(function(){
- 	loadData(); 	
-
- 	$('body').on('click', 'li', function(){
- 		var id = $(this).find('input').val();
- 		$.ajax({
-		    url: '/api/dummy/' + id,
-		    type: 'DELETE',
-		    success: function(data) {
-		        loadData(); 
-		    },
-		    error:function(data) {
-		        console.log(data);	
- 				alert(data.responseText);
-		    }
-		});
- 	})
- });
-
- function sendData(){
- 	var model = {};
- 	model.name = $('#name').val();
- 	model.floatValue = $('#float').val();
- 	model.intValue = $('#int').val();
- 	$.post('/api/dummy', model)
- 	.success(function(data)
- 	{
- 		loadData();
- 	})
- 	.error(function(data)
- 	{
- 		console.log(data);	
- 		alert(data.responseText);	
- 	});
- }
+ 	loadData(); 
+ }); 
 
  function loadData(){
- 	$('#items').empty();
- 	$.get('/api/dummy')
- 	.success(function(data)
- 	{
- 		for (var i = data.length - 1; i >= 0; i--) {
- 			$('#items').append('<li title="' + data[i].id + '">' 
- 				+ data[i].name 
- 				+ ' '
- 				+ data[i].floatValue
- 				+ ' '
- 				+ data[i].intValue
- 				+ '<input type="hidden" value="' + data[i].id + '">'
- 				+ '</li>');
- 		}; 		
- 	})
- 	.error(function(data)
- 	{
- 		console.log(data);	
- 	});
+ 	$('#users').empty();
+ 	
 
  	$.get('/api/user')
  	.success(function(data)
  	{
  		for (var i = data.length - 1; i >= 0; i--) {
- 			$('#items').append('<li>' 
- 				+ data[i].id 
- 				+ '</li>');
+ 			$('#users').append(template(data[i]));
  		}; 		
  	})
  	.error(function(data)
@@ -78,21 +38,18 @@
 
 <div class='row'>
 	<div class='col-md-4'>
-		<input type="text" class="form-control" id="name" placeholder="Enter name">
-		<input type="text" class="form-control" id="float" placeholder="Enter float">
-		<input type="number" class="form-control" id="int" placeholder="Enter int">
-
-		<button class='btn btn-default' onclick='sendData()'>Send</button><br/>
-		<% if (user) { %>
-		    Hello, <strong><%= user.name %></strong><br/>
+		<% if (currentUser) { %>
+		    Hello, <strong><%= currentUser.name %></strong><br/>
+		    <a href="/profile/<%- currentUser.id %>">Go to profile</a><br/>
 		    <a href="/auth/logout">Logout</a>
 		<% } else {%>
 			<a href="/auth/facebook">Login with Facebook</a>
 		<% } %>
 	</div>
 	<div class='col-md-4'>
-		Click on item to delete it.
-		<ul id='items'>
+		
+		Users
+		<ul id='users'>
 
 		</ul>
 	</div>

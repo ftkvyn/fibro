@@ -19,5 +19,6 @@ module.exports.models = {
   ***************************************************************************/
 
   connection: 'localMysqlServer',
-  schema:true
+  schema:true,
+  migrate:'alter'
 };

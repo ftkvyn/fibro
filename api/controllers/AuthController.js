@@ -17,13 +17,7 @@ module.exports = {
   fb_authenticate: function (req, res, next) {
       passport.authenticate('facebook', { scope: ['email', 'user_about_me']},
         function (err, user) {
-            console.log('fb_authenticate callback called.');
-                // req.session.user = user;
-                // console.log('User is in the session');
-                // console.log(user);
-                // console.log(req.session);
-                // res.redirect('/profile');
-            
+            console.log('fb_authenticate callback called.');            
     })(req, res, next);
   },
 
@@ -34,7 +28,7 @@ module.exports = {
             //console.log('User is in the session');
             //console.log(user);
             //console.log(req.session);
-            res.redirect('/profile');
+            res.redirect('/' + user.id);
         })(req, res, next);
   },
 

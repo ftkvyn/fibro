@@ -93,18 +93,11 @@ module.exports.http = {
         app.use(passport.session());
 
         app.use(function(req, res, next){
+            var user = null;
             if(req.session){
-              var user = req.session.user;
-              res.locals({user:user});
-              // console.log('Setting locals'); 
-              // console.log(res.locals); 
+              user = req.session.user;
             }
-            else{
-              // console.log('No session');              
-              // console.log('============');
-              //console.log(res);
-            }
-
+            res.locals({currentUser:user});
             next();
         });
 

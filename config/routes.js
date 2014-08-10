@@ -32,16 +32,16 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'test'
-  },
+  
 
   '/test': {
     view: 'homepage'
   },
 
-  '/profile': {
-    view: 'profile'
+  '/profile/:id': 'ViewController.profile',
+
+  '/': {
+    view: 'test'
   },
 
   'get /auth/facebook': 'AuthController.fb_authenticate',
