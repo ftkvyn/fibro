@@ -1,0 +1,18 @@
+<% if (user) { %>
+	<div>
+		<strong><%- user.name %></strong><br/>
+		<% if (user.fb_id) { %>
+			<img src='http://graph.facebook.com/<%- user.fb_id %>/picture?type=normal'	alt='image'/><br/>
+			<a target="_blank" href="http://facebook.com/<%- user.fb_id %>"><%- user.name %> on facebook</a>
+			<br/>
+		<% } %>
+		Email: <strong><%- user.email %></strong>
+	<div><br/>	
+	<a href="/">Home</a><br/>
+	<% if (isMe) { %>
+		<a href="/auth/logout">Log off</a>
+	<% } %>
+<% } else {%>
+		You are not logged in. <a href="/auth/facebook">Login with Facebook</a>
+<% } %>
+

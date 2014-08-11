@@ -18,6 +18,28 @@ module.exports = {
 	name: {
 	    type: 'string'	    
 	},
+	friendlyId:{
+		type:'string',
+		unique:true
+	},
+	birthDate:{
+		type:'date',
+	},
+	skills:{
+		type:'string'
+	},
+	about:{
+		type:'text'
+	},
+	projects:{
+		collection: 'project',
+        via: 'members',
+        dominant:false
+	},
+	createdProjects:{
+		collection:'project',
+		via:'author'
+	},
 	fb_token: {
 	    type: 'string',
 	},

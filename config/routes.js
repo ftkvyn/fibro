@@ -44,6 +44,8 @@ module.exports.routes = {
     view: 'test'
   },
 
+  '/new/project' : 'ViewController.newProject',
+
   'get /auth/facebook': 'AuthController.fb_authenticate',
 
   'get /auth/facebook/callback': 'AuthController.fb_authenticate_callback',

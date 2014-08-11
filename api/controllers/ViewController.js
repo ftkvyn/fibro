@@ -9,13 +9,20 @@ module.exports = {
 			if(req.session && req.session.user){ 
 				isMe = user.id == req.session.user.id;
 			}
-			return res.view('profile', 
+			return res.view('user/profile', 
 			{
 		      user: user,
 		      isMe: isMe,	      
 		    });
-		});
+		});		
+	},
 
+	newProject : function(req, res){
+		if(req.session && req.session.user){ 
+			return res.view('project/new');
+		}else{
+			return res.view('/', {message: 'Please, login.'});
+		}
 		
 	}
 };

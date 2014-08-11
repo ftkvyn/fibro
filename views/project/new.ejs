@@ -1,0 +1,45 @@
+<h1>New Project</h1>
+
+<script type="text/javascript">
+	var createProject = function(){
+		var project = {};
+		project.name = $('#name').val();
+		project.description = $('#description').val();
+		project.needed = $('#needed').val();
+		if(!project.name){
+			alert('Please, enter projects name.');
+			return;
+		}
+		if(!project.description){
+			alert('Please, enter projects description.');
+			return;
+		}
+
+		$.post('/api/project', project)
+		.done(function(data){
+			console.log('Success!');
+			console.log(data);
+		})
+		.fail(function(data){
+			console.log(data);
+			alert('Error occured while creating project.');
+		});
+	}
+</script>
+
+
+<div class='col-md-6'>
+	<div class='row'>
+		<label for='name'>Name:</label><br/>
+		<input id='name' type='text'></input>
+	</div>
+	<div class='row'>
+		<label for='description'>Description:</label><br/>
+		<textarea rows="5" cols="60" id='description'></textarea>
+	</div>
+	<div class='row'>
+		<label for='needed'>Needed people:</label><br/>
+		<input id='needed' type='text'></input>
+	</div>
+	<button onclick='createProject()' class='btn btn-success'>Create!</button>
+</div>
