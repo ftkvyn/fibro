@@ -1,6 +1,8 @@
 module.exports = {
 	profile : function(req,res){
 		User.findOne(req.param('id'))
+		.populate('projects')
+		.populate('createdProjects')		
 		.exec(function(err, user){
 			if(err || (!user)){
 				return res.badRequest('User not found.');
@@ -24,5 +26,25 @@ module.exports = {
 			return res.view('/', {message: 'Please, login.'});
 		}
 		
-	}
+	},
+
+	project : function(req,res){
+		Project.findOne(req.param('id'))
+		.populate('author')
+		.populate('members')
+		.exec(function(err, project){
+			if(err || (!project)){
+				return res.badRequest('Project not found.');
+			}
+			var isMy = false;
+			if(req.session && req.session.user){ 
+				isMy = project.author.id == req.session.user.id;
+			}
+			return res.view('project/view', 
+			{
+		      project: project,
+		      isMy: isMy,	      
+		    });
+		});		
+	},
 };

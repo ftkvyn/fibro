@@ -8,6 +8,32 @@
 		<% } %>
 		Email: <strong><%- user.email %></strong>
 	<div><br/>	
+		
+	<% if (user.createdProjects && user.createdProjects.length) { %>
+		<div>
+			<h3>Created Projects</h3>
+			<ul>
+			    <% for(var i=0; i<user.createdProjects.length; i++) { %>
+			        <li>
+			            <a href='/project/<%= user.createdProjects[i].id %>'><%= user.createdProjects[i].name %></a>
+			        </li>
+			    <% } %>
+			</ul>
+		</div>
+	<% } %>
+
+	<% if (user.projects && user.projects.length) { %>
+		<div>
+			<h3>Taking part in</h3>
+			<ul>
+			    <% for(var i=0; i<user.projects.length; i++) { %>
+			        <li>
+			            <a href='/project/<%= user.projects[i].id %>'><%= user.projects[i].name %></a>
+			        </li>
+			    <% } %>
+			</ul>
+		</div>
+	<% } %>
 	<a href="/">Home</a><br/>
 	<% if (isMe) { %>
 		<a href="/auth/logout">Log off</a>

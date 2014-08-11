@@ -5,7 +5,7 @@
 		var project = {};
 		project.name = $('#name').val();
 		project.description = $('#description').val();
-		project.needed = $('#needed').val();
+		project.neededMembers = $('#needed').val();
 		if(!project.name){
 			alert('Please, enter projects name.');
 			return;
@@ -18,7 +18,7 @@
 		$.post('/api/project', project)
 		.done(function(data){
 			console.log('Success!');
-			console.log(data);
+			window.location = '/project/' + data.id;
 		})
 		.fail(function(data){
 			console.log(data);
@@ -43,3 +43,4 @@
 	</div>
 	<button onclick='createProject()' class='btn btn-success'>Create!</button>
 </div>
+<a href="/">Home</a><br/>

@@ -7,6 +7,10 @@
 
 module.exports = {
 	create : function(req, res){
+		//ToDo: make a policy
+		if(!req.session.user){
+			return res.badRequest('Not authorized.');
+		}
 		var project = req.body;
 		project.author = req.session.user.id;
 		project.members = [req.session.user.id];
@@ -16,10 +20,7 @@ module.exports = {
 				console.log(err);
 				return res.badRequest('Unable create project');
 			}
-
-			console.log(project);
-			//ToDo: redirect to project page
-			return res.redirect('/');
+			return res.send(project);
 		});
 	}
 };

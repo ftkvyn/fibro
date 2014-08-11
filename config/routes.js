@@ -40,6 +40,8 @@ module.exports.routes = {
 
   '/profile/:id': 'ViewController.profile',
 
+  '/project/:id': 'ViewController.project',
+
   '/': {
     view: 'test'
   },
