@@ -1,17 +1,17 @@
 <div class='col-md-6'>
 	<div class='row'>
-		<h1><%- project.name %></h1>
+		<h1><%= project.name %></h1>
 		<h3>by <a href='/profile/<%= project.author.id %>'><%- project.author.name %></a></h3>
 		<%- (new Date(project.createdAt)).toDateString() %>
 	</div>
 	<div class='row'>
 		<h3>Description</h3>
-		<%- project.description %>
+		<%= project.description %>
 	</div>
 	<% if (project.neededMembers) { %>
 		<div class='row'>
 			<h3>Who is needed</h3>
-			<%- project.neededMembers %>
+			<%= project.neededMembers %>
 		</div>
 	<% } %>
 	<% if (project.members && project.members.length) { %>
