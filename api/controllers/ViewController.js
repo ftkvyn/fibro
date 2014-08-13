@@ -36,14 +36,17 @@ module.exports = {
 			if(err || (!project)){
 				return res.badRequest('Project not found.');
 			}
-			var isMy = false;
+			var isAuthor = false;
 			if(req.session && req.session.user){ 
-				isMy = project.author.id == req.session.user.id;
+				isAuthor = project.author.id == req.session.user.id;
 			}
 			return res.view('project/view', 
 			{
 		      project: project,
-		      isMy: isMy,	      
+		      isAuthor: isAuthor,
+		      isMember: false,
+		      isInvited: false,
+		      isRequestingMembership: false	      
 		    });
 		});		
 	},

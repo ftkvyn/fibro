@@ -36,9 +36,13 @@ module.exports = {
         via: 'members',
         dominant:false
 	},
-	createdProjects:{
+	createdProjects: {
 		collection:'project',
 		via:'author'
+	},
+	invitations: {
+		collection:'invitation',
+		via:'user'
 	},
 	fb_token: {
 	    type: 'string',

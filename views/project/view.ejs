@@ -1,4 +1,4 @@
-<div class='col-md-6'>
+<div class='col-md-6' ng-controller='ProjectController as project'>
 	<div class='row'>
 		<h1><%= project.name %></h1>
 		<h3>by <a href='/profile/<%= project.author.id %>'><%- project.author.name %></a></h3>
@@ -26,5 +26,6 @@
 			</ul>
 		</div>
 	<% } %>
+	{{project.val}}
 	<a href="/">Home</a><br/>
 </div>
