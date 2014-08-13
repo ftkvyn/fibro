@@ -48,4 +48,14 @@ module.exports.policies = {
 		// before letting any users feed our rabbits
 		// feed : ['isNiceToAnimals', 'hasRabbitFood']
 	// }
+
+  ProjectController:{
+    '*' : 'sessionAuth',
+
+    find: true
+  },
+
+  InvitationController:{
+    '*' : 'sessionAuth',
+  }
 };

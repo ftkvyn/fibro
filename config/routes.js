@@ -43,16 +43,27 @@ module.exports.routes = {
   '/project/:id': 'ViewController.project',
 
   '/': {
-    view: 'test'
+    view: 'home'
   },
 
   '/new/project' : 'ViewController.newProject',
+
+  'get /api/project/authored' : 'ProjectController.authoredProjects',
+
+  'get /api/invitation/forUser' : 'InvitationController.forCurrentUser',
+
+  'post /api/invitation/accept/' : 'InvitationController.accept',
+
+  'post /api/invitation/decline/' : 'InvitationController.decline',
 
   'get /auth/facebook': 'AuthController.fb_authenticate',
 
   'get /auth/facebook/callback': 'AuthController.fb_authenticate_callback',
 
   'get /auth/logout': 'AuthController.logout',
+
+  //temp method
+  'get /auth/loginById/:id':'AuthController.loginById',
 
   /***************************************************************************
   *                                                                          *

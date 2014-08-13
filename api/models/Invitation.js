@@ -19,17 +19,17 @@ module.exports = {
   			defaultsTo: false
   		}, 
   		user: {
-			model:'user',
-			required: true
-		},
-		inviter: {
-			model:'user',
-			required: true
-		},
-		project: {
-			model: 'project',
-			required: true
-		}
+			  model:'user',
+			  required: true
+  		},
+  		inviter: {
+  			model:'user',
+  			required: true
+  		},
+  		project: {
+  			model: 'project',
+  			required: true
+  		}
   }
 };
 

@@ -1,46 +1,20 @@
 <h1>New Project</h1>
 
-<script type="text/javascript">
-	var createProject = function(){
-		var project = {};
-		project.name = $('#name').val();
-		project.description = $('#description').val();
-		project.neededMembers = $('#needed').val();
-		if(!project.name){
-			alert('Please, enter projects name.');
-			return;
-		}
-		if(!project.description){
-			alert('Please, enter projects description.');
-			return;
-		}
-
-		$.post('/api/project', project)
-		.done(function(data){
-			console.log('Success!');
-			window.location = '/project/' + data.id;
-		})
-		.fail(function(data){
-			console.log(data);
-			alert('Error occured while creating project.');
-		});
-	}
-</script>
-
-
-<div class='col-md-6'>
-	<div class='row'>
-		<label for='name'>Name:</label><br/>
-		<input id='name' type='text'></input>
-	</div>
-	<div class='row'>
-		<label for='description'>Description:</label><br/>
-		<textarea rows="5" cols="60" id='description'></textarea>
-	</div>
-	<div class='row'>
-		<label for='needed'>Needed people:</label><br/>
-		<input id='needed' type='text'></input>
-	</div>
-	<button onclick='createProject()' class='btn btn-success'>Create!</button>
+<div class='col-md-6' ng-controller='ProjectController as project'>
+	<form name='projectForm' ng-submit='projectForm.$valid && project.create()' novalidate>
+		<div class='row'>
+			<label for='name'>Name:</label><br/>
+			<input id='name' ng-model='project.new.name' class='form-control' required type='text'></input>
+		</div>
+		<div class='row'>
+			<label for='description'>Description:</label><br/>
+			<textarea rows="5" cols="60" ng-model='project.new.description' class='form-control' required id='description'></textarea>
+		</div>
+		<div class='row'>
+			<label for='needed'>Needed people:</label><br/>
+			<input id='needed' ng-model='project.new.neededMembers' class='form-control' type='text'></input>
+		</div>
+		<input type='submit' class='btn btn-success' value='Create!'></input>
+	</form>
 </div>
 <a href="/">Home</a><br/>

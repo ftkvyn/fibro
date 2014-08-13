@@ -1,12 +1,12 @@
 <% if (user) { %>
 	<div>
-		<strong><%- user.name %></strong><br/>
+		<strong><%= user.name %></strong><br/>
 		<% if (user.fb_id) { %>
 			<img src='http://graph.facebook.com/<%- user.fb_id %>/picture?type=normal'	alt='image'/><br/>
-			<a target="_blank" href="http://facebook.com/<%- user.fb_id %>"><%- user.name %> on facebook</a>
+			<a target="_blank" href="http://facebook.com/<%- user.fb_id %>"><%= user.name %> on facebook</a>
 			<br/>
 		<% } %>
-		Email: <strong><%- user.email %></strong>
+		Email: <strong><%= user.email %></strong>
 	<div><br/>	
 		
 	<% if (user.createdProjects && user.createdProjects.length) { %>
@@ -36,7 +36,26 @@
 	<% } %>
 	<a href="/">Home</a><br/>
 	<% if (isMe) { %>
+	
 		<a href="/auth/logout">Log off</a>
+	<% } else {%>
+		<div 
+		class='col-md-6' 
+		ng-controller='InviteController as inviteCtrl' 
+		ng-show='inviteCtrl.projects.length'
+		ng-init='inviteCtrl.loadProjects()'>
+			<div ng-show='inviteCtrl.success' class="alert alert-success alert-dismissible" role="alert">
+			  <button type="button" class="close" ng-click='inviteCtrl.hideAlerts()'><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			  <strong>Success!</strong> Invite is sent successfully.
+			</div>
+
+			Invite to :
+			<select ng-model='inviteCtrl.new.project' ng-options="project.id as project.name for project in inviteCtrl.projects"> 
+			</select><br/>
+			<label for='message'>Add invitation mesage, if you want:</label><br/>
+			<textarea rows="3" cols="40" ng-model='inviteCtrl.new.message' class='form-control' id='message'></textarea><br/>
+			<button class='btn btn-success' ng-click='inviteCtrl.send(<%= user.id %>, inviteCtrl.new.project)'>Invite!</button>
+		</div>
 	<% } %>
 <% } else {%>
 		You are not logged in. <a href="/auth/facebook">Login with Facebook</a>

@@ -36,5 +36,16 @@ module.exports = {
         })(req, res, next);
   },
 
+  loginById: function (req, res, next) {
+      User.findOne(req.param('id'))
+      .exec(function(err, user){
+      if(err || (!user)){
+        return res.badRequest('User not found.');
+      }
+      req.session.user = user;
+      return res.view('home');
+    }); 
+  },
+
 };
 

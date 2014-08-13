@@ -25,7 +25,30 @@
 			    <% } %>
 			</ul>
 		</div>
+	<% } %>	
+	<% if (isAuthor) { %>
+	<div 
+		class='col-md-6' 
+		ng-controller='InviteController as inviteCtrl' 
+		ng-show='inviteCtrl.users.length'
+		ng-init='inviteCtrl.loadUsers()'>
+			<div ng-show='inviteCtrl.success' class="alert alert-success alert-dismissible" role="alert">
+			  <button type="button" class="close" ng-click='inviteCtrl.hideAlerts()'><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			  <strong>Success!</strong> Invite is sent successfully.
+			</div>
+
+			Invite :
+			<select ng-model='inviteCtrl.new.user' ng-options="user.id as user.name for user in inviteCtrl.users"> 
+			</select><br/>
+			<label for='message'>Add invitation mesage, if you want:</label><br/>
+			<textarea rows="3" cols="40" ng-model='inviteCtrl.new.message' class='form-control' id='message'></textarea><br/>
+			<button class='btn btn-success' ng-click='inviteCtrl.send(inviteCtrl.new.user ,<%= project.id %>)'>Invite!</button>
+		</div>
+		<br/>
+	
 	<% } %>
-	{{project.val}}
-	<a href="/">Home</a><br/>
 </div>
+<% if (isAuthor) { %>
+<button ng-click='project.delete(<%= project.id %>)' class='btn btn-danger'>Delete project</button>
+<% } %>
+<a href="/">Home</a><br/>
