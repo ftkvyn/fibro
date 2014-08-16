@@ -4,6 +4,7 @@
  * @description :: Server-side logic for managing Membershiprequests
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
+var Q = require('q');
 
 module.exports = {
 	create : function(req, res){		
@@ -59,20 +60,22 @@ module.exports = {
 			} else{
 				return res.badRequest('Unable process request');
 			}
+			var projectId = request.project.id;
+			var userId = request.user;
 
 			request.project.members.add(request.user);
-			request.project.save(function(err){
-				if(err){
-					console.log(err);
-					return res.serverError('Unable save project');
-				}
-				request.destroy(function(err){
-					if(err){
-						console.log(err);
-						return res.serverError('Unable destroy request');
-					}
+			var qs = [];
+			qs.push(request.project.save());
+			qs.push(request.destroy());
+			qs.push(Invitation.destroy({user: userId, project: projectId}));
+
+			Q.all(qs).done(
+				function(){
 					return res.send('Success!');
-				})
+				},
+				function(err){
+					console.log(err);
+					return res.serverError('Error processing request');
 			});
 		});
 	},

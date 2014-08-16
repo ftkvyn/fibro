@@ -51,7 +51,10 @@
 		<div 
 		class='col-md-6' 
 		ng-controller='InviteController as inviteCtrl'>
-			<p>You are invited to join this project by <%= invitation.inviter.name %>!</p><br/>
+			<p>You are invited to join this project by <%= invitation.inviter.name %>!</p>
+			<% if(invitation.message) { %>
+			<p><%= invitation.message %></p>
+			<% } %>
 			<button class='btn btn-success' ng-click='inviteCtrl.accept(<%= invitation.id %>, true)'>Join!</button>
 			<button class='btn btn-danger' ng-click='inviteCtrl.decline(<%= invitation.id %>, true)'>Decline</button>
 		</div>

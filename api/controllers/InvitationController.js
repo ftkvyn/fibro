@@ -4,6 +4,7 @@
  * @description :: Server-side logic for managing Invitations
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
+var Q = require('q');
 
 module.exports = {
 	create : function(req, res){		
@@ -48,19 +49,22 @@ module.exports = {
 				return res.badRequest('Unable process invite');
 			}
 
+			var projectId = invite.project.id;
+			var userId = invite.user;
+
 			invite.project.members.add(invite.user);
-			invite.project.save(function(err){
-				if(err){
-					console.log(err);
-					return res.serverError('Unable save project');
-				}
-				invite.destroy(function(err){
-					if(err){
-						console.log(err);
-						return res.serverError('Unable destroy invite');
-					}
+			var qs = [];
+			qs.push(invite.project.save());
+			qs.push(invite.destroy());
+			qs.push(MembershipRequest.destroy({user: userId, project: projectId}));
+
+			Q.all(qs).done(
+				function(){
 					return res.send('Success!');
-				})
+				},
+				function(err){
+					console.log(err);
+					return res.serverError('Error processing invitation.');
 			});
 		});
 	},
