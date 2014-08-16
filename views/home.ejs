@@ -69,6 +69,7 @@ var projectTemplate = Handlebars.compile(source);
 					<li ng-repeat='invite in inviteCtrl.invitations'>
 						<strong>{{invite.project.name}}</strong> 
 						by {{invite.inviter.name}} (<em>{{invite.createdAt | date}}</em>)<br/>
+						<span ng-show='invite.message'>{{invite.message}}</span>
 						<div ng-hide='invite.isDeclined'>
 						<button class='btn btn-success' ng-click='inviteCtrl.accept(invite.id)'>Accept</button>
 						<button class='btn btn-danger' ng-click='inviteCtrl.decline(invite.id)'>Decline</button>
@@ -91,6 +92,7 @@ var projectTemplate = Handlebars.compile(source);
 					<li ng-repeat='request in requestCtrl.requests'>
 						<strong>{{request.user.name}}</strong> 
 						to {{request.project.name}} (<em>{{request.createdAt | date}}</em>)<br/>
+						<span ng-show='request.message'>{{request.message}}</span>
 						<div>
 						<button class='btn btn-success' ng-click='requestCtrl.accept(request.id)'>Accept</button>
 						<button class='btn btn-danger' ng-click='requestCtrl.decline(request.id)'>Decline</button>

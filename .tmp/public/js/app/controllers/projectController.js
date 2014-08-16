@@ -31,4 +31,16 @@ fibroApp.controller('ProjectController', ['$http', function($http){
 				alert('Error occured while deleting project.');
 			});
 		}
+
+		this.leave = function(id){
+			$http.post('/api/project/leave/',{id:id})
+			.success(function(data){
+				console.log('Success!');
+				window.location.reload();
+			})
+			.error(function(data){
+				console.log(data);
+				alert('Error occured while leaving project.');
+			});
+		}
 	}]);

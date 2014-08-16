@@ -62,5 +62,19 @@ module.exports = {
 			return res.send(projects);
 		});
 	},
+
+	leave : function(req, res){		
+		Project.findOne(req.body.id)
+		.exec(function(err, project){
+			if(err){
+				console.log(err);
+				return res.badRequest('Unable find project');
+			}
+			project.members.remove(req.session.user.id);
+			project.save(function(){
+				return res.send('Success!');	
+			});			
+		});
+	},
 };
 

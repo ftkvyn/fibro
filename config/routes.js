@@ -44,6 +44,8 @@ module.exports.routes = {
 
   'get /api/project/authored' : 'ProjectController.authoredProjects',
 
+  'get /api/project/leave' : 'ProjectController.leave',
+
   'get /api/invitation/forUser' : 'InvitationController.forCurrentUser',
 
   'post /api/invitation/accept/' : 'InvitationController.accept',

@@ -3,15 +3,14 @@ fibroApp.controller('MembershipRequestController', ['$http', function($http){
 	this.projectId = undefined;
 	// this.isRequested = false;
 	this.request = {};
-	this.success = true;
+	this.success = false;
 	this.requests = [];
 	var me = this;
 
 	this.sendRequest = function(){
-		var request = {};
-		request.project = this.projectId; 
+		me.request.project = this.projectId; 
 
-		$http.post('/api/membershipRequest', request)
+		$http.post('/api/membershipRequest', me.request)
 		.success(function(data){
 			me.request = data;
 			me.success = true;
