@@ -1,3 +1,5 @@
+<script type="text/javascript" src='/js/app/controllers/inviteController.js'></script>
+<script type="text/javascript" src='/js/app/controllers/projectController.js'></script>
 <div class='col-md-6' ng-controller='ProjectController as project'>
 	<div class='row'>
 		<h1><%= project.name %></h1>
@@ -45,10 +47,37 @@
 			<button class='btn btn-success' ng-click='inviteCtrl.send(inviteCtrl.new.user ,<%= project.id %>)'>Invite!</button>
 		</div>
 		<br/>
-	
-	<% } %>
-</div>
+	<% } else if(invitation) { %>
+		<div 
+		class='col-md-6' 
+		ng-controller='InviteController as inviteCtrl'>
+			<p>You are invited to join this project by <%= invitation.inviter.name %>!</p><br/>
+			<button class='btn btn-success' ng-click='inviteCtrl.accept(<%= invitation.id %>, true)'>Join!</button>
+			<button class='btn btn-danger' ng-click='inviteCtrl.decline(<%= invitation.id %>, true)'>Decline</button>
+		</div>
+		<br/>
+	<% } else if(currentUser 
+			 && !isMember 
+			 && !isRequestingMembership) { %>
+	<div 
+		class='col-md-6' 
+		ng-controller='MembershipRequestController as memberCtrl' 
+		ng-init='memberCtrl.projectId = <%= project.id %>'
+		ng-hide='memberCtrl.request.id'>
+		<div ng-show='memberCtrl.success' class="alert alert-success alert-dismissible" role="alert">
+			  <button type="button" class="close" ng-click='memberCtrl.hideAlerts()'><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			  <strong>Success!</strong> Request is sent successfully.
+			</div>
+		<label for='message'>Add mesage about yourself, if you want:</label><br/>
+		<textarea rows="3" cols="40" ng-model='memberCtrl.request.message' class='form-control' id='message'></textarea><br/>
+		<button class='btn btn-success' ng-click='memberCtrl.sendRequest()'>Join!</button>
+		{{memberCtrl.projectId}}
+	</div>
+	<br/>
+	<% } %>	
 <% if (isAuthor) { %>
 <button ng-click='project.delete(<%= project.id %>)' class='btn btn-danger'>Delete project</button>
 <% } %>
+</div>
+
 <a href="/">Home</a><br/>

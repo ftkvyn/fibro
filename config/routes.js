@@ -31,13 +31,7 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
-
   
-
-  '/test': {
-    view: 'homepage'
-  },
-
   '/profile/:id': 'ViewController.profile',
 
   '/project/:id': 'ViewController.project',
@@ -55,6 +49,8 @@ module.exports.routes = {
   'post /api/invitation/accept/' : 'InvitationController.accept',
 
   'post /api/invitation/decline/' : 'InvitationController.decline',
+
+  // 'get /api/membershipRequest/forProject/:id': 'MembershipRequestController.findOneForProject',
 
   'get /auth/facebook': 'AuthController.fb_authenticate',
 

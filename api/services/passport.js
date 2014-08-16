@@ -48,6 +48,7 @@ passport.use(new FacebookStrategy({
         User.create({
 
           fb_id: profile.id,
+          fb_token: accessToken,
           name: profile.displayName,
           email: profile.emails[0].value,
 
@@ -70,8 +71,11 @@ passport.use(new FacebookStrategy({
       // If there is already a user, return it
       } else {
         console.log('Logged In Successfully, old user');
-        return done(null, user, {
-          message: 'Logged In Successfully'
+        user.fb_token = accessToken;
+        user.save(function(){
+          return done(null, user, {
+            message: 'Logged In Successfully'
+          });
         });
       }
     });

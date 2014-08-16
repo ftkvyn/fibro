@@ -2,7 +2,7 @@
   <li>
   	<a href='/profile/{{id}}'><img src='{{#if fb_id}}http://graph.facebook.com/{{fb_id}}/picture{{else}}/images/anonymous.jpg{{/if}}' 
   	alt='image'/> {{name}}</a><br/>
-  	<!-- <a href='/auth/loginById/{{id}}'>Login as this user</a> -->
+  
   </li>
 </script>
 
@@ -14,7 +14,7 @@
 
 
 <script>
-var source   = $("#user-template").html();
+var source   = $("#user-template").html(); 
 var template = Handlebars.compile(source);
 
 
@@ -70,8 +70,8 @@ var projectTemplate = Handlebars.compile(source);
 						<strong>{{invite.project.name}}</strong> 
 						by {{invite.inviter.name}} (<em>{{invite.createdAt | date}}</em>)<br/>
 						<div ng-hide='invite.isDeclined'>
-						<button class='btn btn-success' ng-click='inviteCtrl.accept(invite.id, $index)'>Accept</button>
-						<button class='btn btn-danger' ng-click='inviteCtrl.decline(invite.id, $index)'>Decline</button>
+						<button class='btn btn-success' ng-click='inviteCtrl.accept(invite.id)'>Accept</button>
+						<button class='btn btn-danger' ng-click='inviteCtrl.decline(invite.id)'>Decline</button>
 						</div>
 
 						<div ng-show='invite.isDeclined'>
