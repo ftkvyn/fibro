@@ -50,7 +50,11 @@ module.exports.routes = {
 
   'post /api/invitation/decline/' : 'InvitationController.decline',
 
-  // 'get /api/membershipRequest/forProject/:id': 'MembershipRequestController.findOneForProject',
+  'get /api/membershipRequest/forAuthor/': 'MembershipRequestController.findForAuthor',
+
+  'post /api/membershipRequest/accept/' : 'MembershipRequestController.accept',
+
+  'post /api/membershipRequest/decline/' : 'MembershipRequestController.decline',
 
   'get /auth/facebook': 'AuthController.fb_authenticate',
 

@@ -35,21 +35,20 @@ module.exports = {
 	accept : function(req, res){		
 		Invitation.findOne(req.body.id)
 		.populate('project')
-		.populate('user')
 		.exec(function(err, invite){
 			if(err){
 				console.log(err);
 				return res.badRequest('Unable find invite');
 			}
 			if(req.session && req.session.user){
-				if(req.session.user.id != invite.user.id){
+				if(req.session.user.id != invite.user){
 					return res.badRequest('Unable process invite');	
 				}
 			} else{
 				return res.badRequest('Unable process invite');
 			}
 
-			invite.project.members.add(invite.user.id);
+			invite.project.members.add(invite.user);
 			invite.project.save(function(err){
 				if(err){
 					console.log(err);
@@ -68,18 +67,25 @@ module.exports = {
 
 	decline : function(req, res){		
 		Invitation.findOne(req.body.id)
-		.populate('user')
 		.exec(function(err, invite){
-			//ToDo: check user
 			if(err){
 				console.log(err);
 				return res.badRequest('Unable find invite');
 			}
-			invite.isDeclined = true;
-			invite.save(function(err){
+			if(req.session && req.session.user){
+				if(req.session.user.id != invite.user){
+					return res.badRequest('Unable process invite');	
+				}
+			} else{
+				return res.badRequest('Unable process invite');
+			}
+
+
+			// invite.isDeclined = true;
+			invite.destroy(function(err){
 				if(err){
 					console.log(err);
-					return res.serverError('Unable save project');
+					return res.serverError('Unable process invite');
 				}
 				return res.send('Success!');
 			});

@@ -59,19 +59,19 @@
 	<% } else if(currentUser 
 			 && !isMember 
 			 && !isRequestingMembership) { %>
-	<div 
+	<div  
 		class='col-md-6' 
 		ng-controller='MembershipRequestController as memberCtrl' 
-		ng-init='memberCtrl.projectId = <%= project.id %>'
-		ng-hide='memberCtrl.request.id'>
+		ng-init='memberCtrl.projectId = <%= project.id %>'>
 		<div ng-show='memberCtrl.success' class="alert alert-success alert-dismissible" role="alert">
 			  <button type="button" class="close" ng-click='memberCtrl.hideAlerts()'><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 			  <strong>Success!</strong> Request is sent successfully.
-			</div>
-		<label for='message'>Add mesage about yourself, if you want:</label><br/>
-		<textarea rows="3" cols="40" ng-model='memberCtrl.request.message' class='form-control' id='message'></textarea><br/>
-		<button class='btn btn-success' ng-click='memberCtrl.sendRequest()'>Join!</button>
-		{{memberCtrl.projectId}}
+	    </div>
+		<div ng-hide='memberCtrl.request.id'>
+			<label for='message'>Add mesage about yourself, if you want:</label><br/>
+			<textarea rows="3" cols="40" ng-model='memberCtrl.request.message' class='form-control' id='message'></textarea><br/>
+			<button class='btn btn-success' ng-click='memberCtrl.sendRequest()'>Join!</button>
+		</div>
 	</div>
 	<br/>
 	<% } %>	

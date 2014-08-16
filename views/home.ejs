@@ -2,7 +2,7 @@
   <li>
   	<a href='/profile/{{id}}'><img src='{{#if fb_id}}http://graph.facebook.com/{{fb_id}}/picture{{else}}/images/anonymous.jpg{{/if}}' 
   	alt='image'/> {{name}}</a><br/>
-  
+  	<a href='/auth/loginById/{{id}}'>Login as this user</a>
   </li>
 </script>
 
@@ -64,7 +64,7 @@ var projectTemplate = Handlebars.compile(source);
 			ng-controller='InviteController as inviteCtrl' 
 			ng-show='inviteCtrl.invitations.length'
 			ng-init='inviteCtrl.loadInvites()'>
-			<h3>Pending invitations</h3>
+			<h3>Invitations to projects</h3>
 				<ul>
 					<li ng-repeat='invite in inviteCtrl.invitations'>
 						<strong>{{invite.project.name}}</strong> 
@@ -81,6 +81,25 @@ var projectTemplate = Handlebars.compile(source);
 				</ul>
 
 			</div>
+
+ 			<div 			
+			ng-controller='MembershipRequestController as requestCtrl' 
+			ng-show='requestCtrl.requests.length'
+			ng-init='requestCtrl.loadRequests()'>
+			<h3>Requests for membership</h3>
+				<ul>
+					<li ng-repeat='request in requestCtrl.requests'>
+						<strong>{{request.user.name}}</strong> 
+						to {{request.project.name}} (<em>{{request.createdAt | date}}</em>)<br/>
+						<div>
+						<button class='btn btn-success' ng-click='requestCtrl.accept(request.id)'>Accept</button>
+						<button class='btn btn-danger' ng-click='requestCtrl.decline(request.id)'>Decline</button>
+						</div>
+					</li>
+				</ul>
+
+			</div>
+
 		    <a href="/profile/<%- currentUser.id %>">Go to profile</a><br/>
 		    <a href="/new/project">Create project</a></br>
 		    <a href="/auth/logout">Logout</a>
