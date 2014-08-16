@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html ng-app='fibro'>
   <head>
-    <title>New Sails App</title>
-
+    <title>Find Bro</title>
+    <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -46,11 +46,25 @@
     <!--SCRIPTS END-->
     <script src='/bootstrap/js/jquery-2.1.1.min.js'></script>
     
+
   </head>
 
   <body>
-    <%- body %>
+    <div class='fibro-header'>
+      <h1>Find your Bro!</h1>
+      <div class='account-info'>
+        <% if(currentUser) { %>
+          <a href="/profile/<%= currentUser.id %>"> <strong><%= currentUser.name %></strong></a>
+          <a href="/auth/logout">Logout</a>
+        <% } else { %>
+          <a href="/auth/facebook">Login with Facebook</a>
+        <% } %>        
+      </div>
+    </div>
 
+    <div class='fibro-content'>
+      <%- body %>
+    </div>
 
 
     <!--
@@ -102,6 +116,15 @@
 
     -->
 
-    
+    <script type="text/javascript">
+      $('body').on('click', '.fibro-header h1', function(){
+        location = '/';
+      });
+    </script>
   </body>
+  <footer>
+    <div class='fibro-footer'>
+      &copy; Andrei Marchenko, Poznan, Poland, 2014
+   </div>
+  </footer>
 </html>

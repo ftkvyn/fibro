@@ -1,3 +1,66 @@
 .ng-dirty.ng-invalid{
 	border-color: red;
 }
+body{
+	font-family: 'Arvo', serif !important;
+	background-color: #b29966  !important;
+	color: #2a1d02  !important;
+}
+.fibro-header{
+	height: 60px;
+	width: 100%;
+	clear: both;
+	background-color: green;
+	color: #F5F5DC; 
+	padding-top: 10px;
+	padding-right: 10px;
+}
+
+.fibro-header h1{
+	margin: 0px 0px 0px 20px;
+	cursor: pointer;
+	float: left;
+	clear: left;
+}
+
+.fibro-header .account-info{
+	float: right;
+	margin-right: 20px;	
+	margin-top: 10px;
+}
+
+.fibro-header a{
+	font-size: 16px;
+	color: #F5F5DC;
+}
+
+.fibro-header a:hover{
+	color: #eadec3;
+}
+
+.fibro-content{
+	margin: 0px 30px 0px 30px;
+	clear: both;
+	height: 100%;
+	background-color: #F5F5DC; 
+	padding: 10px;
+	overflow: hidden;
+	display: block;
+}
+.fibro-content a{
+	color: #725f35;
+}
+
+.fibro-content a:hover{
+	color: #50401f;
+}
+
+.fibro-footer{
+	width:100%;
+	position: relative;
+	height:30px;
+	margin: 10px 0px 10px 0px;
+	text-align: center;
+	clear: both;
+	display: block;
+}
