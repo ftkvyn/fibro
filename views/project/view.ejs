@@ -1,36 +1,26 @@
 <script type="text/javascript" src='/js/app/controllers/inviteController.js'></script>
 <script type="text/javascript" src='/js/app/controllers/projectController.js'></script>
-<div class='col-md-6' ng-controller='ProjectController as project'>
+<div class='col-md-12' ng-controller='ProjectController as project'>
 	<div class='row'>
+	<div class='col-md-8'>
+		<div class='row'>
 		<h1><%= project.name %></h1>
 		<h3>by <a href='/profile/<%= project.author.id %>'><%- project.author.name %></a></h3>
 		<%- (new Date(project.createdAt)).toDateString() %>
-	</div>
-	<div class='row'>
+	
 		<h3>Description</h3>
 		<%= project.description %>
-	</div>
-	<% if (project.neededMembers) { %>
-		<div class='row'>
-			<h3>Who is needed</h3>
-			<%= project.neededMembers %>
-		</div>
+	
+	<% if (project.neededMembers) { %>		
+		<h3>Who is needed</h3>
+		<%= project.neededMembers %>		
 	<% } %>
-	<% if (project.members && project.members.length) { %>
-		<div class='row'>
-			<h3>Members</h3>
-			<ul>
-			    <% for(var i=0; i<project.members.length; i++) { %>
-			        <li>
-			            <a href='/profile/<%= project.members[i].id %>'><%= project.members[i].name %></a>
-			        </li>
-			    <% } %>
-			</ul>
 		</div>
-	<% } %>	
+
+	<div class='row'>
 	<% if (isAuthor) { %>
-	<div 
-		class='col-md-6' 
+	<div 		
+
 		ng-controller='InviteController as inviteCtrl' 
 		ng-show='inviteCtrl.users.length'
 		ng-init='inviteCtrl.loadUsers()'>
@@ -46,10 +36,8 @@
 			<textarea rows="3" cols="40" ng-model='inviteCtrl.new.message' class='form-control' id='message'></textarea><br/>
 			<button class='btn btn-success' ng-click='inviteCtrl.send(inviteCtrl.new.user ,<%= project.id %>)'>Invite!</button>
 		</div>
-		<br/>
 	<% } else if(invitation) { %>
 		<div 
-		class='col-md-6' 
 		ng-controller='InviteController as inviteCtrl'>
 			<p>You are invited to join this project by <%= invitation.inviter.name %>!</p>
 			<% if(invitation.message) { %>
@@ -58,12 +46,10 @@
 			<button class='btn btn-success' ng-click='inviteCtrl.accept(<%= invitation.id %>, true)'>Join!</button>
 			<button class='btn btn-danger' ng-click='inviteCtrl.decline(<%= invitation.id %>, true)'>Decline</button>
 		</div>
-		<br/>
 	<% } else if(currentUser 
 			 && !isMember 
 			 && !isRequestingMembership) { %>
 	<div  
-		class='col-md-6' 
 		ng-controller='MembershipRequestController as memberCtrl' 
 		ng-init='memberCtrl.projectId = <%= project.id %>'>
 		<div ng-show='memberCtrl.success' class="alert alert-success alert-dismissible" role="alert">
@@ -76,15 +62,53 @@
 			<button class='btn btn-success' ng-click='memberCtrl.sendRequest()'>Join!</button>
 		</div>
 	</div>
-	<br/>
 	<% } %>	
 
-	<% if(isMember) { %>
-		<button ng-click='project.leave(<%= project.id %>)' class='btn btn-warning'>Leave project</button>
+	<% if (isAuthor) { %>
+	<button ng-click='project.delete(<%= project.id %>)' class='btn btn-danger'>Delete project</button>
+
+	<% } else if(isMember) { %>
+	<button ng-click='project.leave(<%= project.id %>)' class='btn btn-warning'>Leave project</button>
 	<% } %>	
-<% if (isAuthor) { %>
-<button ng-click='project.delete(<%= project.id %>)' class='btn btn-danger'>Delete project</button>
-<% } %>
+	</div>
+	
+	</div>
+
+	<% if (project.members && project.members.length) { %>
+		<div class='col-md-4'>
+			<h3>Members</h3>
+			<ul>
+			    <% for(var i=0; i<project.members.length; i++) { %>
+			        <li>
+			            <a href='/profile/<%= project.members[i].id %>'><%= project.members[i].name %></a>
+			        </li>
+			    <% } %>
+			</ul>
+
+			<% if (isAuthor) { %>
+			<div 			
+			ng-controller='MembershipRequestController as requestCtrl' 
+			ng-show='requestCtrl.requests.length'
+			ng-init='requestCtrl.loadRequests(<%= project.id %>)'>
+			<h3>Requests for membership</h3>
+				<ul>
+					<li ng-repeat='request in requestCtrl.requests'>
+						<strong>{{request.user.name}}</strong> 
+						to {{request.project.name}} (<em>{{request.createdAt | date}}</em>)<br/>
+						<span ng-show='request.message'>{{request.message}}</span>
+						<div>
+						<button class='btn btn-success' ng-click='requestCtrl.accept(request.id)'>Accept</button>
+						<button class='btn btn-danger' ng-click='requestCtrl.decline(request.id)'>Decline</button>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<% } %>
+			
+		</div>
+	<% } %>		
+
+</div>
 </div>
 
 <a href="/">Home</a><br/>

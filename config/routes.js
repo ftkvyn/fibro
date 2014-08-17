@@ -52,7 +52,7 @@ module.exports.routes = {
 
   'post /api/invitation/decline/' : 'InvitationController.decline',
 
-  'get /api/membershipRequest/forAuthor/': 'MembershipRequestController.findForAuthor',
+  'get /api/membershipRequest/forAuthor/:id?': 'MembershipRequestController.findForAuthor',
 
   'post /api/membershipRequest/accept/' : 'MembershipRequestController.accept',
 

@@ -20,10 +20,15 @@ module.exports = {
 		});
 	},
 
-	findForAuthor: function(req, res){		
-		Project.find({
+	findForAuthor: function(req, res){	
+		var projectId = req.param('id');
+		var query = {
 			author: req.session.user.id
-		})
+		};
+		if(projectId){
+			query.id = projectId;
+		}
+		Project.find(query)
 		.exec(function(err, projects){
 			if(err){
 				console.log(err);

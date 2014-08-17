@@ -46,6 +46,7 @@ body{
 	padding: 10px;
 	overflow: hidden;
 	display: block;
+	padding: 20px 20px 20px 50px; 
 }
 .fibro-content a{
 	color: #725f35;
@@ -54,7 +55,9 @@ body{
 .fibro-content a:hover{
 	color: #50401f;
 }
-
+.fibro-content textarea.form-control{
+	width: 300px;
+}
 .fibro-footer{
 	width:100%;
 	position: relative;

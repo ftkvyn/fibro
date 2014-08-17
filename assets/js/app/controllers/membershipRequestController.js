@@ -25,8 +25,9 @@ fibroApp.controller('MembershipRequestController', ['$http', function($http){
 		me.success = false;
 	}
 
-	this.loadRequests = function(){
-		$http.get('/api/membershipRequest/forAuthor/')
+	this.loadRequests = function(id){
+		id = id || "";
+		$http.get('/api/membershipRequest/forAuthor/'+id)
 		.success(function(data){
 			me.requests = data;
 		})
