@@ -7,8 +7,14 @@
 	<h3><%= name %></h3>	
 	<textarea ng-model='text' ng-keypress='keyPressed()' class='message-area'></textarea>	 
 	<button class='btn btn-success' ng-click='send()' ng-disabled='isSending'>Send</button>
-	<div ng-repeat='msg in messages'>
-		{{msg.text}} {{msg.createdAt | date}}
+	<div class='row'>
+		<div ng-repeat='msg in messages' class='message row'
+			ng-class='{self: msg.from == currentUserId, other: msg.from != currentUserId}'>
+			<div class='container col-md-6'>
+				<div class='author'>{{users[msg.from].name}}</div>
+				<div class='text'>{{msg.text}}</div>
+				<div class='date'>{{msg.createdAt | date}}</div>
+			</div>
+		</div>
 	</div>
-
 </div>

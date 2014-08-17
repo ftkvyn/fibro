@@ -5,6 +5,7 @@ fibroApp.controller('ChatController', ['$http', '$scope', function($http, $scope
 	$scope.currentUserId = undefined;
 	$scope.text = '';
 	$scope.isSending = false;
+	$scope.users = [];
 	var me = $scope;
 
 	$scope.init = function(type, id, currentUserId){
@@ -12,6 +13,7 @@ fibroApp.controller('ChatController', ['$http', '$scope', function($http, $scope
 		me.id = id;
 		me.currentUserId = currentUserId;
 		me.loadMessages();
+		me.loadUsers();
 	}	
 
 	$scope.keyPressed = function(){
@@ -42,7 +44,8 @@ fibroApp.controller('ChatController', ['$http', '$scope', function($http, $scope
 		console.log(message);
 		$http.post('/api/message/', message)
 		.success(function(data){
-			me.messages.push(data);
+			console.log(data);
+			me.messages.unshift(data);
 			me.text = '';
 			me.isSending = false;
 		})
@@ -63,5 +66,17 @@ fibroApp.controller('ChatController', ['$http', '$scope', function($http, $scope
 			alert('Error occured while loading messages.');
 		});
 	}
-	
+
+	$scope.loadUsers = function(){
+		$http.get('/api/message/users/' + $scope.type + '/' + $scope.id)
+		.success(function(data){
+			for (var i = data.length - 1; i >= 0; i--) {
+				me.users[data[i].id] = data[i];
+			};
+		})
+		.error(function(data){
+			console.log(data);
+			alert('Error occured while loading messages.');
+		});
+	}
 }]);

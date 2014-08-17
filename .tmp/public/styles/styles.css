@@ -97,5 +97,28 @@ a:link.chat-link{
 	width: 400px;
 	height: 80px;
 }
-
-
+.message{
+	display: block;
+	clear: both;
+	margin: 5px;
+}
+.message .container{
+	border-style: solid;
+	border-color: #D3D3D3;
+	border-width: 1px;
+	border-radius: 4px;
+}
+.message.self .container{
+	float: right;
+	background-color: white;
+	text-align: right; 
+}
+.message.other .container{
+	float: left;
+	background-color: #dcecf9;	
+	text-align: left; 
+}
+.message .author, .message .date{
+	color: #bebebe;
+	font-size: 10px;
+}

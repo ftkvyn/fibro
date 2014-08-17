@@ -44,6 +44,8 @@ module.exports.routes = {
 
   'get /api/message/:type/:id': 'MessageController.find',
 
+  'get /api/message/users/:type/:id': 'MessageController.getChatUsers',
+
   'post /api/message/:type/:id': 'MessageController.create',
 
   '/': {
