@@ -15,6 +15,9 @@
 		<h3>Who is needed</h3>
 		<%= project.neededMembers %>		
 	<% } %>
+	<% if (isMember) { %>		
+		<a href="/chat/project/<%= project.id %>">Go to project chat</a>		
+	<% } %>
 		</div>
 
 	<div class='row'>

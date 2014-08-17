@@ -80,4 +80,48 @@ module.exports = {
 			return res.serverError('Error loading project.');
 		});
 	},
+
+	chats : function(req, res){
+
+		return res.view('messages/chatList');
+	},
+
+	chat: function(req, res){
+
+		var sendResponce = function(name){
+			return res.view('messages/chat',
+			{
+				type: req.param('type'),
+				id: req.param('id'),
+				name: name
+			});
+		}
+
+		var id = req.param('id');
+		var type = req.param('type');
+		var obj;
+		if(type == 'project'){
+			obj = Project;
+		} else if(type == 'user'){
+			obj = User;
+		} else{
+			console.log('Type = ' + type);			
+			return res.badRequest('Fuck you, thats why.');
+		}		
+
+		obj.findOne(id)
+			.exec(function(err, item){
+				sendResponce(item.name);
+		});
+	},
 };
+
+
+
+
+
+
+
+
+
+

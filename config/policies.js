@@ -49,13 +49,29 @@ module.exports.policies = {
 		// feed : ['isNiceToAnimals', 'hasRabbitFood']
 	// }
 
-  ProjectController:{
+  ProjectController: {
     '*' : 'sessionAuth',
 
     find: true
   },
 
-  InvitationController:{
+  InvitationController: {
     '*' : 'sessionAuth',
-  }
+  },
+
+  ViewController: {
+    '*' : true,
+
+    chats: 'sessionAuth',
+    
+    chat: 'sessionAuth',
+  },
+
+  MessageController: {
+    '*' : 'sessionAuth',
+
+    destroy: false,
+
+    update: false,
+  },
 };

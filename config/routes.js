@@ -36,6 +36,16 @@ module.exports.routes = {
 
   '/project/:id': 'ViewController.project',
 
+  '/chats': 'ViewController.chats',
+
+  '/chat/:type/:id': 'ViewController.chat',
+
+  'get /api/message/chats' : 'MessageController.chats',
+
+  'get /api/message/:type/:id': 'MessageController.find',
+
+  'post /api/message/:type/:id': 'MessageController.create',
+
   '/': {
     view: 'home'
   },

@@ -12,6 +12,7 @@
 			Email: <strong><%= user.email %></strong>
 		</div>
 	<% if(!isMe && currentUser) {%>
+		<a href="/chat/user/<%= user.id %>">Go to chat</a>		
 		<div 
 		ng-controller='InviteController as inviteCtrl' 
 		ng-show='inviteCtrl.projects.length'

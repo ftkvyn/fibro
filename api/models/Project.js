@@ -34,7 +34,8 @@ module.exports = {
         dominant:true
 	},
 	author:{
-		model:'user'
+		model:'user',
+		required:true
 	}
   }
 };
