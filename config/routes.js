@@ -48,6 +48,8 @@ module.exports.routes = {
 
   'post /api/message/:type/:id': 'MessageController.create',
 
+  'get /api/message/subscribe/:type/:id': 'MessageController.subscribe',
+
   '/': {
     view: 'home'
   },

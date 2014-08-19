@@ -23,6 +23,9 @@ module.exports.sockets = {
   ***************************************************************************/
   onConnect: function(session, socket) {
 
+    // console.log('=====Connected=======');
+    // console.log(session.user.name);
+    //console.log(socket);
     // By default, do nothing.
 
   },
@@ -36,6 +39,9 @@ module.exports.sockets = {
   ***************************************************************************/
   onDisconnect: function(session, socket) {
 
+    // console.log('=====Disconnected=======');
+    // console.log(session.user.name);
+    //console.log(socket);
     // By default: do nothing.
   },
 
@@ -49,12 +55,13 @@ module.exports.sockets = {
   * flashsockets by adding 'flashsocket' to this list:                       *
   *                                                                          *
   ***************************************************************************/
-  // transports: [
-  //   'websocket',
-  //   'htmlfile',
-  //   'xhr-polling',
-  //   'jsonp-polling'
-  // ],
+  transports: [
+    'websocket',
+    'htmlfile',
+    'xhr-polling',
+    'jsonp-polling',
+    // 'flashsockets'
+  ],
 
   /***************************************************************************
   *                                                                          *
@@ -63,7 +70,7 @@ module.exports.sockets = {
   *                                                                          *
   ***************************************************************************/
 
-  // adapter: 'memory',
+  //adapter: 'memory',
 
   /***************************************************************************
   *                                                                          *
@@ -91,11 +98,11 @@ module.exports.sockets = {
   *                                                                          *
   ***************************************************************************/
 
-  // adapter: 'redis',
-  // host: '127.0.0.1',
-  // port: 6379,
-  // db: 'sails',
-  // pass: '<redis auth password>'
+  adapter: 'redis',
+  host: 'pub-redis-17557.eu-west-1-1.2.ec2.garantiadata.com',
+  port: 17557,
+  db: 'redis-fibro-app',
+  pass: 'bn3T0K3d8nRVJdzc',
 
 
   /***************************************************************************
@@ -146,7 +153,21 @@ module.exports.sockets = {
   *                                                                          *
   ***************************************************************************/
 
-  // authorization: false,
+  authorization: function(req, cb) {     
+                                                                       
+     // Any data saved in `handshake` is available in subsequent       
+     // requests from this as `req.socket.handshake.*`  
+     // console.log(req);                  
+     // if(req.session && req.session.user){
+        cb(null, true);
+     // }else{
+      // cb(null, false);
+     // }                
+
+     // to allow the connection, call `cb(null, true)`                 
+     // to prevent the connection, call `cb(null, false)`              
+     // to report an error, call `cb(err)`                             
+  },
 
   /***************************************************************************
   *                                                                          *
@@ -159,7 +180,7 @@ module.exports.sockets = {
   *                                                                          *
   ***************************************************************************/
 
-  // 'backwardsCompatibilityFor0.9SocketClients': false,
+  'backwardsCompatibilityFor0.9SocketClients': false,
 
   /***************************************************************************
   *                                                                          *

@@ -9,6 +9,31 @@
 
 module.exports = {
 
+	subscribe: function(req, res){
+		var type = req.param('type');
+		var id = req.param('id');
+		var socket = req.socket;
+
+		if(type === 'project'){		
+			Project.findOne(id)
+					.populate('members')
+					.exec(function(err, project){
+						for (var i = project.members.length - 1; i >= 0; i--) {
+							if(project.members[i].id === req.session.user.id){
+								socket.join('project_' + id);
+								return res.send(200);													
+							}
+						};
+						return res.send(403);
+					});
+			
+		} else if(type === 'user'){
+			socket.join('user_' + req.session.user.id);
+		}
+
+		return res.send(200);
+	},
+
 	find: function(req, res){
 		var loadMessages = function(query){
 			Message.find(query).exec(function(err,messages){
@@ -73,6 +98,19 @@ module.exports = {
 					console.log(err);
 					return res.badRequest('Unable create message.');
 				}
+
+				var socket = req.socket;
+			    var io = sails.io;
+			    
+			    if(message.toProject){		
+			    	io.sockets.in('project_' + message.toProject).emit('message', message);
+					// socket.broadcast.to('project_' + message.toProject).emit('message', message);
+				} else if(message.toUser){
+					io.sockets.in('user_' + message.toUser).emit('message', message);
+					// socket.broadcast.to('user_' + message.toUser).emit('message', message);
+				}
+
+
 				return res.send(message);
 			});
 		};

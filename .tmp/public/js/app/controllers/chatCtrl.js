@@ -11,9 +11,11 @@ fibroApp.controller('ChatController', ['$http', '$scope', function($http, $scope
 	$scope.init = function(type, id, currentUserId){
 		me.type = type;
 		me.id = id;
+		me.socketMagic();
 		me.currentUserId = currentUserId;
 		me.loadMessages();
 		me.loadUsers();
+		
 	}	
 
 	$scope.keyPressed = function(){
@@ -41,11 +43,14 @@ fibroApp.controller('ChatController', ['$http', '$scope', function($http, $scope
 		} else if($scope.type === 'user'){
 			message.toUser = $scope.id;
 		}
-		console.log(message);
 		$http.post('/api/message/', message)
 		.success(function(data){
-			console.log(data);
-			me.messages.unshift(data);
+			// In project chat message goes through 
+			// socket to every project member, so
+			// there is no need to add message here.
+			if(me.type !== 'project'){
+				me.messages.unshift(data);
+			}
 			me.text = '';
 			me.isSending = false;
 		})
@@ -78,5 +83,22 @@ fibroApp.controller('ChatController', ['$http', '$scope', function($http, $scope
 			console.log(data);
 			alert('Error occured while loading messages.');
 		});
+	}
+
+	$scope.socketMagic = function(){
+		var socket = io.connect();
+
+		socket.on('connect', function(){
+			console.log('connected');
+		});
+
+		socket.on('message', function(msg){
+				// console.log('message');
+				// console.log(msg);
+				me.messages.unshift(msg);
+				$scope.$apply();
+			});		
+
+		socket.get('/api/message/subscribe/'+ $scope.type + '/' + $scope.id);
 	}
 }]);
