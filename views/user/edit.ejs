@@ -1,0 +1,27 @@
+<script type="text/javascript" src='/js/app/controllers/pofileController.js'></script>
+<h1>Edit Profile</h1>
+
+<div class='col-md-6' ng-controller='ProfileController' ng-init='load(<%= userId %>)'>
+	<form name='profileForm' novalidate>
+		<div class='row'>
+			<label for='name'>Your name:</label><br/>
+			<input id='name' ng-model='user.name' class='form-control' required type='text'></input>
+		</div>
+		<div class='row'>
+			<label for='birth'>Your birthday:</label><br/>
+			<input id='birth' ng-model='user.birthDate' class='form-control' type='date'></input>
+		</div>
+		<div class='row'>
+			<label for='about'>A few words about yourself:</label><br/>
+			<textarea id='about' rows="5" cols="60" ng-model='user.about' class='form-control'></textarea>
+		</div>
+		<div class='row'>
+			<label for='skills'>Describe your skills:</label><br/>
+			<input id='skills' ng-model='user.skills' class='form-control' type='text'></input>
+		</div>
+		<div>
+			TBD: Upload foto.
+		</div>	
+		<button type='submit' class='btn btn-success' ng-click='save()'>Save!</button>
+	</form>
+</div>

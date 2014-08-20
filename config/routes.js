@@ -34,6 +34,8 @@ module.exports.routes = {
   
   '/profile/:id': 'ViewController.profile',
 
+  '/profile/:id/edit': 'ViewController.editProfile',
+
   '/project/:id': 'ViewController.project',
 
   '/chats': 'ViewController.chats',

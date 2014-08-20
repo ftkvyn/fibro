@@ -21,6 +21,13 @@ module.exports = {
 		});		
 	},
 
+	editProfile: function(req, res){
+		if(+req.param('id') !== req.session.user.id){
+			return res.send(403);
+		}
+		return res.view('user/edit', {userId : req.param('id')});
+	},
+
 	newProject : function(req, res){
 		if(req.session && req.session.user){ 
 			return res.view('project/new');
