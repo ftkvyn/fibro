@@ -21,6 +21,21 @@ module.exports = {
 		});
 	},
 
+	update: function (req, res) {
+		Project.findOne(req.param('id'))
+		.exec(function(err, project){
+			if(err || (!project)){
+				return res.badRequest('Project not found.');
+			}
+			project.name = req.body.name;
+			project.description = req.body.description;
+			project.neededMembers = req.body.neededMembers;
+			project.save(function(err, project){
+				return res.send(project);	
+			});			
+		});		
+	},
+
 	destroy: function(req, res){
 		// console.log(req);
 		var id = +req.param('id');

@@ -38,6 +38,8 @@ module.exports.routes = {
 
   '/project/:id': 'ViewController.project',
 
+  '/project/:id/edit': 'ViewController.editProject',
+
   '/chats': 'ViewController.chats',
 
   '/chat/:type/:id': 'ViewController.chat',

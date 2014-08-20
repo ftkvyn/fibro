@@ -30,10 +30,22 @@ module.exports = {
 
 	newProject : function(req, res){
 		if(req.session && req.session.user){ 
-			return res.view('project/new');
+			return res.view('project/edit',{isNew : true, projectId : undefined});
 		}else{
 			return res.view('/', {message: 'Please, login.'});
 		}
+		
+	},
+
+	editProject : function(req, res){
+		var projectId = req.param('id');
+		Project.findOne(projectId)
+		.exec(function(err, project){
+			if(project.author != req.session.user.id){
+				return res.send(403);
+			}
+			return res.view('project/edit',{isNew : false, projectId : project.id});
+		})
 		
 	},
 

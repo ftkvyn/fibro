@@ -1,22 +1,43 @@
 fibroApp.controller('ProjectController', ['$http', function($http){
-		this.new = {};
+		this.model = {};
 		var me = this;
-		me.isCreating = false;
+		me.isSaving = false;
+		me.isNew = undefined;
 
-		this.create = function(){
-			if(!me.isCreating){
-				me.isCreating = true;
-				$http.post('/api/project', this.new)
+		this.save = function(){
+			if(!me.isSaving){
+				me.isSaving = true;
+				var query;
+				if(me.isNew){
+					query = $http.post('/api/project', this.model);	
+				} else{
+					query = $http.put('/api/project/'+this.model.id, this.model);
+				}
+				query
 				.success(function(data){
 					console.log('Success!');
-					me.isCreating = false;
+					me.isSaving = false;
 					window.location = '/project/' + data.id;
 				})
 				.error(function(data){
 					console.log(data);
-					me.isCreating = false;
-					alert('Error occured while creating project.');
+					me.isSaving = false;
+					alert('Error occured while saving project.');
 				});			
+			}
+		}
+
+		this.load = function(isNew, projectId){
+			me.isNew = isNew;
+			if(!isNew){
+				$http.get('/api/project/'+projectId)
+				.success(function(data){
+					me.model = data;
+				})
+				.error(function(data){
+					console.log(data);
+					alert('Error occured while loading project.');
+				});	
 			}
 		}
 
