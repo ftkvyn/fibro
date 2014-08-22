@@ -10,6 +10,7 @@ module.exports = {
 			}
 			user.name = req.body.name;
 			user.skills = req.body.skills;
+			user.location = req.body.location;
 			user.about = req.body.about;
 			if(user.birthDate){
 				user.birthDate = new Date(req.body.birthDate);
@@ -40,7 +41,11 @@ module.exports = {
 				  case "about":
 				    request.or.push({about : {'contains' : values[i]}});
 				    break;
+				  case "location":
+				    request.or.push({location : {'contains' : values[i]}});
+				    break;
 				  default:
+				  	console.log(req.body.criteia);
 				    return res.badRequest('Invalid search criteia.');
 				}
 			}

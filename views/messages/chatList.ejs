@@ -6,7 +6,7 @@
 	 <a href='/chat/{{chat.type}}/{{chat.target.id}}' ng-repeat='chat in chats' class='chat-link'>
 	 <div class='row chat-row' >
 	 	<img ng-show='chat.type==="user"' 
-	 	src="http://graph.facebook.com/{{chat.target.fb_id}}/picture"></img>
+	 	ng-src="http://graph.facebook.com/{{chat.target.fb_id}}/picture"></img>
 	 	{{chat.target.name}}
 	 </div>
 	</a>

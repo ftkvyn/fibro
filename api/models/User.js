@@ -31,6 +31,12 @@ module.exports = {
 	about:{
 		type:'text'
 	},
+	location:{
+		type:'string'
+	},
+
+
+
 	projects:{
 		collection: 'project',
         via: 'members',

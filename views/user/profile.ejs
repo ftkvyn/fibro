@@ -15,6 +15,12 @@
 				<p><%= user.birthDate.toLocaleDateString() %></p>
 			</div>
 			<% } %>
+			<% if(user.location) { %>
+			<div>
+				<h4>Location</h4>
+				<p><%= user.location %></p>
+			</div>
+			<% } %>
 			<div>
 				<h4>About</h4>
 				<p><%= user.about || "Empty yet :(" %></p>

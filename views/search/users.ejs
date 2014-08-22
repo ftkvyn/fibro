@@ -7,6 +7,7 @@
 			<input type="radio" ng-model="criteria" value="skills" ng-change='search()'>Skills</input>
 			<input type='radio' ng-model="criteria" value="name" ng-change='search()'>Name</input>
 			<input type='radio' ng-model="criteria" value="about" ng-change='search()'>About</input>
+			<input type='radio' ng-model="criteria" value="location" ng-change='search()'>Location</input>
 		</div>
 		<input type='text' ng-model='pattern' ng-change='search()'></input>
 	</div>
@@ -15,13 +16,16 @@
 		<a href="/profile/{{user.id}}" ng-repeat='user in users' class='search-result-link'>
 			<div class='row search-result'>
 				<div class='title'>
-					<img src="http://graph.facebook.com/{{user.fb_id}}/picture"></img>
+					<img ng-src="http://graph.facebook.com/{{user.fb_id}}/picture"></img>
 					<span class='name'>{{user.name}}</span>
 				</div>
 				<div class='info'>
 					<ul>
 						<li ng-show='user.skills'>
 							{{user.skills}}
+						</li>
+						<li ng-show='user.location'>
+							{{user.location}}
 						</li>
 						<li ng-show='user.about'>
 							{{user.about}}
