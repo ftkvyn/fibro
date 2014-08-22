@@ -43,6 +43,8 @@ module.exports.routes = {
   '/chats': 'ViewController.chats',
 
   '/search/user': 'ViewController.searchUser',
+  
+  '/search/project': 'ViewController.searchProject',
 
   '/chat/:type/:id': 'ViewController.chat',
 
@@ -63,6 +65,8 @@ module.exports.routes = {
   '/new/project' : 'ViewController.newProject',
 
   'post /api/user/search' : 'UserController.search',
+
+  'post /api/project/search' : 'ProjectController.search',
 
   'get /api/project/authored' : 'ProjectController.authoredProjects',
 

@@ -1,6 +1,6 @@
 <script type="text/javascript" src='/js/app/controllers/searchController.js'></script>
 <h3>Search user</h3>
-<div ng-controller='SearchController' class='col-md-10'>
+<div ng-controller='SearchController' ng-init='initUsers()' class='col-md-10'>
 	<div class='search-options'>
 		<div class='row'>
 			Search by:
@@ -11,9 +11,9 @@
 		</div>
 		<input type='text' ng-model='pattern' ng-change='search()'></input>
 	</div>
-	<div class='search-results' ng-model='users'>
+	<div class='search-results' ng-model='items'>
 		
-		<a href="/profile/{{user.id}}" ng-repeat='user in users' class='search-result-link'>
+		<a href="/profile/{{user.id}}" ng-repeat='user in items' class='search-result-link'>
 			<div class='row search-result'>
 				<div class='title'>
 					<img ng-src="http://graph.facebook.com/{{user.fb_id}}/picture"></img>

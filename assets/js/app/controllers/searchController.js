@@ -1,13 +1,23 @@
 fibroApp.controller('SearchController', ['$http', '$scope', function($http, $scope){
 		$scope.pattern = undefined;
-		$scope.criteria = 'skills';
+		$scope.criteria = undefined;
 		$scope.skip = 0;
-		$scope.users = [];
+		$scope.items = [];
 		var me = $scope;
+
+		$scope.initUsers = function(){
+			$scope.criteria = 'skills';
+			$scope.entity = 'user';
+		}
+
+		$scope.initProjects = function(){
+			$scope.criteria = 'needed';
+			$scope.entity = 'project';
+		}
 
 		$scope.search = function(){
 			if(me.pattern){
-				$http.post('/api/user/search', 
+				$http.post('/api/' + $scope.entity + '/search', 
 					{
 						criteria : me.criteria, 
 						pattern: me.pattern,
@@ -15,16 +25,16 @@ fibroApp.controller('SearchController', ['$http', '$scope', function($http, $sco
 					})
 				.success(function(data){	
 					if(me.pattern === data.pattern){			
-						me.users = data.items;
+						me.items = data.items;
 					}
 				})
 				.error(function(data){
 					console.log(data);
-					alert('Error occured while loading users.');
+					alert('Error occured while searching.');
 				});
 			}
 			else{
-				me.users = [];
+				me.items = [];
 			}
 		}
 

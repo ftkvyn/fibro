@@ -137,7 +137,12 @@ module.exports = {
 	searchUser: function(req, res){
 
 		return res.view('search/users');
-	}
+	},
+
+	searchProject: function(req, res){
+
+		return res.view('search/projects');
+	},
 };
 
 

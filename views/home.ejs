@@ -1,6 +1,6 @@
 <script id="user-template" type="text/x-handlebars-template">
   <li>
-  	<a href='/profile/{{id}}'><img src='{{#if fb_id}}http://graph.facebook.com/{{fb_id}}/picture{{else}}/images/anonymous.jpg{{/if}}' 
+  	<a href='/profile/{{id}}'><img src='{{#if fb_id}}http://graph.facebook.сom/{{fb_id}}/picture{{else}}/images/anonymous.jpg{{/if}}' 
   	alt='image'/> {{name}}</a><br/>
   	<a href='/auth/loginById/{{id}}'>Login as this user</a>
   </li>
@@ -101,11 +101,13 @@ var projectTemplate = Handlebars.compile(source);
 
 			<a href="/chats">Chats</a><br/>
 			<a href="/search/user">Search users</a><br/>
+			<a href="/search/project">Search projects</a><br/>
 		    <a href="/profile/<%- currentUser.id %>">Go to profile</a><br/>
 		    <a href="/new/project">Create project</a></br>
 		    <a href="/auth/logout">Logout</a>
 		<% } else {%>
 			<a href="/search/user">Search users</a><br/>
+			<a href="/search/project">Search projects</a><br/>
 			<a href="/auth/facebook">Login with Facebook</a>
 		<% } %>
 	</div>
