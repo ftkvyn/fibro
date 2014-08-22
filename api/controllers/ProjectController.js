@@ -30,6 +30,7 @@ module.exports = {
 			project.name = req.body.name;
 			project.description = req.body.description;
 			project.neededMembers = req.body.neededMembers;
+			project.privateInformation = req.body.privateInformation;
 			project.save(function(err, project){
 				return res.send(project);	
 			});			

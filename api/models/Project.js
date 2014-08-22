@@ -28,6 +28,9 @@ module.exports = {
 		type:'text',
 		required:true
 	},
+	privateInformation:{
+		type:'text',
+	},
 	members:{
 		collection: 'user',
         via: 'projects',

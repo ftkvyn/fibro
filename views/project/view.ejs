@@ -16,6 +16,10 @@
 		<%= project.neededMembers %>		
 	<% } %>
 	<% if (isMember) { %>		
+		<% if (project.privateInformation) { %>	
+			<h3>Information</h3>
+			<%= project.privateInformation %>
+		<% } %>
 		<br/><a href="/chat/project/<%= project.id %>">Go to project chat</a>		
 	<% } %>
 		</div>
@@ -40,7 +44,8 @@
 			<textarea rows="3" cols="40" ng-model='inviteCtrl.new.message' class='form-control' id='message'></textarea><br/>
 			<button class='btn btn-success' ng-click='inviteCtrl.send(inviteCtrl.new.user ,<%= project.id %>)'>Invite!</button>
 		</div>
-	<% } else if(invitation) { %>
+	<% } %>
+	<% if(invitation) { %>
 		<div 
 		ng-controller='InviteController as inviteCtrl'>
 			<p>You are invited to join this project by <%= invitation.inviter.name %>!</p>
