@@ -1,0 +1,35 @@
+<script type="text/javascript" src='/js/app/controllers/searchController.js'></script>
+<h3>Search user</h3>
+<div ng-controller='SearchController' class='col-md-10'>
+	<div class='search-options'>
+		<div class='row'>
+			Search by:
+			<input type="radio" ng-model="criteria" value="skills" ng-change='search()'>Skills</input>
+			<input type='radio' ng-model="criteria" value="name" ng-change='search()'>Name</input>
+			<input type='radio' ng-model="criteria" value="about" ng-change='search()'>About</input>
+		</div>
+		<input type='text' ng-model='pattern' ng-change='search()'></input>
+	</div>
+	<div class='search-results' ng-model='users'>
+		
+		<a href="/profile/{{user.id}}" ng-repeat='user in users' class='search-result-link'>
+			<div class='row search-result'>
+				<div class='title'>
+					<img src="http://graph.facebook.com/{{user.fb_id}}/picture"></img>
+					<span class='name'>{{user.name}}</span>
+				</div>
+				<div class='info'>
+					<ul>
+						<li ng-show='user.skills'>
+							{{user.skills}}
+						</li>
+						<li ng-show='user.about'>
+							{{user.about}}
+						</li>
+					</ul>
+				</div>
+			
+			</div>
+		</a>
+	</div>
+</div>

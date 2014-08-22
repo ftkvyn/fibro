@@ -6,7 +6,7 @@
 		<div class='row'>
 		<h1><%= project.name %></h1>
 		<h3>by <a href='/profile/<%= project.author.id %>'><%- project.author.name %></a></h3>
-		<%- (new Date(project.createdAt)).toDateString() %>
+		<%= (new Date(project.createdAt)).toDateString() %>
 	
 		<h3>Description</h3>
 		<%= project.description %>
@@ -16,10 +16,8 @@
 		<%= project.neededMembers %>		
 	<% } %>
 	<% if (isMember) { %>		
-		<% if (project.privateInformation) { %>	
-			<h3>Information</h3>
-			<%= project.privateInformation %>
-		<% } %>
+		<h3>Information</h3>
+		<%= project.privateInformation || "Empty yet :("%>
 		<br/><a href="/chat/project/<%= project.id %>">Go to project chat</a>		
 	<% } %>
 		</div>

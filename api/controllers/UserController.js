@@ -11,11 +11,50 @@ module.exports = {
 			user.name = req.body.name;
 			user.skills = req.body.skills;
 			user.about = req.body.about;
-			user.birthDate = new Date(req.body.birthDate);
+			if(user.birthDate){
+				user.birthDate = new Date(req.body.birthDate);
+			}
 			user.save(function(err, user){
 				return res.send(user);	
 			});			
 		});		
+	},
+
+	search: function(req,res){
+		var request = { or : []};
+		var rawPattern = req.body.pattern;
+		var values = rawPattern
+					.split(',')
+					.map(function(str){
+						return str.trim();
+					});
+		for (var i = values.length - 1; i >= 0; i--) {
+			if(values[i]){
+				switch (req.body.criteria) {
+				  case "skills":
+				  	request.or.push({skills : {'contains' : values[i]}});
+				    break;
+				  case "name":
+				  	request.or.push({name : {'contains' : values[i]}});
+				    break;
+				  case "about":
+				    request.or.push({about : {'contains' : values[i]}});
+				    break;
+				  default:
+				    return res.badRequest('Invalid search criteia.');
+				}
+			}
+		};
+
+		User.find(request)
+		.skip(req.body.skip)
+		.exec(function(err, users){
+			if(err){
+				return res.badRequest('Error searching users.');
+			}
+			
+			return res.send({items : users, pattern: rawPattern});	
+		});	
 	}
 };
 

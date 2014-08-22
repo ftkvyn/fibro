@@ -20,7 +20,9 @@ fibroApp.controller('ProfileController', ['$http', '$scope', function($http, $sc
 			$http.get('/api/user/'+id)
 			.success(function(data){
 				console.log('Success!');
-				data.birthDate = new Date(data.birthDate);
+				if(data.birthDate){
+					data.birthDate = new Date(data.birthDate);
+				}
 				me.user = data;
 			})
 			.error(function(data){

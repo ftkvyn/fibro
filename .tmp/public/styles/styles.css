@@ -124,3 +124,28 @@ a:link.chat-link{
 	color: #bebebe;
 	font-size: 10px;
 }
+.search-result{
+	margin: 5px;
+	padding: 10px;
+	font-size: 14px;
+	min-height: 50px;
+	max-height: 150px;
+	overflow: hidden;
+	width: 500px;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 2px;
+	border-color: #b29966;
+	background-color: #f5f5eb;
+}
+a:link.search-result-link{
+	text-decoration: none;
+}
+.search-result:hover{
+	background-color: #f5efd0;
+	cursor: pointer;
+}
+.search-result img{
+	max-height: 30px;
+	max-width: 30px;
+}

@@ -9,18 +9,19 @@
 				<a target="_blank" href="http://facebook.com/<%- user.fb_id %>"><%= user.name %> on facebook</a>
 				<br/>
 			<% } %>
-			Email: <strong><%= user.email %></strong>
+			<% if(user.birthDate) { %>
 			<div>
 				<h4>Birth date</h4>
 				<p><%= user.birthDate.toLocaleDateString() %></p>
 			</div>
+			<% } %>
 			<div>
 				<h4>About</h4>
-				<p><%= user.about %></p>
+				<p><%= user.about || "Empty yet :(" %></p>
 			</div>
 			<div>
 				<h4>Skills</h4>
-				<p><%= user.skills %></p>
+				<p><%= user.skills || "Empty yet :(" %></p>
 			</div>
 		</div>
 	<% if(!isMe && currentUser) {%>

@@ -133,6 +133,11 @@ module.exports = {
 				sendResponce(item.name);
 		});
 	},
+
+	searchUser: function(req, res){
+
+		return res.view('search/users');
+	}
 };
 
 
