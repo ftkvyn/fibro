@@ -39,7 +39,11 @@ module.exports = {
 	author:{
 		model:'user',
 		required:true
-	}
+	},
+	posts:{
+		collection: 'post',
+        via: 'project'
+	},
   }
 };
 

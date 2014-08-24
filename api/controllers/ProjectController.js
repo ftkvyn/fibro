@@ -5,6 +5,7 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 var Q = require('q');
+var cloudinary = require('cloudinary');
 
 module.exports = {
 	create : function(req, res){		

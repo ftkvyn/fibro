@@ -36,9 +36,17 @@ module.exports.routes = {
 
   '/profile/:id/edit': 'ViewController.editProfile',
 
+  '/project/new' : 'ViewController.newProject',
+
   '/project/:id': 'ViewController.project',
 
   '/project/:id/edit': 'ViewController.editProject',
+
+  '/post/new/:projectId' : 'ViewController.newPost',
+
+  '/post/:id': 'ViewController.post',
+
+  '/post/:id/edit': 'ViewController.editPost',
 
   '/chats': 'ViewController.chats',
 
@@ -60,9 +68,7 @@ module.exports.routes = {
 
   '/': {
     view: 'home'
-  },
-
-  '/new/project' : 'ViewController.newProject',
+  },  
 
   'post /api/user/search' : 'UserController.search',
 

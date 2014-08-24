@@ -55,6 +55,14 @@ module.exports.policies = {
     find: true
   },
 
+  PostController: {
+    '*' : ['sessionAuth', 'postAuthor'],
+
+    create: 'sessionAuth',
+
+    find: true
+  },
+
   InvitationController: {
     '*' : 'sessionAuth',
   },

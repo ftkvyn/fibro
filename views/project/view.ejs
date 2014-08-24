@@ -18,7 +18,8 @@
 	<% if (isMember) { %>		
 		<h3>Information</h3>
 		<%= project.privateInformation || "Empty yet :("%>
-		<br/><a href="/chat/project/<%= project.id %>">Go to project chat</a>		
+		<br/><a href="/chat/project/<%= project.id %>">Go to project chat</a>
+		<br/><a href="/post/new/<%= project.id %>">Create post</a>
 	<% } %>
 		</div>
 
@@ -82,8 +83,9 @@
 	
 	</div>
 
-	<% if (project.members && project.members.length) { %>
-		<div class='col-md-4'>
+	<div class='col-md-4'>
+		<% if (project.members && project.members.length) { %>
+		
 			<h3>Members</h3>
 			<ul>
 			    <% for(var i=0; i<project.members.length; i++) { %>
@@ -111,9 +113,18 @@
 				</ul>
 			</div>
 			<% } %>
-			
-		</div>
-	<% } %>		
+		<% } %>	
+		<% if (project.posts && project.posts.length) { %>
+		<h3>Recent posts</h3>	
+		<ul>
+			    <% for(var i=0; i<project.posts.length; i++) { %>
+			        <li>
+			            <a href='/post/<%= project.posts[i].id %>'><%= project.posts[i].title %> (<%= (new Date(project.posts[i].createdAt)).toDateString() %>)</a>
+			        </li>
+			    <% } %>
+			</ul>
+		<% } %>	
+	</div>
 
 </div>
 </div>

@@ -1,0 +1,21 @@
+<script type="text/javascript" src='/js/app/controllers/postController.js'></script>
+<% if(isNew){ %>
+	<h1>New Post</h1>
+<% } else { %>
+	<h1>Edit Post</h1>
+<% } %>
+<div class='col-md-6' ng-controller='PostController'
+		ng-init='load(<%= isNew %>, <%= projectId %>, <%= postId %>)'>
+	<form name='projectForm' ng-submit='projectForm.$valid && save()' novalidate>
+		<div class='row'>
+			<label for='title'>Title:</label><br/>
+			<input id='title' ng-model='model.title' class='form-control' required type='text'></input>
+		</div>
+		<div class='row'>
+			<label for='text'>Text:</label><br/>
+			<textarea rows="5" cols="60" ng-model='model.text' class='form-control' required id='text'></textarea>
+		</div>
+		<input ng-show='isNew' type='submit' class='btn btn-success' value='Create!'></input>
+		<input ng-hide='isNew' type='submit' class='btn btn-success' value='Save'></input>
+	</form>
+</div>

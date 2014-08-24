@@ -53,7 +53,8 @@ module.exports = {
 		var projectId = req.param('id');
 		var proj_q = Project.findOne(projectId)
 		.populate('author')
-		.populate('members');
+		.populate('members')
+		.populate('posts', {sort: 'createdAt DESC'});
 
 		var userId = 0;
 		if(req.session && req.session.user){
@@ -142,6 +143,40 @@ module.exports = {
 	searchProject: function(req, res){
 
 		return res.view('search/projects');
+	},
+
+	newPost : function(req, res){
+		var projectId = req.param('projectId');
+		if(req.session && req.session.user){ 
+			return res.view('post/edit',{isNew : true, projectId : projectId, postId: undefined});
+		}else{
+			return res.view('/', {message: 'Please, login.'});
+		}
+		
+	},
+
+	editPost : function(req, res){
+		var postId = req.param('id');
+		Post.findOne(postId)
+		.exec(function(err, post){
+			if(post.author != req.session.user.id){
+				return res.send(403);
+			}
+			return res.view('post/edit',{isNew : false, projectId : post.project, postId: post.id});
+		})
+		
+	},
+
+	post : function(req,res){
+		var postId = req.param('id');
+		Post.findOne(postId)
+			.populate('author')
+			.populate('project')
+			.populate('comments', {sort: 'createdAt DESC'})
+			.exec(function(err, post){
+				var isAuthor = post.author.id === req.session.user.id;
+				return res.view('post/view',{post: post, isAuthor: isAuthor});
+			});
 	},
 };
 

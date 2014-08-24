@@ -8,7 +8,36 @@
 module.exports = {
 
   attributes: {
+  		title:{
+  			type: 'string',
+  			required: true
+  		},
 
+  		text: {
+  			type: 'text',
+  			required: true
+  		},
+
+  		isPublic: {
+  			type: 'boolean',
+  			required: true,
+  			defaultsTo: true
+  		},
+
+  		author:{
+  			model:'user',
+  			required:true
+  		},
+
+  		project: {
+  			model:'project',
+  			required: true
+  		},
+
+  		comments:{
+			  collection: 'comment',
+	      via: 'post'
+		},
   }
 };
 
