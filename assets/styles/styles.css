@@ -152,3 +152,26 @@ a:link.search-result-link{
 	max-height: 30px;
 	max-width: 30px;
 }
+.comment{
+	display: inline-block;
+	clear: both;
+	margin: 5px;
+	padding: 4px;
+	border-style: solid;
+	border-color: #D3D3D3;
+	border-width: 1px;
+	border-radius: 4px;
+	min-width: 200px;
+	background-color: #FAFAED;
+	text-align: left;
+}
+.comment div{
+
+}
+.comment .date{
+	color: #bebebe;
+	font-size: 10px;
+}
+.comment .author{
+	font-size: 10px;
+}

@@ -172,10 +172,27 @@ module.exports = {
 		Post.findOne(postId)
 			.populate('author')
 			.populate('project')
-			.populate('comments', {sort: 'createdAt DESC'})
+			.populate('comments', {sort: 'createdAt ASC'})
 			.exec(function(err, post){
-				var isAuthor = post.author.id === req.session.user.id;
-				return res.view('post/view',{post: post, isAuthor: isAuthor});
+				// Should be removed when deep populate will work.
+				var users = [];
+				for(var i = 0; i < post.comments.length; i++){
+					if(users.indexOf(post.comments[i].author) < 0){
+						users.push(post.comments[i].author);
+					}					
+				}
+				User.find({id: users})
+				.exec(function(err, users){
+					var usersMap = [];
+					for(var i = 0; i < users.length; i++){
+						usersMap[users[i].id] = users[i];
+					}						
+					for(var i = 0; i < post.comments.length; i++){
+						post.comments[i].author = usersMap[post.comments[i].author];
+					}					
+					var isAuthor = post.author.id === req.session.user.id;
+					return res.view('post/view',{post: post, isAuthor: isAuthor});
+				});				
 			});
 	},
 };

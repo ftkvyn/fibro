@@ -66,6 +66,10 @@ module.exports.routes = {
 
   'get /api/message/subscribe/:type/:id': 'MessageController.subscribe',
 
+  'post /api/comment/:id': 'CommentController.create',
+
+  'get /api/comment/subscribe/:id': 'CommentController.subscribe',
+
   '/': {
     view: 'home'
   },  

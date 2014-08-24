@@ -55,6 +55,12 @@ module.exports.policies = {
     find: true
   },
 
+  CommentController: {
+    '*' : 'sessionAuth',
+
+    find: true
+  },
+
   PostController: {
     '*' : ['sessionAuth', 'postAuthor'],
 
