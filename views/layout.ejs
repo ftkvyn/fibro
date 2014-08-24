@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html ng-app='fibro'>
   <head>
-    <title>Find Bro</title>
+    
+      <title>Find Bro</title>
+    
     <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -56,7 +58,9 @@
 
   <body>
     <div class='fibro-header'>
-      <h1>Find your Bro!</h1>
+      <a href="/">
+        <h1>Find your Bro!</h1>
+      </a>
       <div class='account-info'>
         <% if(currentUser) { %>
           <a href="/profile/<%= currentUser.id %>"> <strong><%= currentUser.name %></strong></a>
@@ -120,12 +124,7 @@
           + Use a different preprocessor, like TypeScript
 
     -->
-
-    <script type="text/javascript">
-      $('body').on('click', '.fibro-header h1', function(){
-        location = '/';
-      });
-    </script>
+    
   </body>
   <footer>
     <div class='fibro-footer'>

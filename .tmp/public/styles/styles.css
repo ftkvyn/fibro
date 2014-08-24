@@ -1,6 +1,9 @@
 .ng-dirty.ng-invalid{
 	border-color: red;
 }
+.fibro-header a:link{
+	text-decoration: none;
+}
 body{
 	font-family: 'Arvo', serif !important;
 	background-color: #b29966  !important;

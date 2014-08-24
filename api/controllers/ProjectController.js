@@ -56,6 +56,7 @@ module.exports = {
 		   qs.push(Project.destroy({id: project.id}));
 		   qs.push(Invitation.destroy({project: project.id}));
 		   qs.push(MembershipRequest.destroy({project: project.id}));
+		   qs.push(Message.destroy({toProject: project.id}));
 
 		   Q.all(qs)
 		   .done(function(data){

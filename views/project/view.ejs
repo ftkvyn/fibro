@@ -46,7 +46,8 @@
 	<% if(invitation) { %>
 		<div 
 		ng-controller='InviteController as inviteCtrl'>
-			<p>You are invited to join this project by <%= invitation.inviter.name %>!</p>
+			<p>You are invited to join this project by 
+				<a href='/profile/<%= invitation.inviter.id %>' target='_blank'><%= invitation.inviter.name %></a>!</p>
 			<% if(invitation.message) { %>
 			<p><%= invitation.message %></p>
 			<% } %>
@@ -100,8 +101,7 @@
 			<h3>Requests for membership</h3>
 				<ul>
 					<li ng-repeat='request in requestCtrl.requests'>
-						<strong>{{request.user.name}}</strong> 
-						to {{request.project.name}} (<em>{{request.createdAt | date}}</em>)<br/>
+						<a href="/profile/{{request.user.id}}" target="_blank"><strong>{{request.user.name}}</strong></a> (<em>{{request.createdAt | date}}</em>)<br/>
 						<span ng-show='request.message'>{{request.message}}</span>
 						<div>
 						<button class='btn btn-success' ng-click='requestCtrl.accept(request.id)'>Accept</button>
