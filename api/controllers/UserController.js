@@ -21,6 +21,10 @@ module.exports = {
 		});		
 	},
 
+	uploadImage: function(req, res){
+		console.log(req.files.userPhoto);
+	},
+
 	search: function(req,res){
 		var request = { where :{}};
 		var rawPattern = req.body.pattern;
@@ -29,44 +33,37 @@ module.exports = {
 					.map(function(str){
 						return str.trim();
 					});
-		var query = User.find();
+		var query = "";
 		if(values[0]){
-			switch (req.body.criteria) {
-			  case "skills":
-			  	query = query.where({or:[{'skills' : {'contains': values[0] }}]});
-			    break;
-			  default:
-			  	console.log(req.body.criteia);
-			    return res.badRequest('Invalid search criteia.');
-			}
+			query = "SELECT * FROM user WHERE " + req.body.criteria + " LIKE '%" + values[0] + "%'";
 		}
 
-		if(values[1]){
-			switch (req.body.criteria) {
-			  case "skills":
-			  	// query = User.find({'skills' : [{'contains': values[0] }, {'contains': values[1] }]});
-			  	// query = User.find({'skills' : {'contains': values[0] },
-			  	// 				   'skills' : {'contains': values[1] }});
-				query = User.find()
-						.where({'skills' : {'contains': values[0] }})
-						.where({'skills' : {'contains': values[1] }});
-			    break;
-			  default:
-			  	console.log(req.body.criteia);
-			    return res.badRequest('Invalid search criteia.');
-			}	
-		}
-
-		query
-		.skip(req.body.skip)
-		.exec(function(err, users){
-			if(err){
+		for (var i = values.length - 1; i >= 1; i--) {
+			query = query + " AND " + req.body.criteria + " LIKE '%" + values[i] + "%'";
+		};
+		User.query(query, function(err, usersRaw) {
+		 	if(err){
 				console.log(err);
 				return res.badRequest('Error searching users.');
 			}
+
+		  	var users = _.map(usersRaw, function(user) {
+		    	return new User._model(user);
+		  	});
+
+		  	return res.send({items : users, pattern: rawPattern});	
+		});
+
+		// query
+		// .skip(req.body.skip)
+		// .exec(function(err, users){
+		// 	if(err){
+		// 		console.log(err);
+		// 		return res.badRequest('Error searching users.');
+		// 	}
 			
-			return res.send({items : users, pattern: rawPattern});	
-		});	
+		// 	return res.send({items : users, pattern: rawPattern});	
+		// });	
 	}
 
 	// search: function(req,res){

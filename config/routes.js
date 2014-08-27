@@ -76,6 +76,8 @@ module.exports.routes = {
 
   'post /api/user/search' : 'UserController.search',
 
+  'post /api/user/image' : 'UserController.uploadImage',
+
   'post /api/project/search' : 'ProjectController.search',
 
   'get /api/project/authored' : 'ProjectController.authoredProjects',

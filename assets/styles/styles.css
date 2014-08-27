@@ -175,3 +175,7 @@ a:link.search-result-link{
 .comment .author{
 	font-size: 10px;
 }
+.imgPreview{
+	max-width: 600px;
+	max-height: 600px;
+}

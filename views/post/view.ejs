@@ -33,7 +33,7 @@
 	<% for(var i = 0; i < post.comments.length; i++) { %>
 		<div class='row'>
 			<div class='comment'>
-				<div class='author'><%= post.comments[i].author.name %></div>
+				<div class='author'><a href='/profile/<%= post.comments[i].author.id %>'><%= post.comments[i].author.name %></a></div>
 				<div class='text'><%= post.comments[i].text %></div>
 				<div class='date'><%= (new Date(post.comments[i].createdAt)).toDateString() %></div>
 			</div>
@@ -41,7 +41,7 @@
 	<% }  %>
 		<div class='row' ng-repeat='comment in items' ng-model='items'>
 			<div class='comment'>
-				<div class='author'>{{comment.author.name}}</div>
+				<div class='author'><a href='/profile/{{comment.author.id}}'>{{comment.author.name}}</a></div>
 				<div class='text'>{{comment.text}}</div>
 				<div class='date'>{{comment.createdAt | date}}</div>
 			</div>

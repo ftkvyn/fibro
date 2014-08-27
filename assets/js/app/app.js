@@ -1,1 +1,1 @@
-fibroApp = angular.module('fibro', []);
+fibroApp = angular.module('fibro', ['flow']);

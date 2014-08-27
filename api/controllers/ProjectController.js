@@ -103,34 +103,55 @@ module.exports = {
 					.map(function(str){
 						return str.trim();
 					});
-		for (var i = values.length - 1; i >= 0; i--) {
-			if(values[i]){
-				switch (req.body.criteria) {
-				  case "needed":
-				  	request.or.push({neededMembers : {'contains' : values[i]}});
-				    break;
-				  case "name":
-				  	request.or.push({name : {'contains' : values[i]}});
-				    break;
-				  case "description":
-				    request.or.push({description : {'contains' : values[i]}});
-				    break;
-				  default:
-				  	console.log(req.body.criteia);
-				    return res.badRequest('Invalid search criteia.');
-				}
-			}
-		};
+		var query = "";
+		if(values[0]){
+			query = "SELECT * FROM project WHERE " + req.body.criteria + " LIKE '%" + values[0] + "%'";
+		}
 
-		Project.find(request)
-		.skip(req.body.skip)
-		.exec(function(err, projects){
-			if(err){
+		for (var i = values.length - 1; i >= 1; i--) {
+			query = query + " AND " + req.body.criteria + " LIKE '%" + values[i] + "%'";
+		};
+		Project.query(query, function(err, projectsRaw) {
+		 	if(err){
+				console.log(err);
 				return res.badRequest('Error searching projects.');
 			}
+
+		  	var projects = _.map(projectsRaw, function(project) {
+		    	return new Project._model(project);
+		  	});
+
+		  	return res.send({items : projects, pattern: rawPattern});	
+		});
+
+		// for (var i = values.length - 1; i >= 0; i--) {
+		// 	if(values[i]){
+		// 		switch (req.body.criteria) {
+		// 		  case "needed":
+		// 		  	request.or.push({neededMembers : {'contains' : values[i]}});
+		// 		    break;
+		// 		  case "name":
+		// 		  	request.or.push({name : {'contains' : values[i]}});
+		// 		    break;
+		// 		  case "description":
+		// 		    request.or.push({description : {'contains' : values[i]}});
+		// 		    break;
+		// 		  default:
+		// 		  	console.log(req.body.criteia);
+		// 		    return res.badRequest('Invalid search criteia.');
+		// 		}
+		// 	}
+		// };
+
+		// Project.find(request)
+		// .skip(req.body.skip)
+		// .exec(function(err, projects){
+		// 	if(err){
+		// 		return res.badRequest('Error searching projects.');
+		// 	}
 			
-			return res.send({items : projects, pattern: rawPattern});	
-		});	
+		// 	return res.send({items : projects, pattern: rawPattern});	
+		// });	
 	}
 };
 

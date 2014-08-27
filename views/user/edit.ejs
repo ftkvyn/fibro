@@ -1,8 +1,21 @@
 <script type="text/javascript" src='/js/app/controllers/pofileController.js'></script>
 <h1>Edit Profile</h1>
 
-<div class='col-md-6' ng-controller='ProfileController' ng-init='load(<%= userId %>)'>
+<div class='col-md-6' ng-controller='ProfileController' ng-init='load(<%= userId %>)'
+	flow-init='{singleFile: true, supportDirectory: false, accept:"image/*", target: "/api/user/image"}'
+	flow-files-submitted="$flow.upload()">
 	<form name='profileForm' novalidate>
+		<div class='row'>
+			<label>Upload image</label><br/>
+			<div>
+			  <span class="btn" flow-btn>Upload File</span>
+
+			  <table>
+			    <img class='imgPreview' flow-img="$flow.files[0]" />
+			  </table>
+			  <button class='btn btn-success' ng-click='saveImage()'>Save image</button>
+			</div>
+		</div>
 		<div class='row'>
 			<label for='name'>Your name:</label><br/>
 			<input id='name' ng-model='user.name' class='form-control' required type='text'></input>

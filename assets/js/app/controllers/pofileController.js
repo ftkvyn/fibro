@@ -16,6 +16,19 @@ fibroApp.controller('ProfileController', ['$http', '$scope', function($http, $sc
 			}
 		}
 
+		$scope.saveImage = function(){
+			console.log($scope.$flow.files[0]);
+			$http.get('/api/user/image', $scope.$flow.files[0])
+			.success(function(data){
+				console.log('Success!');
+				
+			})
+			.error(function(data){
+				console.log(data);
+				alert('Error occured while uploading picture.');
+			});
+		}
+
 		$scope.load = function(id){
 			$http.get('/api/user/'+id)
 			.success(function(data){
