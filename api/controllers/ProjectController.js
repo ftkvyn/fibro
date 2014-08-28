@@ -96,12 +96,21 @@ module.exports = {
 	},
 
 	search: function(req,res){
-		var request = { or : []};
 		var rawPattern = req.body.pattern;
+		switch(req.body.criteria){
+			case "neededMembers":
+			case "name":
+			case "description":
+				break;
+			default:{
+				console.log('Creieria = ' + req.body.criteria);
+				return res.badRequest('Error searching users.');
+			}
+		}
 		var values = rawPattern
 					.split(',')
 					.map(function(str){
-						return str.trim();
+						return str.trim().replace("'","\\'");
 					});
 		var query = "";
 		if(values[0]){
@@ -123,35 +132,6 @@ module.exports = {
 
 		  	return res.send({items : projects, pattern: rawPattern});	
 		});
-
-		// for (var i = values.length - 1; i >= 0; i--) {
-		// 	if(values[i]){
-		// 		switch (req.body.criteria) {
-		// 		  case "needed":
-		// 		  	request.or.push({neededMembers : {'contains' : values[i]}});
-		// 		    break;
-		// 		  case "name":
-		// 		  	request.or.push({name : {'contains' : values[i]}});
-		// 		    break;
-		// 		  case "description":
-		// 		    request.or.push({description : {'contains' : values[i]}});
-		// 		    break;
-		// 		  default:
-		// 		  	console.log(req.body.criteia);
-		// 		    return res.badRequest('Invalid search criteia.');
-		// 		}
-		// 	}
-		// };
-
-		// Project.find(request)
-		// .skip(req.body.skip)
-		// .exec(function(err, projects){
-		// 	if(err){
-		// 		return res.badRequest('Error searching projects.');
-		// 	}
-			
-		// 	return res.send({items : projects, pattern: rawPattern});	
-		// });	
 	}
 };
 

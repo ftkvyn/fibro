@@ -28,10 +28,21 @@ module.exports = {
 	search: function(req,res){
 		var request = { where :{}};
 		var rawPattern = req.body.pattern;
+		switch(req.body.criteria){
+			case "skills":
+			case "name":
+			case "location":
+			case "about":
+				break;
+			default:{
+				console.log('Creieria = ' + req.body.criteria);
+				return res.badRequest('Error searching users.');
+			}
+		}
 		var values = rawPattern
 					.split(',')
 					.map(function(str){
-						return str.trim();
+						return str.trim().replace("'","\\'");
 					});
 		var query = "";
 		if(values[0]){
@@ -53,58 +64,6 @@ module.exports = {
 
 		  	return res.send({items : users, pattern: rawPattern});	
 		});
-
-		// query
-		// .skip(req.body.skip)
-		// .exec(function(err, users){
-		// 	if(err){
-		// 		console.log(err);
-		// 		return res.badRequest('Error searching users.');
-		// 	}
-			
-		// 	return res.send({items : users, pattern: rawPattern});	
-		// });	
 	}
-
-	// search: function(req,res){
-	// 	var request = { or : []};
-	// 	var rawPattern = req.body.pattern;
-	// 	var values = rawPattern
-	// 				.split(',')
-	// 				.map(function(str){
-	// 					return str.trim();
-	// 				});
-	// 	for (var i = values.length - 1; i >= 0; i--) {
-	// 		if(values[i]){
-	// 			switch (req.body.criteria) {
-	// 			  case "skills":
-	// 			  	request.or.push({skills : {'contains' : values[i]}});
-	// 			    break;
-	// 			  case "name":
-	// 			  	request.or.push({name : {'contains' : values[i]}});
-	// 			    break;
-	// 			  case "about":
-	// 			    request.or.push({about : {'contains' : values[i]}});
-	// 			    break;
-	// 			  case "location":
-	// 			    request.or.push({location : {'contains' : values[i]}});
-	// 			    break;
-	// 			  default:
-	// 			  	console.log(req.body.criteia);
-	// 			    return res.badRequest('Invalid search criteia.');
-	// 			}
-	// 		}
-	// 	};
-
-	// 	User.find(request)
-	// 	.skip(req.body.skip)
-	// 	.exec(function(err, users){
-	// 		if(err){
-	// 			return res.badRequest('Error searching users.');
-	// 		}
-			
-	// 		return res.send({items : users, pattern: rawPattern});	
-	// 	});	
-	// }
 };
 
