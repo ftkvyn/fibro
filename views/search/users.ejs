@@ -12,7 +12,21 @@
 		<input type='text' ng-model='pattern' ng-change='search()'></input>
 	</div>
 	<div class='search-results' ng-model='items'>
-		
+		<div class='no-result' ng-show='!items.length'>
+			<div ng-hide='isSearching'>
+				<span ng-show='!pattern.length'>
+					Please, enter search text.
+				</span>
+				<span ng-hide='!pattern.length'>
+					Sorry, no resuts maching your criteria found :(
+				</span>
+			</div>
+		</div>
+		<div ng-show='isSearching'>
+			<span>
+				Searching...
+			</span>
+		</div>
 		<a href="/profile/{{user.id}}" ng-repeat='user in items' class='search-result-link'>
 			<div class='row search-result'>
 				<div class='title'>

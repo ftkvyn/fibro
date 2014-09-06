@@ -102,7 +102,7 @@ module.exports = {
 	},
 
 	chats : function(req, res){
-
+		
 		return res.view('messages/chatList');
 	},
 

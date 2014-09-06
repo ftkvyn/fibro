@@ -3,6 +3,7 @@ fibroApp.controller('SearchController', ['$http', '$scope', function($http, $sco
 		$scope.criteria = undefined;
 		$scope.skip = 0;
 		$scope.items = [];
+		$scope.isSearching = false;
 		var me = $scope;
 
 		$scope.initUsers = function(){
@@ -11,12 +12,13 @@ fibroApp.controller('SearchController', ['$http', '$scope', function($http, $sco
 		}
 
 		$scope.initProjects = function(){
-			$scope.criteria = 'needed';
+			$scope.criteria = 'neededMembers';
 			$scope.entity = 'project';
 		}
 
 		$scope.search = function(){
 			if(me.pattern){
+				me.isSearching = true;
 				$http.post('/api/' + $scope.entity + '/search', 
 					{
 						criteria : me.criteria, 
@@ -26,6 +28,7 @@ fibroApp.controller('SearchController', ['$http', '$scope', function($http, $sco
 				.success(function(data){	
 					if(me.pattern === data.pattern){			
 						me.items = data.items;
+						me.isSearching = false;
 					}
 				})
 				.error(function(data){
@@ -35,6 +38,7 @@ fibroApp.controller('SearchController', ['$http', '$scope', function($http, $sco
 			}
 			else{
 				me.items = [];
+				me.isSearching = false;
 			}
 		}
 

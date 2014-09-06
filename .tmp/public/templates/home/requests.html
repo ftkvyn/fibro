@@ -1,0 +1,17 @@
+<div 			
+			ng-controller='MembershipRequestController as requestCtrl' 
+			ng-show='requestCtrl.requests.length'
+			ng-init='requestCtrl.loadRequests()'>
+			<h3>Requests for membership</h3>
+				<ul>
+					<li ng-repeat='request in requestCtrl.requests'>
+						<a href="/profile/{{request.user.id}}" target="_blank"><strong>{{request.user.name}}</strong></a>
+						to <a href="/project/{{request.project.id}}" target="_blank">{{request.project.name}}</a> (<em>{{request.createdAt | date}}</em>)<br/>
+						<span ng-show='request.message'>{{request.message}}</span>
+						<div>
+						<button class='btn btn-success' ng-click='requestCtrl.accept(request.id)'>Accept</button>
+						<button class='btn btn-danger' ng-click='requestCtrl.decline(request.id)'>Decline</button>
+						</div>
+					</li>
+				</ul>
+			</div>

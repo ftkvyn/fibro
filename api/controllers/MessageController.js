@@ -159,6 +159,9 @@ module.exports = {
 			var users = data[0];
 			var projects = data[1].projects;
 
+			// var userIds = users.map(function(u){ return u.id;});
+			// var projectIds =  project.map(function(p){ return p.id;});
+
 			for (var i = users.length - 1; i >= 0; i--) {
 				if(users[i].id === userId){
 					continue;
