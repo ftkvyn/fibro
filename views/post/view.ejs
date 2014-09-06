@@ -1,7 +1,7 @@
 <script type="text/javascript" src='/js/app/controllers/postController.js'></script>
 <div class='col-md-12' ng-controller='PostController'>
 	<div class='row'>
-	<div class='col-md-8'>
+	<div class='col-md-10'>
 		<div class='row'>
 		<h1><%= post.title %></h1>
 		<h3>by <a href='/profile/<%= post.author.id %>'><%- post.author.name %></a></h3>
@@ -11,7 +11,7 @@
 		<br/>	Last update <%= (new Date(post.updatedAt)).toDateString() %> <%= (new Date(post.updatedAt)).toLocaleTimeString() %>
 		<% }  %>
 		<div class='postContent'>
-			<%= post.text %>
+			<%- post.text %>
 		</div>
 		</div>
 

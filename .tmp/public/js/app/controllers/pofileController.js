@@ -1,9 +1,13 @@
 fibroApp.controller('ProfileController', ['$http', '$scope', function($http, $scope){
 		$scope.user = {};
 		var me = $scope;
+		if(document.getElementById('about')){
+				new nicEditor().panelInstance('about');
+		}
 
 		$scope.save = function(){
 			if($scope.user.name){
+				me.user.about = nicEditors.findEditor('about').getContent();
 				$http.put('/api/user/'+$scope.user.id, $scope.user)
 				.success(function(data){
 					console.log('Success!');
@@ -37,6 +41,7 @@ fibroApp.controller('ProfileController', ['$http', '$scope', function($http, $sc
 					data.birthDate = new Date(data.birthDate);
 				}
 				me.user = data;
+				nicEditors.findEditor('about').setContent(data.about);
 			})
 			.error(function(data){
 				console.log(data);

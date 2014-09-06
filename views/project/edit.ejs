@@ -4,27 +4,27 @@
 <% } else { %>
 	<h1>Edit Project</h1>
 <% } %>
-<div class='col-md-6' ng-controller='ProjectController as project'
+<div class='col-md-10' ng-controller='ProjectController as project'
 		ng-init='project.load(<%= isNew %>, <%= projectId %>)'>
-	<form name='projectForm' ng-submit='projectForm.$valid && project.save()' novalidate>
+	<div name='projectForm'>
 		<div class='row'>
 			<label for='name'>Name:</label><br/>
 			<input id='name' ng-model='project.model.name' class='form-control' required type='text'></input>
 		</div>
 		<div class='row'>
 			<label for='description'>Description:</label><br/>
-			<textarea rows="5" cols="60" ng-model='project.model.description' class='form-control' required id='description'></textarea>
+			<textarea  class='editor-area' id='description'></textarea>
 		</div>
 		<div class='row'>
 			<label for='info'>Information (only for members):</label><br/>
-			<textarea rows="5" cols="60" ng-model='project.model.privateInformation' class='form-control' required id='info'></textarea>
+			<textarea class='editor-area' id='info'></textarea>
 		</div>		
 		<div class='row'>
 			<label for='needed'>Needed people:</label><br/>
 			<input id='needed' ng-model='project.model.neededMembers' class='form-control' type='text'></input>
 		</div>
-		<input ng-show='project.isNew' type='submit' class='btn btn-success' value='Create!'></input>
-		<input ng-hide='project.isNew' type='submit' class='btn btn-success' value='Save'></input>
-	</form>
+		<button ng-show='project.isNew' ng-click='project.save()' class='btn btn-success'>Create!</button>
+		<button ng-hide='project.isNew' ng-click='project.save()' class='btn btn-success'>Save</button>
+	</div>
 </div>
 <a href="/">Home</a><br/>

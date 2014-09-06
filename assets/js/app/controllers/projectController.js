@@ -3,10 +3,16 @@ fibroApp.controller('ProjectController', ['$http', function($http){
 		var me = this;
 		me.isSaving = false;
 		me.isNew = undefined;
+		if(document.getElementById('info')){
+			new nicEditor().panelInstance('description');
+			new nicEditor().panelInstance('info');
+		}
 
 		this.save = function(){
 			if(!me.isSaving){
 				me.isSaving = true;
+				me.model.description = nicEditors.findEditor('description').getContent();
+				me.model.privateInformation = nicEditors.findEditor('info').getContent();
 				var query;
 				if(me.isNew){
 					query = $http.post('/api/project', this.model);	
@@ -33,6 +39,8 @@ fibroApp.controller('ProjectController', ['$http', function($http){
 				$http.get('/api/project/'+projectId)
 				.success(function(data){
 					me.model = data;
+					nicEditors.findEditor('description').setContent(data.description);
+					nicEditors.findEditor('info').setContent(data.privateInformation);
 				})
 				.error(function(data){
 					console.log(data);

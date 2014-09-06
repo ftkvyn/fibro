@@ -4,18 +4,18 @@
 <% } else { %>
 	<h1>Edit Post</h1>
 <% } %>
-<div class='col-md-6' ng-controller='PostController'
+<div class='col-md-10' ng-controller='PostController'
 		ng-init='load(<%= isNew %>, <%= projectId %>, <%= postId %>)'>
-	<form name='projectForm' ng-submit='projectForm.$valid && save()' novalidate>
+	<div name='projectForm'>
 		<div class='row'>
 			<label for='title'>Title:</label><br/>
-			<input id='title' ng-model='model.title' class='form-control' required type='text'></input>
+			<input name='title' id='title' ng-model='model.title' class='form-control' required type='text'></input>
 		</div>
 		<div class='row'>
 			<label for='text'>Text:</label><br/>
-			<textarea rows="5" cols="60" ng-model='model.text' class='form-control' required id='text'></textarea>
+			<textarea class='editor-area' name='text' id='text'></textarea>
 		</div>
-		<input ng-show='isNew' type='submit' class='btn btn-success' value='Create!'></input>
-		<input ng-hide='isNew' type='submit' class='btn btn-success' value='Save'></input>
-	</form>
+		<button ng-show='isNew' ng-click='save()' class='btn btn-success'>Create!</button>
+		<button ng-hide='isNew' ng-click='save()' class='btn btn-success'>Save</input>
+	</div>
 </div>

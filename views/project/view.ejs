@@ -2,14 +2,14 @@
 <script type="text/javascript" src='/js/app/controllers/projectController.js'></script>
 <div class='col-md-12' ng-controller='ProjectController as project'>
 	<div class='row'>
-	<div class='col-md-8'>
+	<div class='col-md-10'>
 		<div class='row'>
 		<h1><%= project.name %></h1>
 		<h3>by <a href='/profile/<%= project.author.id %>'><%- project.author.name %></a></h3>
 		<%= (new Date(project.createdAt)).toDateString() %>
 	
 		<h3>Description</h3>
-		<%= project.description %>
+		<%- project.description %>
 	
 	<% if (project.neededMembers) { %>		
 		<h3>Who is needed</h3>
@@ -17,7 +17,7 @@
 	<% } %>
 	<% if (isMember) { %>		
 		<h3>Information</h3>
-		<%= project.privateInformation || "Empty yet :("%>
+		<%- project.privateInformation || "Empty yet :("%>
 		<br/><a href="/chat/project/<%= project.id %>">Go to project chat</a>
 		<br/><a href="/post/new/<%= project.id %>">Create post</a>
 	<% } %>

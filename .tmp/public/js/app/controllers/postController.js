@@ -3,16 +3,22 @@ fibroApp.controller('PostController', ['$http','$scope', function($http, $scope)
 		var me = $scope;
 		me.isSaving = false;
 		me.isNew = undefined;
-
+		if(document.getElementById('text')){
+				new nicEditor().panelInstance('text');
+		}
+		
 		$scope.save = function(){
 			if(!me.isSaving){
 				me.isSaving = true;
+				me.model.text = nicEditors.findEditor('text').getContent();
 				var query;
 				if(me.isNew){
 					query = $http.post('/api/post', $scope.model);	
 				} else{
 					query = $http.put('/api/post/'+$scope.model.id, $scope.model);
 				}
+				console.log($scope.model);
+				//return;
 				query
 				.success(function(data){
 					console.log('Success!');
@@ -33,6 +39,7 @@ fibroApp.controller('PostController', ['$http','$scope', function($http, $scope)
 				$http.get('/api/post/'+postId)
 				.success(function(data){
 					me.model = data;
+					nicEditors.findEditor('text').setContent(data.text);
 				})
 				.error(function(data){
 					console.log(data);
