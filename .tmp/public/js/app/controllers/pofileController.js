@@ -1,6 +1,10 @@
 fibroApp.controller('ProfileController', ['$http', '$scope', function($http, $scope){
 		$scope.user = {};
 		var me = $scope;
+		me.count = 5;
+		me.users = [];
+		me.isLoading = false;
+
 		if(document.getElementById('about')){
 				new nicEditor().panelInstance('about');
 		}
@@ -47,6 +51,19 @@ fibroApp.controller('ProfileController', ['$http', '$scope', function($http, $sc
 				console.log(data);
 				alert('Error occured while loading profile.');
 			});
+		}
+
+		$scope.loadOnMain = function(){
+			me.isLoading = true;
+			$http.get('/api/user/forMain/'+me.count)
+			.success(function(data){
+				me.users = data;
+				me.isLoading = false;
+			})
+			.error(function(data){
+				console.log(data);
+				alert('Error occured while loading users.');
+			});	
 		}
 
 	}]);

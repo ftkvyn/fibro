@@ -78,6 +78,8 @@ module.exports.routes = {
 
   'post /api/user/image' : 'UserController.uploadImage',
 
+  'get /api/user/forMain/:count' : 'UserController.forMain',
+
   'post /api/project/search' : 'ProjectController.search',
 
   'get /api/project/forMain/:skip/:count' : 'ProjectController.forMain',

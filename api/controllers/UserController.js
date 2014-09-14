@@ -33,6 +33,25 @@ module.exports = {
 			["skills", "name", "about_plainText", "location"], 
 			User,
 			"user");
+	},
+
+	forMain: function(req, res){
+		var count = +req.param('count');
+		User.find({sort: 'updatedAt DESC', limit: count})
+		.exec(function(err, users){
+			if(err){
+				console.log(err);
+				return res.badRequest('Unable load users');
+			}
+			users = users.map(function(u){
+				delete u.about;
+				delete u.about_plainText;
+				delete u.email;
+				delete u.password;
+				return u;
+			});
+			return res.send(users);	
+		});	
 	}
 };
 

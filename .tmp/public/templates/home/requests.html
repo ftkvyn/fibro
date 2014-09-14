@@ -2,7 +2,7 @@
 			ng-controller='MembershipRequestController as requestCtrl' 
 			ng-show='requestCtrl.requests.length'
 			ng-init='requestCtrl.loadRequests()'>
-			<h3>Requests for membership</h3>
+			<h4>Requests for membership</h4>
 				<ul>
 					<li ng-repeat='request in requestCtrl.requests'>
 						<a href="/profile/{{request.user.id}}" target="_blank"><strong>{{request.user.name}}</strong></a>

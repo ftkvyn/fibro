@@ -2,7 +2,7 @@
 			ng-controller='InviteController as inviteCtrl' 
 			ng-show='inviteCtrl.invitations.length'
 			ng-init='inviteCtrl.loadInvites()'>
-			<h3>Invitations to projects</h3>
+			<h4>Invitations to projects</h4>
 				<ul>
 					<li ng-repeat='invite in inviteCtrl.invitations'>
 						<a href="/project/{{invite.project.id}}" target="_blank"><strong>{{invite.project.name}}</strong></a>

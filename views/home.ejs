@@ -1,35 +1,3 @@
-<script id="user-template" type="text/x-handlebars-template">
-  <li>
-  	<a href='/profile/{{id}}'><img src='{{#if fb_id}}http://graph.facebook.com/{{fb_id}}/picture{{else}}/images/anonymous.jpg{{/if}}' 
-  	alt='image'/> {{name}}</a><br/>
-  	<a href='/auth/loginById/{{id}}'>Login as this user</a>
-  </li>
-</script>
-
-<script>
-var source   = $("#user-template").html(); 
-var template = Handlebars.compile(source);
-
-
- $(function(){
- 	loadData(); 
- }); 
-
- function loadData(){
- 	$('#users').empty();
- 	$.get('/api/user')
- 	.success(function(data)
- 	{
- 		for (var i = data.length - 1; i >= 0; i--) {
- 			$('#users').append(template(data[i]));
- 		}; 		
- 	})
- 	.error(function(data)
- 	{
- 		console.log(data);	
- 	});
- }
-</script>
 <div class='row'>
 	<div class='col-md-8'
 		ng-controller='ProjectController as projectCtrl'
@@ -64,6 +32,7 @@ var template = Handlebars.compile(source);
 	</div>
 
 	<div class='col-md-4'>
+		<a href="/project/new"><h3>Create project</h3></a></br>
 		<% if (currentUser) { %>
 			<ng-include
 			  src="'/templates/home/invites.html'">
@@ -72,15 +41,38 @@ var template = Handlebars.compile(source);
 
 			<ng-include
 			  src="'/templates/home/requests.html'">
-			</ng-include>
- 			
-
-		    <a href="/project/new">Create project</a></br>
+			</ng-include>			
+		    
 		<% } %>
-		Users
-		<ul id='users'>
-
-		</ul>
+		<div class='users'
+			ng-controller='ProfileController'
+			ng-init='loadOnMain()' >
+			<h4>Our folks</h4>
+			<span ng-show='isLoading'>Loading...</span>
+			<div 
+			ng-repeat='user in users'
+			class='user-tile'>
+				<div class='picture'>
+					<a href='/profile/{{user.id}}'>
+						<img ng-src='http://graph.facebook.com/{{user.fb_id}}/picture' alt='image'/> 
+				  	</a>			  	
+			  	</div>
+			  	<div class='info'>
+				  	<div class='name'>
+					  	<a href='/profile/{{user.id}}'>
+					  		{{user.name}}
+					  	</a>
+				  	</div>
+				  	<div class='location'>
+				  		{{user.location}}
+				  	</div>
+			  	</div>
+			  	<div class='skills'>
+			  		{{user.skills}}
+			  	</div>
+			  	<a href='/auth/loginById/{{id}}'>Login as this user</a>
+			</div>
+		</div>
 	</div>
 </div>
 
