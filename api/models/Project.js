@@ -28,6 +28,10 @@ module.exports = {
 		type:'text',
 		required:true
 	},
+	description_plainText:{
+		type:'text',
+		required:true
+	},
 	privateInformation:{
 		type:'text',
 	},
@@ -44,6 +48,16 @@ module.exports = {
 		collection: 'post',
         via: 'project'
 	},
+  },
+
+  beforeCreate: function (values, cb) {
+  	values.description_plainText = htmlToTextService.convert(values.description);
+    cb();
+  },
+
+  beforeUpdate: function(values, cb){
+  	values.description_plainText = htmlToTextService.convert(values.description);
+    cb();
   }
 };
 

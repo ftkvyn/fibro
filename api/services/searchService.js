@@ -1,6 +1,6 @@
 exports.search = function (res, rawPattern, criteria, allowedCriterias, entity, tableName) {
 	if(allowedCriterias.indexOf(criteria) === -1){
-		console.log('Creieria = ' + criteria);
+		console.log('Criteria = ' + criteria);
 		return res.badRequest('Error searching users.');
 	}
 	var values = rawPattern

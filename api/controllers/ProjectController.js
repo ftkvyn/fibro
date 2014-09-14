@@ -33,6 +33,8 @@ module.exports = {
 			project.neededMembers = req.body.neededMembers;
 			project.privateInformation = req.body.privateInformation;
 			project.save(function(err, project){
+				console.log('==========');
+				console.log(project);
 				return res.send(project);	
 			});			
 		});		
@@ -99,47 +101,10 @@ module.exports = {
 
 		return searchService.search(res, 
 			req.body.pattern, 
-			req.body.criteria, 
-			["neededMembers", "name", "description"], 
+			req.body.criteria.replace('description', 'description_plainText'), 
+			["neededMembers", "name", "description_plainText"], 
 			Project,
 			"project");
-
-		var rawPattern = req.body.pattern;
-		switch(req.body.criteria){
-			case "neededMembers":
-			case "name":
-			case "description":
-				break;
-			default:{
-				console.log('Creieria = ' + req.body.criteria);
-				return res.badRequest('Error searching users.');
-			}
-		}
-		var values = rawPattern
-					.split(',')
-					.map(function(str){
-						return str.trim().replace("'","\\'");
-					});
-		var query = "";
-		if(values[0]){
-			query = "SELECT * FROM project WHERE " + req.body.criteria + " LIKE '%" + values[0] + "%'";
-		}
-
-		for (var i = values.length - 1; i >= 1; i--) {
-			query = query + " AND " + req.body.criteria + " LIKE '%" + values[i] + "%'";
-		};
-		Project.query(query, function(err, projectsRaw) {
-		 	if(err){
-				console.log(err);
-				return res.badRequest('Error searching projects.');
-			}
-
-		  	var projects = _.map(projectsRaw, function(project) {
-		    	return new Project._model(project);
-		  	});
-
-		  	return res.send({items : projects, pattern: rawPattern});	
-		});
 	}
 };
 

@@ -2,6 +2,7 @@ var Q = require('q');
 
 module.exports = {
 	profile : function(req,res){
+
 		User.findOne(req.param('id'))
 		.populate('projects')
 		.populate('createdProjects')		
@@ -102,8 +103,18 @@ module.exports = {
 	},
 
 	chats : function(req, res){
-		
-		return res.view('messages/chatList');
+		// Project.find().exec(function(err, projects){
+		// 	var saves = [];
+
+		// 	for (var i = projects.length - 1; i >= 0; i--) {
+		// 		projects[i].description_plainText = "ololo";
+		// 		saves.push(projects[i].save());
+		// 		Q.all(saves).then(function(){
+							
+		// 		});
+		// 	};			
+		// });
+		return res.view('messages/chatList');	
 	},
 
 	chat: function(req, res){

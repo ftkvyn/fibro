@@ -31,6 +31,9 @@ module.exports = {
 	about:{
 		type:'text'
 	},
+	about_plainText:{
+		type:'text'
+	},
 	location:{
 		type:'string'
 	},
@@ -58,6 +61,16 @@ module.exports = {
       	required: true,
       	unique: true
 	}
+  },
+
+  beforeCreate: function (values, cb) {
+  	values.about_plainText = htmlToTextService.convert(values.about);
+    cb();
+  },
+
+  beforeUpdate: function(values, cb){
+  	values.about_plainText = htmlToTextService.convert(values.about);
+    cb();
   }
 };
 
