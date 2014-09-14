@@ -15,27 +15,43 @@ body{
 	clear: both;
 	background-color: green;
 	color: #F5F5DC; 
-	padding-top: 10px;
 	padding-right: 10px;
+	overflow: hidden;
 }
 
-.fibro-header h1{
+.fibro-header .logo{
 	margin: 0px 0px 0px 20px;
 	cursor: pointer;
 	float: left;
 	clear: left;
+	display: block;
+}
+
+.header-menu{
+	margin-left: 15px;
+	display: block;
+	font-size: 18px;
+	float: left;
+	padding-top: 20px;
+	padding-left: 50px;
+}
+
+.header-menu a{
+	margin: 0 15px 0 15px;
 }
 
 .fibro-header .account-info{
 	float: right;
 	margin-right: 20px;	
 	margin-top: 10px;
+	padding-top: 10px;
 }
 
 .fibro-header a{
 	font-size: 16px;
 	color: #F5F5DC;
 }
+
 
 .fibro-header a:hover{
 	color: #eadec3;

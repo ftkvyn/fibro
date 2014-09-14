@@ -96,6 +96,14 @@ module.exports = {
 	},
 
 	search: function(req,res){
+
+		return searchService.search(res, 
+			req.body.pattern, 
+			req.body.criteria, 
+			["neededMembers", "name", "description"], 
+			Project,
+			"project");
+
 		var rawPattern = req.body.pattern;
 		switch(req.body.criteria){
 			case "neededMembers":

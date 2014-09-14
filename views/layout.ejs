@@ -65,9 +65,22 @@
 
   <body>
     <div class='fibro-header'>
-      <a href="/">
-        <h1>Find your Bro!</h1>
-      </a>
+      <div class='logo'>
+        <a href="/">
+          <img src="/images/logo.png"/>
+        </a>
+      </div>
+      <div class='header-menu'>
+        <a href="/search/project">
+          Projects
+        </a>
+        <a href="/search/user">
+          People
+        </a>
+        <a href="/ideas">
+          Ideas
+        </a>
+      </div>
       <div class='account-info'>
         <% if(currentUser) { %>
           <a href="/profile/<%= currentUser.id %>"> <strong><%= currentUser.name %></strong></a>

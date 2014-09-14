@@ -26,6 +26,13 @@ module.exports = {
 	},
 
 	search: function(req,res){
+		return searchService.search(res, 
+			req.body.pattern, 
+			req.body.criteria, 
+			["skills", "name", "about", "location"], 
+			User,
+			"user");
+
 		var request = { where :{}};
 		var rawPattern = req.body.pattern;
 		switch(req.body.criteria){
