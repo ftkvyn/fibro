@@ -80,6 +80,8 @@ module.exports.routes = {
 
   'post /api/project/search' : 'ProjectController.search',
 
+  'get /api/project/forMain/:skip/:count' : 'ProjectController.forMain',
+
   'get /api/project/authored' : 'ProjectController.authoredProjects',
 
   'get /api/project/leave' : 'ProjectController.leave',

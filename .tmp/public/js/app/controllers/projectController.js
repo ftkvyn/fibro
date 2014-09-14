@@ -3,6 +3,11 @@ fibroApp.controller('ProjectController', ['$http', function($http){
 		var me = this;
 		me.isSaving = false;
 		me.isNew = undefined;
+		me.projects = [];
+		me.allLoaded = false;
+		me.isLoading = false;
+		me.skip = 0;
+		me.count = 3;
 		if(document.getElementById('info')){
 			new nicEditor().panelInstance('description');
 			new nicEditor().panelInstance('info');
@@ -47,6 +52,27 @@ fibroApp.controller('ProjectController', ['$http', function($http){
 					alert('Error occured while loading project.');
 				});	
 			}
+		}
+
+		this.loadOnMain = function(){
+			me.isLoading = true;
+			$http.get('/api/project/forMain/'+me.skip+'/'+me.count)
+			.success(function(data){
+				me.skip += data.length;
+				me.projects = me.projects.concat(data);
+				me.isLoading = false;
+				if(!data.length){
+					me.allLoaded = true;
+				}
+			})
+			.error(function(data){
+				console.log(data);
+				alert('Error occured while loading projects.');
+			});	
+		}
+
+		this.loadMore = function(){
+			this.loadOnMain();
 		}
 
 		this.delete = function(id){

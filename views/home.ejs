@@ -6,20 +6,10 @@
   </li>
 </script>
 
-<script id="project-template" type="text/x-handlebars-template">
-  <li>
-  	<a href='/project/{{id}}'><strong>{{name}}</strong> by {{author.name}}</a>
-  </li>
-</script>
-
-
 <script>
 var source   = $("#user-template").html(); 
 var template = Handlebars.compile(source);
 
-
-source   = $("#project-template").html();
-var projectTemplate = Handlebars.compile(source);
 
  $(function(){
  	loadData(); 
@@ -38,26 +28,43 @@ var projectTemplate = Handlebars.compile(source);
  	{
  		console.log(data);	
  	});
-
- 	$('#projects').empty();
- 	$.get('/api/project')
- 	.success(function(data)
- 	{
- 		for (var i = data.length - 1; i >= 0; i--) {
- 			$('#projects').append(projectTemplate(data[i]));
- 		}; 		
- 	})
- 	.error(function(data)
- 	{
- 		console.log(data);	
- 	});
  }
 </script>
-
 <div class='row'>
+	<div class='col-md-8'
+		ng-controller='ProjectController as projectCtrl'
+		ng-init='projectCtrl.loadOnMain()' >
+		<div class=''>
+		</div>
+		<a href="/project/{{project.id}}"
+		ng-repeat='project in projectCtrl.projects' 
+		class='project-tile-link'>
+			<div class='project-tile'>
+				<div class='title'>
+					<span class='name'>{{project.name}}</span>
+				</div>
+				<div class='date'>
+					{{project.createdAt | date}}
+				</div>
+				<div class='info'>
+					<div class='description' ng-show='project.description_plainText'>
+						{{project.description_plainText}}
+					</div>
+					<hr width='90%'/>
+					<div class='needed' ng-show='project.neededMembers'>
+						We need: {{project.neededMembers}}
+					</div>						
+				</div>			
+			</div>
+		</a>
+		<span ng-show='projectCtrl.isLoading'>Loading...</span>
+		<a ng-click='projectCtrl.loadMore()' 
+		ng-hide='projectCtrl.allLoaded || projectCtrl.isLoading'>
+		Load more!</a>
+	</div>
+
 	<div class='col-md-4'>
 		<% if (currentUser) { %>
-		    Hello, <strong><%= currentUser.name %></strong><br/>
 			<ng-include
 			  src="'/templates/home/invites.html'">
 			</ng-include>
@@ -68,29 +75,10 @@ var projectTemplate = Handlebars.compile(source);
 			</ng-include>
  			
 
-			<a href="/chats">Chats</a><br/>
-			<a href="/search/user">Search users</a><br/>
-			<a href="/search/project">Search projects</a><br/>
-		    <a href="/profile/<%- currentUser.id %>">Go to profile</a><br/>
 		    <a href="/project/new">Create project</a></br>
-		    <a href="/auth/logout">Logout</a>
-		<% } else {%>
-			<a href="/search/user">Search users</a><br/>
-			<a href="/search/project">Search projects</a><br/>
-			<a href="/auth/facebook">Login with Facebook</a>
 		<% } %>
-	</div>
-	<div class='col-md-3'>
-		
 		Users
 		<ul id='users'>
-
-		</ul>
-	</div>
-	<div class='col-md-3'>
-		
-		Projects
-		<ul id='projects'>
 
 		</ul>
 	</div>

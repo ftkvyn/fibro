@@ -105,6 +105,24 @@ module.exports = {
 			["neededMembers", "name", "description_plainText"], 
 			Project,
 			"project");
+	},
+
+	forMain: function(req, res){
+		var skip = +req.param('skip');
+		var count = +req.param('count');
+		Project.find({sort: 'createdAt DESC', limit: count, skip: skip})
+		.exec(function(err, projects){
+			if(err){
+				console.log(err);
+				return res.badRequest('Unable load projects');
+			}
+			projects = projects.map(function(p){
+				delete p.description;
+				delete p.privateInformation;
+				return p;
+			});
+			return res.send(projects);	
+		});	
 	}
 };
 

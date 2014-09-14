@@ -71,8 +71,11 @@
 			<button class='btn btn-success' ng-click='memberCtrl.sendRequest()'>Join!</button>
 		</div>
 	</div>
+	<% } else if(isRequestingMembership) { %>	
+	<div class='requesting'>
+		<span>Your request for joing project is waiting for approval from author.</span>
+	</div>
 	<% } %>	
-
 	<% if (isAuthor) { %>
 	<button ng-click='project.delete(<%= project.id %>)' class='btn btn-danger'>Delete project</button>
 

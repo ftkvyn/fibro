@@ -199,3 +199,51 @@ a:link.search-result-link{
 	width: 100%;
 	height: 400px;	
 }
+.project-tile{
+	margin: 5px;
+	padding: 10px;
+	font-size: 14px;
+	height: 250px;
+	overflow: hidden;
+	width: 250px;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 2px;
+	border-color: #b29966;
+	background-color: #f5f5eb;
+	display: block;
+	float: left;
+}
+a:link.project-tile-link{
+	text-decoration: none;
+}
+.project-tile .title{
+	font-size: 20px;
+	text-align: center;
+}
+.project-tile .description{
+	height: 145px;
+}
+.project-tile hr{
+	background-color:#b29966;
+	margin: 5px;
+	height: 1px; 
+}
+.project-tile .needed{
+	font-size: 14px;
+}
+.project-tile .date{
+	font-size: 10px;
+	color: #7C7568;
+}
+.project-tile:hover{
+	background-color: #f5efd0;
+	cursor: pointer;
+}
+.project-tile img{
+	max-height: 30px;
+	max-width: 30px;
+}
+.requesting{
+	font-size: 18px;
+}
