@@ -52,7 +52,8 @@ module.exports.policies = {
   ProjectController: {
     '*' : 'sessionAuth',
 
-    find: true
+    find: true,
+    forMain: true,
   },
 
   CommentController: {
