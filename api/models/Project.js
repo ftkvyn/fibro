@@ -52,11 +52,19 @@ module.exports = {
 
   beforeCreate: function (values, cb) {
   	values.description_plainText = htmlToTextService.convert(values.description);
+  	if(values.description)
+  	{
+  		values.description = escapeService.escapeScript(values.description);
+  	}
     cb();
   },
 
   beforeUpdate: function(values, cb){
   	values.description_plainText = htmlToTextService.convert(values.description);
+  	if(values.description)
+  	{
+  		values.description = escapeService.escapeScript(values.description);
+  	}
     cb();
   }
 };

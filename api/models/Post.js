@@ -38,6 +38,21 @@ module.exports = {
 			  collection: 'comment',
 	      via: 'post'
 		},
+  },
+  beforeCreate: function (values, cb) {
+    if(values.text)
+    {
+      values.text = escapeService.escapeScript(values.text);
+    }
+    cb();
+  },
+
+  beforeUpdate: function(values, cb){
+    if(values.text)
+    {
+      values.text = escapeService.escapeScript(values.text);
+    }
+    cb();
   }
 };
 

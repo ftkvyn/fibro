@@ -65,11 +65,19 @@ module.exports = {
 
   beforeCreate: function (values, cb) {
   	values.about_plainText = htmlToTextService.convert(values.about);
+  	if(values.about)
+  	{
+  		values.about = escapeService.escapeScript(values.about);
+  	}
     cb();
   },
 
   beforeUpdate: function(values, cb){
   	values.about_plainText = htmlToTextService.convert(values.about);
+  	if(values.about)
+  	{
+  		values.about = escapeService.escapeScript(values.about);
+  	}
     cb();
   }
 };

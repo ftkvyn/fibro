@@ -205,7 +205,7 @@ a:link.search-result-link{
 	font-size: 14px;
 	height: 250px;
 	overflow: hidden;
-	width: 250px;
+	width: 32%;
 	border-width: 1px;
 	border-style: solid;
 	border-radius: 2px;
@@ -254,7 +254,7 @@ a:link.project-tile-link{
 	border-radius: 25px;
 }
 .user-tile img:hover{
-	border-radius: 0px;
+
 }
 .user-tile .picture{
 	float: left;
