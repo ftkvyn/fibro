@@ -1,3 +1,7 @@
+.greetings{
+	font-size: 18px;
+	text-align: left;
+}
 .ng-dirty.ng-invalid{
 	border-color: red;
 }
@@ -38,6 +42,27 @@ body{
 
 .header-menu a{
 	margin: 0 15px 0 15px;
+}
+.create-project-box{
+	margin: 5px;
+	padding: 5px;
+	font-size: 24px;
+	width: 207px;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 4px;
+	border-color: #b29966;
+	background-color: #f5f5eb;
+	display: block;
+	box-shadow: 0px 0px 6px 1px #8BDF49;
+
+}
+.create-project-box:hover{
+	box-shadow: 0px 0px 11px 4px #8BDF49;
+}
+
+a.create-project-link:link{
+	text-decoration: none;
 }
 
 .fibro-header .account-info{
@@ -205,7 +230,7 @@ a:link.search-result-link{
 	font-size: 14px;
 	height: 250px;
 	overflow: hidden;
-	width: 32%;
+	width: 31%;
 	border-width: 1px;
 	border-style: solid;
 	border-radius: 2px;
@@ -214,6 +239,7 @@ a:link.search-result-link{
 	display: block;
 	float: left;
 }
+.clear{clear: both;}
 a:link.project-tile-link{
 	text-decoration: none;
 }
@@ -239,6 +265,8 @@ a:link.project-tile-link{
 .project-tile:hover{
 	background-color: #f5efd0;
 	cursor: pointer;
+	margin-top: 0px;
+	margin-bottom: 10px;
 }
 .project-tile img{
 	max-height: 30px;

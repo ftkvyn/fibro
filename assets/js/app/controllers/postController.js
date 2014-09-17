@@ -1,8 +1,11 @@
 fibroApp.controller('PostController', ['$http','$scope', function($http, $scope){
 		$scope.model = {};
 		var me = $scope;
+		me.posts = [];
 		me.isSaving = false;
+		me.isLoading = false;
 		me.isNew = undefined;
+		me.count = 4;
 		if(document.getElementById('text')){
 				new nicEditor().panelInstance('text');
 		}
@@ -60,5 +63,18 @@ fibroApp.controller('PostController', ['$http','$scope', function($http, $scope)
 				console.log(data);
 				alert('Error occured while deleting post.');
 			});
+		},
+
+		$scope.loadOnMain = function(){
+			me.isLoading = true;
+			$http.get('/api/project/forMain/'+me.count)
+			.success(function(data){
+				me.projects = data;
+				me.isLoading = false;
+			})
+			.error(function(data){
+				console.log(data);
+				alert('Error occured while loading projects.');
+			});	
 		}
 	}]);

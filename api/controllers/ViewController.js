@@ -2,7 +2,6 @@ var Q = require('q');
 
 module.exports = {
 	profile : function(req,res){
-
 		User.findOne(req.param('id'))
 		.populate('projects')
 		.populate('createdProjects')		

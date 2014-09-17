@@ -1,8 +1,11 @@
+
 <div class='row'>
 	<div class='col-md-8'
 		ng-controller='ProjectController as projectCtrl'
 		ng-init='projectCtrl.loadOnMain()' >
-		<div class=''>
+		<div class='greetings'>
+			<h2>Find fellows and realize superiour ideas.</h2>
+			<h3>Join now and become a part of something great!</h3>
 		</div>
 		<a href="/project/{{project.id}}"
 		ng-repeat='project in projectCtrl.projects' 
@@ -25,6 +28,7 @@
 				</div>			
 			</div>
 		</a>
+		<div class='clear'></div>
 		<span ng-show='projectCtrl.isLoading'>Loading...</span>
 		<a ng-click='projectCtrl.loadMore()' 
 		ng-hide='projectCtrl.allLoaded || projectCtrl.isLoading'>
@@ -32,7 +36,11 @@
 	</div>
 
 	<div class='col-md-4'>
-		<a href="/project/new"><h3>Create project</h3></a></br>
+		<a href="/project/new" class='create-project-link'>
+			<div class='create-project-box'>
+				<span>+ Create project</span>
+			</div>
+		</a></br>
 		<% if (currentUser) { %>
 			<ng-include
 			  src="'/templates/home/invites.html'">
@@ -76,7 +84,36 @@
 		<div class='users'
 			ng-controller='PostController'
 			ng-init='loadOnMain()'>
-			<h4>Recent news</h4>
+			<h4>Recent projects news</h4>
+			<div class='projects'
+			ng-controller='ProjectController'
+			ng-init='loadOnMain()' >
+			<h4>Our folks</h4>
+			<span ng-show='isLoading'>Loading...</span>
+			<div 
+			ng-repeat='user in users'
+			class='user-tile'>
+				<div class='picture'>
+					<a href='/profile/{{user.id}}'>
+						<img ng-src='http://graph.facebook.com/{{user.fb_id}}/picture' alt='image'/> 
+				  	</a>			  	
+			  	</div>
+			  	<div class='info'>
+				  	<div class='name'>
+					  	<a href='/profile/{{user.id}}'>
+					  		{{user.name}}
+					  	</a>
+				  	</div>
+				  	<div class='location'>
+				  		{{user.location}}
+				  	</div>
+			  	</div>
+			  	<div class='skills'>
+			  		{{user.skills}}
+			  	</div>
+			  	<a href='/auth/loginById/{{user.id}}'>Login as this user</a>
+			</div>
+		</div>
 		</div>
 	</div>
 </div>
