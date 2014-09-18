@@ -1,12 +1,15 @@
 
+<div class='greetings'>
+	<div class='greetings-overlay'>		
+		<h2>Find fellows and realize superiour ideas.</h2>
+		<h3>Join now and become a part of something great!</h3>
+	</div>
+</div>
 <div class='row'>
 	<div class='col-md-8'
 		ng-controller='ProjectController as projectCtrl'
 		ng-init='projectCtrl.loadOnMain()' >
-		<div class='greetings'>
-			<h2>Find fellows and realize superiour ideas.</h2>
-			<h3>Join now and become a part of something great!</h3>
-		</div>
+		
 		<a href="/project/{{project.id}}"
 		ng-repeat='project in projectCtrl.projects' 
 		class='project-tile-link'>

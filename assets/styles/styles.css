@@ -1,6 +1,20 @@
 .greetings{
-	font-size: 18px;
+	font-size: 150%;
+	color: #DBD2D2;
 	text-align: left;
+	clear: both;
+	height: 400px;
+	background-image: url('../images/ttt.jpg');
+	background-position: center;
+	margin: -20px -30px 10px -60px;
+}
+.greetings h2{
+	font-size: 42px;
+}
+.greetings-overlay{
+	background-color: rgba(135,135,135,0.25);
+	height: 100%;
+	padding: 25px 50px;
 }
 .ng-dirty.ng-invalid{
 	border-color: red;
@@ -17,7 +31,7 @@ body{
 	height: 60px;
 	width: 100%;
 	clear: both;
-	background-color: green;
+	background-color: rgb(17, 155, 17);
 	color: #F5F5DC; 
 	padding-right: 10px;
 	overflow: hidden;
@@ -43,6 +57,10 @@ body{
 .header-menu a{
 	margin: 0 15px 0 15px;
 }
+
+.fibro-header a:hover{
+	text-shadow: 2px 2px 3px #B4892E;
+}
 .create-project-box{
 	margin: 5px;
 	padding: 5px;
@@ -55,7 +73,6 @@ body{
 	background-color: #f5f5eb;
 	display: block;
 	box-shadow: 0px 0px 6px 1px #8BDF49;
-
 }
 .create-project-box:hover{
 	box-shadow: 0px 0px 11px 4px #8BDF49;
@@ -265,8 +282,6 @@ a:link.project-tile-link{
 .project-tile:hover{
 	background-color: #f5efd0;
 	cursor: pointer;
-	margin-top: 0px;
-	margin-bottom: 10px;
 }
 .project-tile img{
 	max-height: 30px;

@@ -66,6 +66,7 @@ fibroApp.controller('PostController', ['$http','$scope', function($http, $scope)
 		},
 
 		$scope.loadOnMain = function(){
+			return;
 			me.isLoading = true;
 			$http.get('/api/project/forMain/'+me.count)
 			.success(function(data){
