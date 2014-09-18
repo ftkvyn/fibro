@@ -7,7 +7,7 @@ fibroApp.controller('ProjectController', ['$http', function($http){
 		me.allLoaded = false;
 		me.isLoading = false;
 		me.skip = 0;
-		me.count = 3;
+		me.count = 6;
 		if(document.getElementById('info')){
 			new nicEditor().panelInstance('description');
 			new nicEditor().panelInstance('info');

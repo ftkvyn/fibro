@@ -4,16 +4,30 @@ fibroApp.controller('SearchController', ['$http', '$scope', function($http, $sco
 		$scope.skip = 0;
 		$scope.items = [];
 		$scope.isSearching = false;
+		$scope.initialCount = 4;
 		var me = $scope;
 
 		$scope.initUsers = function(){
 			$scope.criteria = 'skills';
 			$scope.entity = 'user';
+			$scope.loadInitialItems();
 		}
 
 		$scope.initProjects = function(){
 			$scope.criteria = 'neededMembers';
 			$scope.entity = 'project';
+			$scope.loadInitialItems();
+		}
+
+		$scope.loadInitialItems = function(){
+			$http.get('/api/' + $scope.entity + '/some/' + $scope.initialCount )
+			.success(function(data){	
+				me.items = data;
+			})
+			.error(function(data){
+				console.log(data);
+				alert('Error occured while loading.');
+			});
 		}
 
 		$scope.search = function(){

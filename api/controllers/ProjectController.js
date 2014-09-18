@@ -108,7 +108,7 @@ module.exports = {
 	},
 
 	forMain: function(req, res){
-		var skip = +req.param('skip');
+		var skip = +req.param('skip') || 0;
 		var count = +req.param('count');
 		Project.find({sort: 'createdAt DESC', limit: count, skip: skip})
 		.exec(function(err, projects){
@@ -123,6 +123,6 @@ module.exports = {
 			});
 			return res.send(projects);	
 		});	
-	}
+	},
 };
 
