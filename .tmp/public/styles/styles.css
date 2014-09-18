@@ -1,12 +1,13 @@
 .greetings{
 	font-size: 150%;
-	color: #DBD2D2;
+	color: #F0EFEE;
 	text-align: left;
 	clear: both;
 	height: 400px;
 	background-image: url('../images/ttt.jpg');
 	background-position: center;
 	margin: -20px -30px 10px -60px;
+	border-bottom: 1px solid #b29966;
 }
 .greetings h2{
 	font-size: 42px;
@@ -35,14 +36,19 @@ body{
 	color: #F5F5DC; 
 	padding-right: 10px;
 	overflow: hidden;
+	border-bottom: 1px solid #7C673C;
 }
 
 .fibro-header .logo{
-	margin: 0px 0px 0px 20px;
+	margin: -10px 0px 20px 20px;
 	cursor: pointer;
 	float: left;
 	clear: left;
 	display: block;
+}
+
+.logo h1{
+	margin-bottom: 20px;
 }
 
 .header-menu{
@@ -315,4 +321,31 @@ a:link.project-tile-link{
 .user-tile .skills{
 	clear: both;
 	padding-top: 10px;
+}
+.project-view .author{
+	font-size: 95%;
+}
+.project-view .createdAt{
+	font-size: 85%;
+}
+.credits h1,
+.credits .createdAt,
+.credits .author{
+	text-align: center;
+}
+.credits{
+	text-align: center;
+	margin-bottom: 20px;
+	margin-top: -20px;
+}
+.user-view h2{
+	text-align: center;
+}
+.user-foto{
+	float: left;
+	margin: 10px 20px 20px 10px;
+}
+.action-link{
+	font-size: 150%;
+	clear: both;
 }

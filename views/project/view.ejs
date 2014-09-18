@@ -1,31 +1,43 @@
 <script type="text/javascript" src='/js/app/controllers/inviteController.js'></script>
 <script type="text/javascript" src='/js/app/controllers/projectController.js'></script>
-<div class='col-md-12' ng-controller='ProjectController as project'>
+<div class='col-md-12 project-view' ng-controller='ProjectController as project'>
+	<div class='credits'>
+	<h1><%= project.name %></h1>
+		<span class='author'>
+			by <a href='/profile/<%= project.author.id %>'><%- project.author.name %></a>
+		</span> <br/>
+		<span class='createdAt'>
+			<%= (new Date(project.createdAt)).toDateString() %>
+		</span>
+	</div>
 	<div class='row'>
-	<div class='col-md-10'>
+	<div class='col-md-9'>
 		<div class='row'>
-		<h1><%= project.name %></h1>
-		<h3>by <a href='/profile/<%= project.author.id %>'><%- project.author.name %></a></h3>
-		<%= (new Date(project.createdAt)).toDateString() %>
-	
-		<h3>Description</h3>
+		
 		<%- project.description %>
-	
+	<% if (isMember) { %>		
+		<h4>For members only:</h4>
+		<%- project.privateInformation || "Empty yet :("%>
+	<% } %>
 	<% if (project.neededMembers) { %>		
-		<h3>Who is needed</h3>
+		<h3>We need:</h3>
 		<%= project.neededMembers %>		
 	<% } %>
-	<% if (isMember) { %>		
-		<h3>Information</h3>
-		<%- project.privateInformation || "Empty yet :("%>
-		<br/><a href="/chat/project/<%= project.id %>">Go to project chat</a>
-		<br/><a href="/post/new/<%= project.id %>">Create post</a>
-	<% } %>
-		</div>
+	
+	</div>
 
+	
+	
+	</div>
+
+	<div class='col-md-3'>
 	<div class='row'>
+	<% if (isMember) { %>		
+		<a class='action-link' href="/chat/project/<%= project.id %>">Go to project chat</a><br/>
+		<a class='action-link' href="/post/new/<%= project.id %>">Create post</a><br/>
+	<% } %>
 	<% if (isAuthor) { %>
-	<a href="/project/<%= project.id %>/edit">Edit project</a>
+	<a class='action-link' href="/project/<%= project.id %>/edit">Edit project</a>
 	<div 		
 
 		ng-controller='InviteController as inviteCtrl' 
@@ -73,7 +85,7 @@
 	</div>
 	<% } else if(isRequestingMembership) { %>	
 	<div class='requesting'>
-		<span>Your request for joing project is waiting for approval from author.</span>
+		<span>Your request for joining project is waiting for approval from author.</span>
 	</div>
 	<% } %>	
 	<% if (isAuthor) { %>
@@ -82,11 +94,7 @@
 	<% } else if(isMember) { %>
 	<button ng-click='project.leave(<%= project.id %>)' class='btn btn-warning'>Leave project</button>
 	<% } %>	
-	</div>
-	
-	</div>
-
-	<div class='col-md-4'>
+	</div>		
 		<% if (project.members && project.members.length) { %>
 		
 			<h3>Members</h3>
@@ -132,4 +140,3 @@
 </div>
 </div>
 
-<a href="/">Home</a><br/>

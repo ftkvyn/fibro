@@ -1,14 +1,17 @@
 
 <script type="text/javascript" src='/js/app/controllers/inviteController.js'></script>
+<div class='user-view'>
+<h2><%= user.name %></h2>
 <div class='row'>
-	<div class='col-md-8'>
-		<div>
-			<strong><%= user.name %></strong><br/>
+
+	<div class='col-md-9'>
+		<div class='row'>
+			<div class='user-foto'>
 			<% if (user.fb_id) { %>
-				<img src='http://graph.facebook.com/<%- user.fb_id %>/picture?type=normal'	alt='image'/><br/>
-				<a target="_blank" href="http://facebook.com/<%= user.fb_id %>"><%= user.name %> on facebook</a>
+				<img src='http://graph.facebook.com/<%- user.fb_id %>/picture?type=large'	alt='image'/><br/>
 				<br/>
 			<% } %>
+			</div>
 			<% if(user.birthDate) { %>
 			<div>
 				<h4>Birth date</h4>
@@ -22,16 +25,21 @@
 			</div>
 			<% } %>
 			<div>
-				<h4>About</h4>
-				<p><%- user.about || "Empty yet :(" %></p>
-			</div>
-			<div>
 				<h4>Skills</h4>
 				<p><%= user.skills || "Empty yet :(" %></p>
 			</div>
 		</div>
+		<div class='row'>
+			<p><%- user.about || "Empty yet :(" %></p>
+		</div>	
+	</div>
+
+	<div class='col-md-3'>
+	<% if(isMe) { %>
+		<a class='action-link' href="/profile/<%= user.id %>/edit">Edit profile</a>
+	<% } %>
 	<% if(!isMe && currentUser) {%>
-		<a href="/chat/user/<%= user.id %>">Go to chat</a>		
+		<a class='action-link' href="/chat/user/<%= user.id %>">Go to chat</a>		
 		<div 
 		ng-controller='InviteController as inviteCtrl' 
 		ng-show='inviteCtrl.projects.length'
@@ -48,13 +56,7 @@
 			<textarea rows="3" cols="40" ng-model='inviteCtrl.new.message' class='form-control' id='message'></textarea><br/>
 			<button class='btn btn-success' ng-click='inviteCtrl.send(<%= user.id %>, inviteCtrl.new.project)'>Invite!</button>
 		</div>
-	<% } %>
-	<% if(isMe) { %>
-		<a href="/profile/<%= user.id %>/edit">Edit profile</a>
-	<% } %>
-	</div>
-
-	<div class='col-md-4'>
+	<% } %>	
 	<% if (user.createdProjects && user.createdProjects.length) { %>
 		<div>
 			<h3>Created Projects</h3>
@@ -81,4 +83,5 @@
 		</div>
 	<% } %>		
 	</div>
+</div>
 </div>
