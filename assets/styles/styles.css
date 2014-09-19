@@ -354,3 +354,32 @@ a:link.project-tile-link{
 }
 .center{text-align: center;}
 .btn.save{margin: 10px 0px 0px -15px;width: 120px;}
+.chat-link-box{
+	margin: 5px;
+	padding: 5px;
+	font-size: 20px;
+	width: 200px;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 4px;
+	border-color: #b29966;
+	background-color: #f5f5eb;
+	box-shadow: 0px 0px 6px 1px #49A3DF;
+	margin-left: auto;
+	margin-right: auto;
+}
+.chat-link-box:hover{
+	box-shadow: 0px 0px 11px 4px #49A3DF;
+}
+
+a.chat-link:link{
+	text-decoration: none;
+}
+.post-credits{text-align: left;}
+.post-credits img{border-radius: 25px;}
+.post-credits .picture{float: left;}
+.post-credits .name{clear: both;}
+.post-credits .info{float: left;margin-left: 10px;}
+.post-credits .createdAt{clear: both;font-size: 85%;}
+.post-title{clear: both;padding-top: 10px;text-align: center;}
+.post-actions{float: left;clear: both;}

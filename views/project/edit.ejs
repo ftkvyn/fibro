@@ -1,10 +1,11 @@
 <script type="text/javascript" src='/js/app/controllers/projectController.js'></script>
 <% if(isNew){ %>
-	<h1>New Project</h1>
+	<h1 class='center'>New Project</h1>
 <% } else { %>
-	<h1>Edit Project</h1>
+	<h1 class='center'>Edit Project</h1>
 <% } %>
-<div class='col-md-10' ng-controller='ProjectController as project'
+<div class='col-md-1'></div>
+<div class='col-md-9' ng-controller='ProjectController as project'
 		ng-init='project.load(<%= isNew %>, <%= projectId %>)'>
 	<div name='projectForm'>
 		<div class='row'>
@@ -23,8 +24,8 @@
 			<label for='needed'>Needed people:</label><br/>
 			<input id='needed' ng-model='project.model.neededMembers' class='form-control' type='text'></input>
 		</div>
-		<button ng-show='project.isNew' ng-click='project.save()' class='btn btn-success'>Create!</button>
-		<button ng-hide='project.isNew' ng-click='project.save()' class='btn btn-success'>Save</button>
+		<button ng-show='project.isNew' ng-click='project.save()' class='save btn btn-success'>Create!</button>
+		<button ng-hide='project.isNew' ng-click='project.save()' class='save btn btn-success'>Save</button>
 	</div>
 </div>
-<a href="/">Home</a><br/>
+<div class='col-md-3'></div>

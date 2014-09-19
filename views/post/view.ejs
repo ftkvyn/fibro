@@ -1,35 +1,47 @@
 <script type="text/javascript" src='/js/app/controllers/postController.js'></script>
 <div class='col-md-12' ng-controller='PostController'>
-	<div class='credits'>
-		<h1><%= post.title %></h1>
-		<h4><a href='/project/<%= post.project.id %>'><%- post.project.name %></a></h4>
-		<span class='author'>
-			by <a href='/profile/<%= post.author.id %>'><%- post.author.name %></a><br/>
-			
-		</span> <br/>
-		<span class='createdAt'>
-			<%= (new Date(post.createdAt)).toDateString() %>
-			<% if (post.createdAt - post.updatedAt) { %>
-			<br/>	Last update <%= (new Date(post.updatedAt)).toDateString() %> <%= (new Date(post.updatedAt)).toLocaleTimeString() %>
-			<% }  %>
+	<div class='post-credits'>
+		 <div class='post-title'>
+			<h1><%= post.title %></h1>
+			<h4><a href='/project/<%= post.project.id %>'><%- post.project.name %></a></h4>
+		</div>
+		<div class='picture'>
+			<a href='/profile/<%= post.author.id %>'>
+				<img ng-src='http://graph.facebook.com/<%= post.author.fb_id %>/picture' alt='image'/> 
+		  	</a>			  	
+	  	</div>
+	  	<div class='info'>
+		  	<div class='name'>
+			  	<a href='/profile/<%= post.author.id %>'>
+			  		<%= post.author.name %>
+			  	</a>
+		  	</div>
+		  	<div class='createdAt'>
+		  		<%= (new Date(post.createdAt)).toDateString() %>
+		  		<% if (post.createdAt - post.updatedAt) { %>
+				<br/>	Last update <%= (new Date(post.updatedAt)).toDateString() %> <%= (new Date(post.updatedAt)).toLocaleTimeString() %>
+				<% }  %>
+		  	</div>
 
-		</span>
+		  	
+	  	</div>
+	<% if (isAuthor) { %>
+	<div class='post-actions'>
+		<a href="/post/<%= post.id %>/edit" class='action-link'>>>Edit post<<</a>
+		<button ng-click='delete(<%= post.id %>)' class='btn btn-danger'>Delete post</button>
 	</div>
+	<% }  %>
+	</div>
+	<div class='clear'></div>
 	<div class='row'>
+	<div class='col-md-1'></div>
 	<div class='col-md-10'>
 		<div class='row'>
 		
 		<div class='postContent'>
 			<%- post.text %>
 		</div>
-		</div>
-
-	<% if (isAuthor) { %>
-	<div class='row'>
-		<a href="/post/<%= post.id %>/edit">Edit post</a><br/>
-		<button ng-click='delete(<%= post.id %>)' class='btn btn-danger'>Delete post</button>
 	</div>
-	<% }  %>
 
 	<div class='row' ng-controller='CommentController' ng-init='load(<%= post.id %>)'>
 	<% if (currentUser) { %>
@@ -58,6 +70,6 @@
 	</div>
 
 	</div>
-
+	<div class='col-md-1'></div>
 </div>
 </div>

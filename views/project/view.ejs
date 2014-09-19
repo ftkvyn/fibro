@@ -3,6 +3,11 @@
 <div class='col-md-12 project-view' ng-controller='ProjectController as project'>
 	<div class='credits'>
 	<h1><%= project.name %></h1>
+	<% if (isMember) { %>		
+	<div class='chat-link-box'>
+		<a class='chat-link' href="/chat/project/<%= project.id %>">Go to project chat</a><br/>
+	</div>
+	<% } %>
 		<span class='author'>
 			by <a href='/profile/<%= project.author.id %>'><%- project.author.name %></a>
 		</span> <br/>
@@ -33,11 +38,10 @@
 	<div class='col-md-3'>
 	<div class='row'>
 	<% if (isMember) { %>		
-		<a class='action-link' href="/chat/project/<%= project.id %>">Go to project chat</a><br/>
-		<a class='action-link' href="/post/new/<%= project.id %>">Create post</a><br/>
+		<a class='action-link' href="/post/new/<%= project.id %>">>Create post<</a><br/>
 	<% } %>
 	<% if (isAuthor) { %>
-	<a class='action-link' href="/project/<%= project.id %>/edit">Edit project</a>
+	<a class='action-link' href="/project/<%= project.id %>/edit">>>Edit project<<</a>
 	<div 		
 
 		ng-controller='InviteController as inviteCtrl' 
@@ -87,17 +91,11 @@
 	<div class='requesting'>
 		<span>Your request for joining project is waiting for approval from author.</span>
 	</div>
-	<% } %>	
-	<% if (isAuthor) { %>
-	<button ng-click='project.delete(<%= project.id %>)' class='btn btn-danger'>Delete project</button>
-
-	<% } else if(isMember) { %>
-	<button ng-click='project.leave(<%= project.id %>)' class='btn btn-warning'>Leave project</button>
-	<% } %>	
+	<% } %>		
 	</div>		
 		<% if (project.members && project.members.length) { %>
 		
-			<h3>Members</h3>
+			<h3>Fellows</h3>
 			<ul>
 			    <% for(var i=0; i<project.members.length; i++) { %>
 			        <li>
@@ -111,7 +109,7 @@
 			ng-controller='MembershipRequestController as requestCtrl' 
 			ng-show='requestCtrl.requests.length'
 			ng-init='requestCtrl.loadRequests(<%= project.id %>)'>
-			<h3>Requests for membership</h3>
+			<h3>Join requests</h3>
 				<ul>
 					<li ng-repeat='request in requestCtrl.requests'>
 						<a href="/profile/{{request.user.id}}" target="_blank"><strong>{{request.user.name}}</strong></a> (<em>{{request.createdAt | date}}</em>)<br/>
@@ -135,7 +133,14 @@
 			    <% } %>
 			</ul>
 		<% } %>	
+		<% if (isAuthor) { %>
+		<button ng-click='project.delete(<%= project.id %>)' class='btn btn-danger'>Delete project</button>
+
+		<% } else if(isMember) { %>
+		<button ng-click='project.leave(<%= project.id %>)' class='btn btn-warning'>Leave project</button>
+		<% } %>	
 	</div>
+	
 
 </div>
 </div>
