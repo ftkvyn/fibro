@@ -32,11 +32,11 @@ body{
 	height: 60px;
 	width: 100%;
 	clear: both;
-	background-color: rgb(17, 155, 17);
-	color: #F5F5DC; 
+	background-color: #f5efd0;
 	padding-right: 10px;
 	overflow: hidden;
-	border-bottom: 1px solid #7C673C;
+	border-bottom: 3px solid rgb(30, 168, 30);
+	box-shadow: 0px 0px 11px 4px #8BDF49;
 }
 
 .fibro-header .logo{
@@ -64,8 +64,9 @@ body{
 	margin: 0 15px 0 15px;
 }
 
-.fibro-header a:hover{
-	text-shadow: 2px 2px 3px #B4892E;
+.header-menu a:hover{
+	text-shadow: 1px 1px 2px #B4892E;
+	color: #745F35;
 }
 .create-project-box{
 	margin: 5px;
@@ -97,18 +98,20 @@ a.create-project-link:link{
 
 .fibro-header a{
 	font-size: 16px;
-	color: #F5F5DC;
+	color: #836D3F;
 }
 
 
 .fibro-header a:hover{
-	color: #eadec3;
+	color: #b29966;	
 }
 
 .fibro-content{
 	margin: 0px;
 	clear: both;
 	height: 100%;
+	max-width: 1400px;
+	min-width: 800px;
 	background: #F7F2DD;
 	background-image: url('/images/background.jpg');
 	overflow: hidden;
@@ -254,9 +257,9 @@ a:link.search-result-link{
 	height: 250px;
 	overflow: hidden;
 	width: 31%;
-	border-width: 1px;
+	border-width: 2px;
 	border-style: solid;
-	border-radius: 2px;
+	border-radius: 6px;
 	border-color: #b29966;
 	background-color: #f5f5eb;
 	display: block;
@@ -349,3 +352,5 @@ a:link.project-tile-link{
 	font-size: 150%;
 	clear: both;
 }
+.center{text-align: center;}
+.btn.save{margin: 10px 0px 0px -15px;width: 120px;}
