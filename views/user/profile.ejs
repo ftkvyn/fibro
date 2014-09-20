@@ -39,8 +39,12 @@
 		<a class='action-link' href="/profile/<%= user.id %>/edit"> >>Edit profile<< </a>
 	<% } %>
 	<% if(!isMe && currentUser) {%>
-		<a class='action-link' href="/chat/user/<%= user.id %>">Go to chat</a>		
-		<div 
+	<a class='chat-link' href="/chat/user/<%= user.id %>">
+		<div class='chat-link-box'>
+			Go to chat
+		</div>
+	</a>		
+	<div 
 		ng-controller='InviteController as inviteCtrl' 
 		ng-show='inviteCtrl.projects.length'
 		ng-init='inviteCtrl.loadProjects()'>

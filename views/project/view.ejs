@@ -3,11 +3,6 @@
 <div class='col-md-12 project-view' ng-controller='ProjectController as project'>
 	<div class='credits'>
 	<h1><%= project.name %></h1>
-	<% if (isMember) { %>		
-	<div class='chat-link-box'>
-		<a class='chat-link' href="/chat/project/<%= project.id %>">Go to project chat</a><br/>
-	</div>
-	<% } %>
 		<span class='author'>
 			by <a href='/profile/<%= project.author.id %>'><%- project.author.name %></a>
 		</span> <br/>
@@ -37,7 +32,13 @@
 
 	<div class='col-md-3'>
 	<div class='row'>
-	<% if (isMember) { %>		
+	<% if (isMember) { %>	
+	<a class='chat-link' href="/chat/project/<%= project.id %>">
+		<div class='chat-link-box'>
+			Go to project chat
+		</div>
+	</a><br/>
+	<br/>
 		<a class='action-link' href="/post/new/<%= project.id %>">>Create post<</a><br/>
 	<% } %>
 	<% if (isAuthor) { %>
