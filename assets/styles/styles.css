@@ -141,10 +141,10 @@ a.create-project-link:link{
 	margin: 10px;
 	padding: 10px;
 	font-size: 14px;
-	height: 50px;
-	border-width: 1px;
+	height: 75px;
+	border-width: 2px;
 	border-style: solid;
-	border-radius: 2px;
+	border-radius: 6px;
 	border-color: #b29966;
 	background-color: #f5f5eb;
 }
@@ -156,9 +156,35 @@ a:link.chat-link{
 	cursor: pointer;
 }
 .chat-row img{
-	max-height: 30px;
-	max-width: 30px;
+	max-height: 50px;
+	max-width: 50px;
+	border-radius: 25px;
 }
+.chat-row.unread{	
+	box-shadow: 0px 0px 6px 1px #8BDF49;
+}
+.chat-row.unread:hover{
+	box-shadow: 0px 0px 11px 4px #8BDF49;
+}
+.chat-info{
+	display:inline-block;
+	overflow: hidden;
+	width: 250px;
+	float: left;
+	margin-right: 10px;
+	height: 100%;
+}
+.chat-info .createdAt{font-size: 80%;}
+.chat-info .info{white-space: nowrap;}
+.chat-info .picture{float: left; margin-right: 20px;}
+.last-message{
+	display: inline-block;
+	float: left;
+	margin-left: 10px;
+	height: 100%;
+	text-align: left;
+}
+
 .chat-screen{
 	display: block;
   	text-align: center; 

@@ -1,14 +1,36 @@
 <script type="text/javascript" src='/js/app/controllers/chatListCtrl.js'></script>
+<div class='col-md-2'></div>
 <div ng-controller='ChatListController'
 	 ng-init='loadChats()'
-	 class='col-md-11'>
+	 class='col-md-8'>
 	 
-	 <a href='/chat/{{chat.type}}/{{chat.target.id}}' ng-repeat='chat in chats' class='chat-link'>
-	 <div class='row chat-row' >
-	 	<img ng-show='chat.type==="user"' 
-	 	ng-src="http://graph.facebook.com/{{chat.target.fb_id}}/picture"></img>
-	 	{{chat.target.name}}
+	 <a href='/chat/{{getRoute(chat)}}' ng-repeat='chat in chats' class='chat-link'>
+	 <div class='row chat-row' ng-class='{unread: chat.unreadMessages}'>
+	 	<div class='chat-info'>
+	 		<div class='picture'>
+			 	<img ng-show='chat.targetUser' 
+			 	ng-src="http://graph.facebook.com/{{chat.targetUser.fb_id}}/picture"></img>
+		 	</div>
+		 	<div class='info'>
+			 	<span ng-show='chat.targetUser'>
+			 		{{chat.targetUser.name}}
+			 	</span>
+			 	<span ng-show='chat.targetProject'>
+			 		{{chat.targetProject.name}}
+			 	</span><br/>
+			 	<span ng-show='chat.lastMessage' class='createdAt'>
+			 		{{chat.lastMessage.createdAt | date:'dd-MM-yyyy HH:mm:ss'}}
+			 	</span>
+		 	</div>
+
+	 	</div>
+	 	<div class='last-message' ng-show='chat.lastMessage'>
+	 		<strong ng-show='chat.lastMessage.from===chat.targetUser.id'>
+	 			{{chat.targetUser.name}}:
+	 		</strong>
+	 		<span class='body'>{{chat.lastMessage.text}}</span>
+	 	</div>
 	 </div>
 	</a>
-
 </div>
+<div class='col-md-2'></div>
