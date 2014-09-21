@@ -46,6 +46,8 @@ body{
 	clear: left;
 	display: block;
 }
+.header-menu .unread-chats{display: inline-block;background-color: #8BDF49;color: #fff;
+width:20px; height: 20px;text-align: center; position: relative;left: -6px; top: -5px;border-radius: 10px;}
 
 .logo h1{
 	margin-bottom: 20px;
@@ -177,6 +179,8 @@ a:link.chat-link{
 .chat-info .createdAt{font-size: 80%;}
 .chat-info .info{white-space: nowrap;}
 .chat-info .picture{float: left; margin-right: 20px;}
+.chat-info .unread-messages{display: inline-block;background-color: #8BDF49;color: #fff;
+width:20px; height: 20px;text-align: center; position: absolute;left: 50px; top: 20px;border-radius: 10px;}
 .last-message{
 	display: inline-block;
 	float: left;

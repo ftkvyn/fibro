@@ -10,6 +10,11 @@
 	 		<div class='picture'>
 			 	<img ng-show='chat.targetUser' 
 			 	ng-src="http://graph.facebook.com/{{chat.targetUser.fb_id}}/picture"></img>
+			 	<div
+			 	class='unread-messages' 
+			 	ng-show='chat.unreadMessages'>
+			 		{{chat.unreadMessages}}
+			 	</div>
 		 	</div>
 		 	<div class='info'>
 			 	<span ng-show='chat.targetUser'>

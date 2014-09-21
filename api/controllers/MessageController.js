@@ -107,15 +107,12 @@ module.exports = {
 		};
 
 		var broadcastMessage = function(message){
-			var socket = req.socket;
 		    var io = sails.io;
 		    
 		    if(message.toProject){		
 		    	io.sockets.in('project_' + message.toProject).emit('message', message);
-				// socket.broadcast.to('project_' + message.toProject).emit('message', message);
 			} else if(message.toUser){
 				io.sockets.in('user_' + message.toUser).emit('message', message);
-				// socket.broadcast.to('user_' + message.toUser).emit('message', message);
 			}
 			return res.send(message);
 		}
@@ -150,82 +147,5 @@ module.exports = {
 			createMessage();
 		}
 	},
-
-	chats: function(req, res){
-
-		var chats = [];
-
-		//ToDo: don't load all users;
-		users_q = User.find();
-		var userId = req.session.user.id;
-		currentUser_q = User.findOne(userId)
-				.populate('projects');
-
-		Q.all([users_q, currentUser_q]).then(function(data){
-			var users = data[0];
-			var projects = data[1].projects;
-
-			// var userIds = users.map(function(u){ return u.id;});
-			// var projectIds =  project.map(function(p){ return p.id;});
-
-			for (var i = users.length - 1; i >= 0; i--) {
-				if(users[i].id === userId){
-					continue;
-				}
-				chats.push(
-					{
-						target: {
-							name: users[i].name,
-							id: users[i].id,
-							fb_id: users[i].fb_id,
-							//ToDo: set image
-						}, 
-						type: 'user'
-					});
-			};
-			for (var i = projects.length - 1; i >= 0; i--) {
-				chats.push(
-					{
-						target: {
-							name: projects[i].name,
-							id: projects[i].id
-							//ToDo: set image
-						}, 
-						type: 'project'
-					});
-			};
-			
-			//ToDo: load last message for each chat;
-			return res.send(chats);
-
-		},
-		function(err){
-			console.log(err);
-			return res.serverError('Unable load chats list.');
-		});
-	},
-
-	getChatUsers: function(req, res){
-		var type = req.param('type');
-		var id = req.param('id');
-		if(type === 'user'){
-			User.find({id : [id, req.session.user.id]})
-			.exec(function(err, users){
-				return res.send(users);
-			});
-		} else if(type === 'project'){
-			Project.findOne(id)
-			.populate('members')
-			.exec(function(err, project){
-				var users = project.members;
-				return res.send(users);
-			})
-		} else{
-			//Wrong type argument
-			console.log('Type ' + type);
-			return res.badRequest('Unable load users.');
-		}
-
-	}
 };
 

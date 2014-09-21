@@ -73,7 +73,7 @@ fibroApp.controller('ChatController', ['$http', '$scope', function($http, $scope
 	}
 
 	$scope.loadUsers = function(){
-		$http.get('/api/message/users/' + $scope.type + '/' + $scope.id)
+		$http.get('/api/chat/users/' + $scope.type + '/' + $scope.id)
 		.success(function(data){
 			for (var i = data.length - 1; i >= 0; i--) {
 				me.users[data[i].id] = data[i];
@@ -93,12 +93,28 @@ fibroApp.controller('ChatController', ['$http', '$scope', function($http, $scope
 		});
 
 		socket.on('message', function(msg){
-				// console.log('message');
-				// console.log(msg);
 				me.messages.unshift(msg);
 				$scope.$apply();
+				$scope.markChatRead();
 			});		
 
 		socket.get('/api/message/subscribe/'+ $scope.type + '/' + $scope.id);
 	}
+
+	$scope.markChatRead = function(){
+			
+				$http.post('/api/chat/markAsRead/' + $scope.type + '/' + $scope.id)
+				.success(function(data){
+					//	Do nothing;
+				})
+				.error(function(data){
+					console.log(data);
+					// alert('Error occured while updating chat.');
+				});
+		
+		}
+	setTimeout(function(){
+		$scope.markChatRead();
+	}, 2000);
+	$scope.markChatRead();
 }]);

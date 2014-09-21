@@ -1,5 +1,6 @@
 var Q = require('q');
 
+		    
 var clb = function(err){
 	if(err){
 		console.error(err);
@@ -7,8 +8,8 @@ var clb = function(err){
 }
 
 exports.processNewMessage = function (message, projectMembers){
-
-	var createOrUpdateUserChats = function(err, chats, isMessageAuthor){
+	var cb = clb;
+	var createOrUpdateUserChats = function(err, chats){
 		if(err){
 			console.error(err);		
 			return;
@@ -27,32 +28,35 @@ exports.processNewMessage = function (message, projectMembers){
 			createMessageChats();
 			return;
 		}
+		var saves = [];
 		for (var i = chats.length - 1; i >= 0; i--) {
 			chats[i].lastMessage = message.id;
 			if(chats[i].owner != message.from){
 				chats[i].unreadMessages++;
 			}
-			chats[i].save(clb);
+
+			saves.push(chats[i].save());
 		};		
+		Q.all(saves).then(cb);
 	}
 
 	var createMessageChats = function(){
+		Q.all([
 		Chat.create({
 			owner: message.from,
 			targetUser: message.toUser,
 			unreadMessages: 0,
 			lastMessage: message.id
-		}).exec(clb);
-
+		}),
 		Chat.create({
 			owner: message.toUser,
 			targetUser: message.from,
 			unreadMessages: 1,
 			lastMessage: message.id
-		}).exec(clb);
+		})]).then(cb);
 	}
 
-	var processProjectChats = function(){
+	var processProjectChats = function(cb){
 		if(!projectMembers){
 			console.error('Please, transmit members to the method processNewMessage.');
 		}
@@ -62,13 +66,15 @@ exports.processNewMessage = function (message, projectMembers){
 				console.error(err);		
 				return;
 			}
+			var saves = [];
 			for (var i = chats.length - 1; i >= 0; i--) {
 				chats[i].lastMessage = message.id;
 				if((message.from || message.from.id) !== chats[i].owner){
 					chats[i].unreadMessages++;
 				}
-				chats[i].save(clb);
+				saves.push(chats[i].save());
 			};
+			Q.all(saves).then(cb);
 		});
 	}
 
@@ -83,11 +89,22 @@ exports.processNewMessage = function (message, projectMembers){
 
 
 	if(message.toProject){
-		processProjectChats(message, projectMembers);
+		cb = function(){
+			for (var i = projectMembers.length - 1; i >= 0; i--) {
+				notificationsService.updateUnreadChats(projectMembers[i]);
+			};	
+		}
+		processProjectChats();		
 		return;
 	}
 	if(message.toUser){
-		processUsersChats(message);
+		cb = function(){
+			notificationsService.updateUnreadChats(message.toUser);
+		}
+		processUsersChats();
+		
 		return;
 	}
+
+	// notificationsService.updateUnreadChats(message.from);
 }

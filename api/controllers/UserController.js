@@ -1,4 +1,13 @@
 module.exports = {
+	subscribe: function(req, res){
+		var socket = req.socket;
+		socket.join('notifications_' + req.session.user.id);
+		console.log('Subscribed ' + req.session.user.id);
+		res.send(200);
+
+		notificationsService.updateUnreadChats(req.session.user.id);
+	},
+	
 	update: function (req, res) {
 		if(+req.param('id') !== req.session.user.id){
 			return res.send(403);

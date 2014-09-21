@@ -56,13 +56,13 @@ module.exports.routes = {
 
   '/chat/:type/:id': 'ViewController.chat',
 
-  'get /api/message/chats' : 'MessageController.chats',
-
   'get /api/chats/:skip/:count' : 'ChatController.find',
+
+  'post /api/chat/markAsRead/:type/:id' : 'ChatController.markAsRead',
 
   'get /api/message/:type/:id': 'MessageController.find',
 
-  'get /api/message/users/:type/:id': 'MessageController.getChatUsers',
+  'get /api/chat/users/:type/:id': 'ChatController.getChatUsers',
 
   'post /api/message/:type/:id': 'MessageController.create',
 
@@ -71,6 +71,8 @@ module.exports.routes = {
   'post /api/comment/:id': 'CommentController.create',
 
   'get /api/comment/subscribe/:id': 'CommentController.subscribe',
+
+  'get /api/notifications/subscribe/': 'UserController.subscribe',
 
   '/': {
     view: 'home'

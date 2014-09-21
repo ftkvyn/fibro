@@ -48,6 +48,7 @@
     <script src="/js/app/controllers/commentController.js"></script>
     <script src="/js/app/controllers/inviteController.js"></script>
     <script src="/js/app/controllers/membershipRequestController.js"></script>
+    <script src="/js/app/controllers/notificationsCtrl.js"></script>
     <script src="/js/app/controllers/pofileController.js"></script>
     <script src="/js/app/controllers/postController.js"></script>
     <script src="/js/app/controllers/projectController.js"></script>
@@ -63,7 +64,7 @@
   </head>
 
   <body>
-    <div class='fibro-header'>
+    <div class='fibro-header' ng-controller='NotificationsController'>
       <div class='logo'>
         <a href="/">
           <h1>Project Fellows</h1>
@@ -81,7 +82,10 @@
         </a>
         <% if(currentUser) { %>
         <a href="/chats">
-          Chats
+          Chats <div class='unread-chats ng-hide'
+           ng-show='unreadChats'>
+           {{unreadChats}}
+         </div>
         </a>
         <% } %>        
         <a href="/about">
