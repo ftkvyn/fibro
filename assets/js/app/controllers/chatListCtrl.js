@@ -3,6 +3,8 @@ fibroApp.controller('ChatListController', ['$http', '$scope', function($http, $s
 	var me = $scope;
 
 	$scope.loadChats = function(){
+		// $scope.chats = [];
+		var me = $scope;
 		$http.get('/api/chats/0/10')
 		.success(function(data){
 			me.chats = data;
@@ -21,5 +23,15 @@ fibroApp.controller('ChatListController', ['$http', '$scope', function($http, $s
 			return 'project/' + chat.targetProject.id;
 		}
 	}
+
+	$scope.socketMagic = function(){
+		var socket = io.connect();
+
+		socket.on('unreadChats', function(count){
+				$scope.loadChats();
+			});		
+	}
+
+	me.socketMagic();
 	
 }]);

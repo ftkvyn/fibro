@@ -4,7 +4,7 @@
 <div ng-controller='ChatController'
 	 ng-init='init("<%= type %>", <%= id %>, <%= currentUser.id %>)'
 	 class='col-md-11 chat-screen'>
-	<h3><%= name %></h3>	
+	<h3>to: <%= name %></h3>	
 	<textarea ng-model='text' ng-keypress='keyPressed()' class='message-area'></textarea>	 
 	<button class='btn btn-success' ng-click='send()' ng-disabled='isSending'>Send</button>
 	<div class='row'>

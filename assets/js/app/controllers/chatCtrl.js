@@ -103,18 +103,17 @@ fibroApp.controller('ChatController', ['$http', '$scope', function($http, $scope
 
 	$scope.markChatRead = function(){
 			
-				$http.post('/api/chat/markAsRead/' + $scope.type + '/' + $scope.id)
-				.success(function(data){
-					//	Do nothing;
-				})
-				.error(function(data){
-					console.log(data);
-					// alert('Error occured while updating chat.');
-				});
+		$http.post('/api/chat/markAsRead/' + me.type + '/' + me.id)
+		.success(function(data){
+			//	Do nothing;
+		})
+		.error(function(data){
+			console.log(data);
+			// alert('Error occured while updating chat.');
+		});
 		
-		}
+	}
 	setTimeout(function(){
 		$scope.markChatRead();
-	}, 2000);
-	$scope.markChatRead();
+	}, 2000);	
 }]);

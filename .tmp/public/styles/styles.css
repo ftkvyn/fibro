@@ -163,7 +163,7 @@ a:link.chat-link{
 	border-radius: 25px;
 }
 .chat-row.unread{	
-	box-shadow: 0px 0px 6px 1px #8BDF49;
+	box-shadow: 0px 0px 6px 2px #8BDF49;
 }
 .chat-row.unread:hover{
 	box-shadow: 0px 0px 11px 4px #8BDF49;

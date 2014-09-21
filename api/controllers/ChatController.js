@@ -42,15 +42,19 @@ module.exports = {
 			query.where.targetProject = id;
 			query.where.owner = userId;
 		}
-		if(type === 'user'){
+		else if(type === 'user'){
 			query.where.targetUser = id;
 			query.where.owner = userId;
+		}
+		else {
+			console.log('Type = ' + type);
+			return res.badRequest('Bad type');
 		}
 
 		Chat.findOne(query).exec(function(err, chat){
 			if(err){
-				console.log(error);
-				res.badRequest('Unable load chat');
+				console.log(err);
+				return res.badRequest('Unable load chat');
 			}
 			chat.unreadMessages = 0;
 			chat.save(function(err){

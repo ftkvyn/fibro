@@ -3,7 +3,7 @@ var Q = require('q');
 		    
 var clb = function(err){
 	if(err){
-		console.error(err);
+		console.log(err);
 	}
 }
 
@@ -11,17 +11,17 @@ exports.processNewMessage = function (message, projectMembers){
 	var cb = clb;
 	var createOrUpdateUserChats = function(err, chats){
 		if(err){
-			console.error(err);		
+			console.log(err);		
 			return;
 		}
 		if(chats.length == 1){
-			console.error('Only one chat for users pair');
-			console.error(message);
+			console.log('Only one chat for users pair');
+			console.log(message);
 			return;
 		}
 		if(chats.length > 2){
-			console.error('More than two chats for users pair');
-			console.error(message);
+			console.log('More than two chats for users pair');
+			console.log(message);
 			return;
 		}
 		if(chats.length == 0){
@@ -58,12 +58,12 @@ exports.processNewMessage = function (message, projectMembers){
 
 	var processProjectChats = function(cb){
 		if(!projectMembers){
-			console.error('Please, transmit members to the method processNewMessage.');
+			console.log('Please, transmit members to the method processNewMessage.');
 		}
 		Chat.find({targetProject : message.toProject})
 		.exec(function(err, chats){
 			if(err){
-				console.error(err);		
+				console.log(err);		
 				return;
 			}
 			var saves = [];
