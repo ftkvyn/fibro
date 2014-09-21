@@ -102,15 +102,23 @@ module.exports = {
 	},
 
 	chats : function(req, res){
-		// Project.find().exec(function(err, projects){
+		// Project
+		// .find()
+		// .populate('members')
+		// .exec(function(err, projects){
 		// 	var saves = [];
 
 		// 	for (var i = projects.length - 1; i >= 0; i--) {
-		// 		projects[i].description_plainText = "ololo";
-		// 		saves.push(projects[i].save());
-		// 		Q.all(saves).then(function(){
-							
-		// 		});
+		// 		for (var j = projects[i].members.length - 1; j >= 0; j--) {
+		// 			var create = Chat.create({
+		// 				owner: projects[i].members[j].id,
+		// 				targetProject: projects[i].id
+		// 			});
+		// 			saves.push(create);
+		// 			Q.all(saves).then(function(){
+								
+		// 			});
+		// 		}
 		// 	};			
 		// });		
 		return res.view('messages/chatList');	

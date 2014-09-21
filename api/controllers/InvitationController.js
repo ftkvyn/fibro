@@ -60,7 +60,8 @@ module.exports = {
 
 			Q.all(qs).done(
 				function(){
-					return res.send('Success!');
+					res.send('Success!');
+					chatService.addUserToProjectChat(userId, projectId);
 				},
 				function(err){
 					console.log(err);

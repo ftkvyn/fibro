@@ -12,13 +12,15 @@ module.exports = {
 		var project = req.body;
 		project.author = req.session.user.id;
 		project.members = [req.session.user.id];
+		project.description_plainText = htmlToTextService.convert(project.description);
 		Project.create(project)
 		.exec(function(err, project){
 			if(err){
 				console.log(err);
 				return res.badRequest('Unable create project');
 			}
-			return res.send(project);
+			res.send(project);
+			chatService.addUserToProjectChat(req.session.user.id, project.id);
 		});
 	},
 
@@ -60,6 +62,7 @@ module.exports = {
 		   qs.push(Invitation.destroy({project: project.id}));
 		   qs.push(MembershipRequest.destroy({project: project.id}));
 		   qs.push(Message.destroy({toProject: project.id}));
+		   qs.push(Chat.destroy({targetProject: project.id}));
 
 		   Q.all(qs)
 		   .done(function(data){
@@ -92,7 +95,8 @@ module.exports = {
 			}
 			project.members.remove(req.session.user.id);
 			project.save(function(){
-				return res.send('Success!');	
+				res.send('Success!');	
+				chatService.removeUserFromProjectChat(req.session.user.id, project.id);
 			});			
 		});
 	},

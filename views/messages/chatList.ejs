@@ -5,7 +5,8 @@
 	 class='col-md-8'>
 	 
 	 <a href='/chat/{{getRoute(chat)}}' ng-repeat='chat in chats' class='chat-link'>
-	 <div class='row chat-row ng-hide' ng-show='true' ng-class='{unread: chat.unreadMessages}'>
+	 <div class='row chat-row ng-hide' ng-show='true' 
+	 ng-class='{unread: chat.unreadMessages, project: chat.targetProject}'>
 	 	<div class='chat-info'>
 	 		<div class='picture'>
 			 	<img ng-show='chat.targetUser' 

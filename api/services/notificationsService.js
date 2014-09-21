@@ -1,7 +1,6 @@
 
 
 exports.updateUnreadChats = function (userId){
-
 	Chat.count({owner: userId, unreadMessages: { '>': 0 }})
 	.exec(function(err,count){
 		if(err){

@@ -7,7 +7,7 @@ var clb = function(err){
 	}
 }
 
-exports.processNewMessage = function (message, projectMembers){
+exports.processNewMessage = function (message){
 	var cb = clb;
 	var createOrUpdateUserChats = function(err, chats){
 		if(err){
@@ -57,24 +57,27 @@ exports.processNewMessage = function (message, projectMembers){
 	}
 
 	var processProjectChats = function(cb){
-		if(!projectMembers){
-			console.log('Please, transmit members to the method processNewMessage.');
-		}
 		Chat.find({targetProject : message.toProject})
 		.exec(function(err, chats){
 			if(err){
-				console.log(err);		
+				console.log(err);	
 				return;
 			}
 			var saves = [];
+			var members = [];
 			for (var i = chats.length - 1; i >= 0; i--) {
 				chats[i].lastMessage = message.id;
-				if((message.from || message.from.id) !== chats[i].owner){
+				if(message.from !== chats[i].owner){
 					chats[i].unreadMessages++;
 				}
 				saves.push(chats[i].save());
+				members.push(chats[i].owner);
 			};
-			Q.all(saves).then(cb);
+			Q.all(saves).done(function(){
+				for (var i = members.length - 1; i >= 0; i--) {
+					notificationsService.updateUnreadChats(members[i]);
+				};
+			});
 		});
 	}
 
@@ -89,11 +92,6 @@ exports.processNewMessage = function (message, projectMembers){
 
 
 	if(message.toProject){
-		cb = function(){
-			for (var i = projectMembers.length - 1; i >= 0; i--) {
-				notificationsService.updateUnreadChats(projectMembers[i]);
-			};	
-		}
 		processProjectChats();		
 		return;
 	}
@@ -107,4 +105,23 @@ exports.processNewMessage = function (message, projectMembers){
 	}
 
 	// notificationsService.updateUnreadChats(message.from);
+}
+
+exports.addUserToProjectChat = function(userId, projectId){
+	Chat.create({
+		owner: userId,
+		targetProject: projectId
+	}).exec(function(){
+		notificationsService.updateUnreadChats(userId);	
+	});
+	
+}
+
+exports.removeUserFromProjectChat = function(userId, projectId){
+	Chat.destroy({
+		owner: userId,
+		targetProject: projectId
+	}).exec(function(){
+		notificationsService.updateUnreadChats(userId);	
+	});
 }

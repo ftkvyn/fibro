@@ -45,6 +45,21 @@ module.exports = {
 			});
 		}
 
+		var loadMembershipStartDate = function(query, userId, projectId){
+			Chat.findOne({
+				owner: userId,
+				targetProject: projectId
+			}).exec(function (err, chat){
+				if(chat){
+					query.where.createdAt = {'>=': chat.createdAt};
+					loadMessages(query);
+				}else
+				{
+					return res.badRequest('Unable load messages.');
+				}
+			});
+		}
+
 		var userId = req.session.user.id;
 		var type = req.param('type');
 		var id = req.param('id');
@@ -75,7 +90,7 @@ module.exports = {
 				for (var i = project.members.length - 1; i >= 0; i--) {
 					if(project.members[i].id == userId){
 						isMember = true;
-						loadMessages(query);
+						loadMembershipStartDate(query, userId, project.id);
 					}
 				};
 				if(!isMember){
@@ -102,7 +117,7 @@ module.exports = {
 				}
 				broadcastMessage(message);	
 
-				chatService.processNewMessage(message, projectMembers);
+				chatService.processNewMessage(message);
 			});
 		};
 
