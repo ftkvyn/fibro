@@ -91,6 +91,8 @@ module.exports = {
 	},
 
 	create: function(req, res){
+		var projectMembers;
+
 		var createMessage = function(){
 			Message.create(req.body)
 			.exec(function(err, message){
@@ -98,22 +100,25 @@ module.exports = {
 					console.log(err);
 					return res.badRequest('Unable create message.');
 				}
+				broadcastMessage(message);	
 
-				var socket = req.socket;
-			    var io = sails.io;
-			    
-			    if(message.toProject){		
-			    	io.sockets.in('project_' + message.toProject).emit('message', message);
-					// socket.broadcast.to('project_' + message.toProject).emit('message', message);
-				} else if(message.toUser){
-					io.sockets.in('user_' + message.toUser).emit('message', message);
-					// socket.broadcast.to('user_' + message.toUser).emit('message', message);
-				}
-
-
-				return res.send(message);
+				chatService.processNewMessage(message, projectMembers);
 			});
 		};
+
+		var broadcastMessage = function(message){
+			var socket = req.socket;
+		    var io = sails.io;
+		    
+		    if(message.toProject){		
+		    	io.sockets.in('project_' + message.toProject).emit('message', message);
+				// socket.broadcast.to('project_' + message.toProject).emit('message', message);
+			} else if(message.toUser){
+				io.sockets.in('user_' + message.toUser).emit('message', message);
+				// socket.broadcast.to('user_' + message.toUser).emit('message', message);
+			}
+			return res.send(message);
+		}
 
 		req.body.from = req.session.user.id;
 
@@ -129,6 +134,7 @@ module.exports = {
 					return res.badRequest('Unable create message.');
 				}
 				var isMember = false;
+				projectMembers = project.members;
 				for (var i = project.members.length - 1; i >= 0; i--) {
 					if(project.members[i].id == userId){
 						isMember = true;

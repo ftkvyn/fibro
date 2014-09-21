@@ -58,6 +58,8 @@ module.exports.routes = {
 
   'get /api/message/chats' : 'MessageController.chats',
 
+  'get /api/chats/:skip/:count' : 'ChatController.find',
+
   'get /api/message/:type/:id': 'MessageController.find',
 
   'get /api/message/users/:type/:id': 'MessageController.getChatUsers',

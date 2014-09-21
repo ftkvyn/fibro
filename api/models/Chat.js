@@ -8,6 +8,24 @@
 module.exports = {
 
   attributes: {
+		owner: {
+			model: 'user',
+			required: true,
+		},
+		targetUser: {
+			model: 'user',
+		},
+		targetProject:{
+			model: 'project'
+		},
+		lastMessage: {
+			model:'message',
+		},		
+		unreadMessages: {
+			type: 'integer',
+			required: true,
+			defaultsTo: 0,
+		},
 
   }
 };

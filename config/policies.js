@@ -89,4 +89,8 @@ module.exports.policies = {
 
     update: false,
   },
+
+  ChatController: {
+    '*' : 'sessionAuth',
+  },
 };
