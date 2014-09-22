@@ -134,10 +134,7 @@
 			    <% } %>
 			</ul>
 		<% } %>	
-		<% if (isAuthor) { %>
-		<button ng-click='project.delete(<%= project.id %>)' class='btn btn-danger'>Delete project</button>
-
-		<% } else if(isMember) { %>
+		<% if(isMember) { %>
 		<button ng-click='project.leave(<%= project.id %>)' class='btn btn-warning'>Leave project</button>
 		<% } %>	
 	</div>

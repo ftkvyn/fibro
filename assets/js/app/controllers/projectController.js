@@ -6,6 +6,8 @@ fibroApp.controller('ProjectController', ['$http', function($http){
 		me.projects = [];
 		me.allLoaded = false;
 		me.isLoading = false;
+		me.deleteDialogVisible = false;
+		me.nameConfirm = '';
 		me.skip = 0;
 		me.count = 6;
 		if(document.getElementById('info')){
@@ -73,6 +75,14 @@ fibroApp.controller('ProjectController', ['$http', function($http){
 
 		this.loadMore = function(){
 			this.loadOnMain();
+		}
+
+		this.toggleDialog = function(val){
+			me.deleteDialogVisible = val;
+		}
+
+		this.notConfirmed = function(){
+			return me.model.name != me.nameConfirm;
 		}
 
 		this.delete = function(id){

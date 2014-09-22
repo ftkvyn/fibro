@@ -26,6 +26,28 @@
 		</div>
 		<button ng-show='project.isNew' ng-click='project.save()' class='save btn btn-success'>Create!</button>
 		<button ng-hide='project.isNew' ng-click='project.save()' class='save btn btn-success'>Save</button>
+		<% if(!isNew){ %>
+		<button ng-click='project.toggleDialog(true)' style='margin:10px 0px 0px 10px;' class='btn btn-danger'>Delete project</button>
+
+		<modal-dialog 		
+		show='project.deleteDialogVisible' dialog-title='Deleting project {{project.model.name}}'>
+		  <div class='ng-hide' ng-show='project.deleteDialogVisible'>
+		  <div class='row' style='margin:5px;'>
+			  <p>Are you shure you want to delete project?</p>
+			  <p>Deleting project is irreversible. Enter your project's name below to confirm you want to permanently delete it:</p>
+			  <input type='text' ng-model='project.nameConfirm' />
+		  </div>
+		  <button 
+		  ng-disabled='project.notConfirmed()'
+		  ng-click='project.delete(project.model.id)' class='btn btn-danger'>Delete project</button>
+		  <button ng-click='project.toggleDialog(false)' 
+		   class='btn btn-warning'>Cancel</button>
+		   </div>
+		</modal-dialog>
+
+		<% } %>
+
 	</div>
+	
 </div>
 <div class='col-md-3'></div>

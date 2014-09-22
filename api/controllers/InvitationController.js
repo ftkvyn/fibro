@@ -62,6 +62,7 @@ module.exports = {
 				function(){
 					res.send('Success!');
 					chatService.addUserToProjectChat(userId, projectId);
+					//
 				},
 				function(err){
 					console.log(err);

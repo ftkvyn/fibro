@@ -1,1 +1,1 @@
-fibroApp = angular.module('fibro', ['flow']);
+fibroApp = angular.module('fibro', ['flow', 'ngModal']);
