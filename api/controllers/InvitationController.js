@@ -16,7 +16,8 @@ module.exports = {
 				console.log(err);
 				return res.badRequest('Unable create invite');
 			}
-			return res.send(invite);
+			res.send(invite);
+			notificationsService.updateInvitations(invite.user);
 		});
 	},
 
@@ -62,6 +63,7 @@ module.exports = {
 				function(){
 					res.send('Success!');
 					chatService.addUserToProjectChat(userId, projectId);
+					notificationsService.updateInvitations(userId);
 					//
 				},
 				function(err){
@@ -93,7 +95,8 @@ module.exports = {
 					console.log(err);
 					return res.serverError('Unable process invite');
 				}
-				return res.send('Success!');
+				res.send('Success!');
+				notificationsService.updateInvitations(req.session.user.id);
 			});
 		});
 	},

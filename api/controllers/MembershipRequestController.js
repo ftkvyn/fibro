@@ -16,7 +16,11 @@ module.exports = {
 				console.log(err);
 				return res.badRequest('Unable create request');
 			}
-			return res.send(request);
+			res.send(request);
+			Project.findOne(request.project).exec(function(err, project){
+				notificationsService.updateRequests(project.author);	
+			});
+			
 		});
 	},
 
@@ -78,6 +82,10 @@ module.exports = {
 				function(){
 					res.send('Success!');
 					chatService.addUserToProjectChat(userId, projectId);
+					Project.findOne(projectId).exec(function(err, project){
+						notificationsService.updateRequests(project.author);	
+					});
+					
 				},
 				function(err){
 					console.log(err);
@@ -94,7 +102,7 @@ module.exports = {
 				console.log(err);
 				return res.badRequest('Unable find request');
 			}
-
+			var authorId = request.project.author;
 			if(req.session && req.session.user){
 				if(req.session.user.id != request.project.author){
 					return res.badRequest('Unable process request');	
@@ -103,12 +111,14 @@ module.exports = {
 				return res.badRequest('Unable process request');
 			}
 			// request.isDeclined = true;
+			var projectId = 
 			request.destroy(function(err){
 				if(err){
 					console.log(err);
 					return res.serverError('Unable process request');
 				}
-				return res.send('Success!');
+				res.send('Success!');
+				notificationsService.updateRequests(authorId);	
 			});
 		});
 	},

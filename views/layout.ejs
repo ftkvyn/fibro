@@ -66,7 +66,12 @@
   </head>
 
   <body>
+    <% if(currentUser) { %>
     <div class='fibro-header' ng-controller='NotificationsController'>
+    <% } else { %>
+    <div class='fibro-header'>
+    <% } %>
+    
       <div class='logo'>
         <a href="/">
           <h1>Project Fellows</h1>
@@ -74,17 +79,23 @@
       </div>
       <div class='header-menu'>
         <a href="/search/project">
-          Projects
+          Projects  <div class='invitations notification ng-hide'
+           ng-show='invitations'>
+           {{invitations}}
+         </div>
         </a>
         <a href="/search/user">
-          People
+          People  <div class='requests notification ng-hide'
+           ng-show='requests'>
+           {{requests}}
+         </div>
         </a>
         <a href="/ideas">
           Ideas
         </a>
         <% if(currentUser) { %>
         <a href="/chats">
-          Chats <div class='unread-chats ng-hide'
+          Chats <div class='unread-chats notification ng-hide'
            ng-show='unreadChats'>
            {{unreadChats}}
          </div>

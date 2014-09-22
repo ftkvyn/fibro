@@ -5,6 +5,8 @@ module.exports = {
 		res.send(200);
 
 		notificationsService.updateUnreadChats(req.session.user.id);
+		notificationsService.updateInvitations(req.session.user.id);
+		notificationsService.updateRequests(req.session.user.id);
 	},
 	
 	update: function (req, res) {

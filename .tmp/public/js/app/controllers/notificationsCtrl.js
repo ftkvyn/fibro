@@ -1,5 +1,7 @@
 fibroApp.controller('NotificationsController', ['$http', '$scope', function($http, $scope){
 	$scope.unreadChats = 0;
+	$scope.invitations = 0;
+	$scope.requests = 0;
 	var me = $scope;
 
 	$scope.socketMagic = function(){
@@ -7,7 +9,16 @@ fibroApp.controller('NotificationsController', ['$http', '$scope', function($htt
 
 		socket.on('unreadChats', function(count){
 				$scope.unreadChats = count;
-				console.log(count);
+				$scope.$apply();
+			});		
+
+		socket.on('invitations', function(count){
+				$scope.invitations = count;
+				$scope.$apply();
+			});		
+
+		socket.on('requests', function(count){
+				$scope.requests = count;
 				$scope.$apply();
 			});		
 

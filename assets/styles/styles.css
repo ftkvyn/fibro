@@ -46,8 +46,15 @@ body{
 	clear: left;
 	display: block;
 }
-.header-menu .unread-chats{display: inline-block;background-color: #8BDF49;color: #fff;
-width:20px; height: 20px;text-align: center; position: relative;left: -6px; top: -5px;border-radius: 10px;}
+.header-menu .notification{display: inline-block;background-color: #8BDF49;color: #fff;
+width:20px; height: 20px;text-align: center; position: relative;border-radius: 10px;left: -6px; top: -5px;}
+
+.header-menu .invitations{}
+
+.header-menu .requests{}
+
+.header-menu .unread-chats{}
+
 
 .logo h1{
 	margin-bottom: 20px;
