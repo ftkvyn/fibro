@@ -121,7 +121,17 @@ module.exports = {
 		// 		}
 		// 	};			
 		// });		
-		return res.view('messages/chatList');	
+
+		// User.find()
+		// .exec(function(err, users){
+		// 	for (var i = users.length - 1; i >= 0; i--) {
+		// 		users[i].profilePic = 'http://graph.facebook.com/' + users[i].fb_id + '/picture';
+		// 		users[i].profilePicLarge 
+		// 			= 'http://graph.facebook.com/' + users[i].fb_id + '/picture?type=large';				
+		// 		users[i].save(function(){});
+		// 	};
+		// });
+		res.view('messages/chatList');	
 	},
 
 	chat: function(req, res){

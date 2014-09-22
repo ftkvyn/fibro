@@ -51,6 +51,8 @@ passport.use(new FacebookStrategy({
           fb_token: accessToken,
           name: profile.displayName,
           email: profile.emails[0].value,
+          profilePic: 'http://graph.facebook.com/' + profile.id + '/picture',
+          profilePicLarge: 'http://graph.facebook.com/' + profile.id + '/picture?type=large',
 
           // You can also add any other data you are getting back from Facebook here 
           // as long as it is in your model

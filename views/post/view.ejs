@@ -7,7 +7,7 @@
 		</div>
 		<div class='picture'>
 			<a href='/profile/<%= post.author.id %>'>
-				<img ng-src='http://graph.facebook.com/<%= post.author.fb_id %>/picture' alt='image'/> 
+				<img ng-src='<%= post.author.profilePic %>' alt='image'/> 
 		  	</a>			  	
 	  	</div>
 	  	<div class='info'>

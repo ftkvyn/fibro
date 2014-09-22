@@ -18,6 +18,12 @@ module.exports = {
 	name: {
 	    type: 'string'	    
 	},
+	profilePic: {
+		type: 'url'
+	},
+	profilePicLarge: {
+		type: 'url'
+	},
 	friendlyId:{
 		type:'string',
 		unique:true

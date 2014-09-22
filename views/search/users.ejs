@@ -30,7 +30,7 @@
 		<a href="/profile/{{user.id}}" ng-repeat='user in items' class='search-result-link'>
 			<div class='row search-result'>
 				<div class='title'>
-					<img ng-src="http://graph.facebook.com/{{user.fb_id}}/picture"></img>
+					<img ng-src="{{user.profilePic}}"></img>
 					<span class='name'>{{user.name}}</span>
 				</div>
 				<div class='info'>

@@ -10,7 +10,7 @@
 	 	<div class='chat-info'>
 	 		<div class='picture'>
 			 	<img ng-show='chat.targetUser' 
-			 	ng-src="http://graph.facebook.com/{{chat.targetUser.fb_id}}/picture"></img>
+			 	ng-src="{{chat.targetUser.profilePic}}"></img>
 			 	<div
 			 	class='unread-messages' 
 			 	ng-show='chat.unreadMessages'>
