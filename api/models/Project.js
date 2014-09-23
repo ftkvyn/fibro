@@ -24,17 +24,12 @@ module.exports = {
 		type:'boolean',
 		defaultsTo:true
 	},
-	description:{
-		type:'text',
-		required:true
-	},
-	description_plainText:{
-		type:'text',
-		required:true
-	},
-	privateInformation:{
-		type:'text',
-	},
+	// projectInfo: {
+ //  		model: 'projectInfo',
+ //  		via: 'project',
+ //  		required: true
+ //  	}
+
 	members:{
 		collection: 'user',
         via: 'projects',

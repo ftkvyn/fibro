@@ -104,21 +104,20 @@ module.exports = {
 	chats : function(req, res){
 		// Project
 		// .find()
-		// .populate('members')
 		// .exec(function(err, projects){
 		// 	var saves = [];
 
 		// 	for (var i = projects.length - 1; i >= 0; i--) {
-		// 		for (var j = projects[i].members.length - 1; j >= 0; j--) {
-		// 			var create = Chat.create({
-		// 				owner: projects[i].members[j].id,
-		// 				targetProject: projects[i].id
-		// 			});
-		// 			saves.push(create);
-		// 			Q.all(saves).then(function(){
-								
-		// 			});
-		// 		}
+		// 		var create = ProjectInfo.create({
+		// 			project: projects[i].id,
+		// 			neededMembers: projects[i].neededMembers,
+		// 			description: projects[i].description,
+		// 			description_plainText: projects[i].description_plainText,
+		// 		});
+		// 		saves.push(create);
+		// 		Q.all(saves).then(function(){
+							
+		// 		});
 		// 	};			
 		// });		
 
@@ -131,7 +130,7 @@ module.exports = {
 		// 		users[i].save(function(){});
 		// 	};
 		// });
-		res.view('messages/chatList');	
+		res.view('messages/chatList');
 	},
 
 	chat: function(req, res){

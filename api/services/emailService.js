@@ -1,10 +1,10 @@
-//Not working.
 var nodemailer = require("nodemailer");
 var smtpTransport = nodemailer.createTransport("SMTP",{
-   host : "XXX",
+   host : "smtp.postmarkapp.com",
+   port: 25,
    auth: {
-       user: "XXX@XXX",
-       pass: "XXX"
+       user: process.env.POSTMARK_API_KEY,
+       pass: process.env.POSTMARK_API_KEY
    }
 });
 
@@ -12,7 +12,7 @@ exports.sendTestMail = function () {
 	// body...
 
 	var mailOptions = {
-	   from: "XXX@XXX", // sender address
+	   from: "noreply@projectfellows.com", // sender address
 	   to: "XXX@XXX", // list of receivers
 	   subject: "Hello ✔", // Subject line
 	   text: "Hello world ✔" // plaintext body
@@ -22,7 +22,7 @@ exports.sendTestMail = function () {
 	   if(error){
 	       console.log(error);
 	   }else{
-	       console.log("Message sent: " + response.message);
+	       // console.log("Message sent: " + response.message);
 	   }
 	});
 }
