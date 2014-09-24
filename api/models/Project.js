@@ -24,11 +24,18 @@ module.exports = {
 		type:'boolean',
 		defaultsTo:true
 	},
-	// projectInfo: {
- //  		model: 'projectInfo',
- //  		via: 'project',
- //  		required: true
- //  	}
+ 	description:{
+		type:'text',
+		required:true
+	},
+	description_plainText:{
+		type:'text',
+		required:true
+	},
+	privateInformation:{
+		type:'text',
+	},
+
 
 	members:{
 		collection: 'user',
@@ -43,6 +50,16 @@ module.exports = {
 		collection: 'post',
         via: 'project'
 	},
+
+
+	reduce: function(leavePlainText){
+		delete this.privateInformation;
+		delete this.description;
+		if(!leavePlainText){
+			delete this.description_plainText;
+		}
+		return this;
+	}
   },
 
   beforeCreate: function (values, cb) {
@@ -61,6 +78,6 @@ module.exports = {
   		values.description = escapeService.escapeScript(values.description);
   	}
     cb();
-  }
+  }, 
 };
 

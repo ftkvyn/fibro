@@ -23,7 +23,12 @@ exports.search = function (res, rawPattern, criteria, allowedCriterias, entity, 
 		}
 
 	  	var items = _.map(itemsRaw, function(item) {
-	    	return new entity._model(item);
+	    	var result = new entity._model(item);
+
+	    	if(result.reduce){
+	    		result.reduce(true);
+	    	}
+	    	return result;
 	  	});
 
 	  	return res.send({items : items, pattern: rawPattern});	

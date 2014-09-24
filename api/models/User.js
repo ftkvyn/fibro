@@ -66,7 +66,26 @@ module.exports = {
 	    type: 'string',
       	required: true,
       	unique: true
-	}
+	},
+
+	toJSON: function() {
+      var obj = this.toObject();
+      delete obj.fb_token;
+      delete obj.fb_id;
+      delete obj.password;
+      return obj;
+    },
+
+	reduce: function(leavePlainText){
+		delete this.about;		
+		delete this.email;
+		delete this.password;		
+		if(!leavePlainText){
+			delete this.about_plainText;
+		}
+		return this;
+	},
+
   },
 
   beforeCreate: function (values, cb) {

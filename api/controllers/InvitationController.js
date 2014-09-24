@@ -30,6 +30,9 @@ module.exports = {
 				console.log(err);
 				return res.badRequest('Unable load invitations');
 			}
+			for (var i = invitations.length - 1; i >= 0; i--) {
+				invitations[i].project = invitations[i].project.reduce();
+			};
 			return res.send(invitations);
 		});
 	},

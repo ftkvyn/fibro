@@ -82,6 +82,9 @@ module.exports = {
 				console.log(err);
 				return res.badRequest('Unable load projects');
 			}
+			for (var i = projects.length - 1; i >= 0; i--) {
+				projects[i] = projects[i].reduce();
+			};
 			return res.send(projects);
 		});
 	},
@@ -121,10 +124,9 @@ module.exports = {
 				return res.badRequest('Unable load projects');
 			}
 			projects = projects.map(function(p){
-				delete p.description;
-				delete p.privateInformation;
-				return p;
+				return p.reduce(true);
 			});
+
 			return res.send(projects);	
 		});	
 	},

@@ -313,6 +313,7 @@ a:link.project-tile-link{
 }
 .project-tile .description{
 	height: 145px;
+	overflow: hidden;
 }
 .project-tile hr{
 	background-color:#b29966;

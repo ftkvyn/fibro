@@ -54,11 +54,7 @@ module.exports = {
 				return res.badRequest('Unable load users');
 			}
 			users = users.map(function(u){
-				delete u.about;
-				delete u.about_plainText;
-				delete u.email;
-				delete u.password;
-				return u;
+				return u.reduce();
 			});
 			return res.send(users);	
 		});	

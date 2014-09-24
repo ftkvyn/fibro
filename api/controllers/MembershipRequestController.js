@@ -48,6 +48,9 @@ module.exports = {
 					console.log(err);
 					return res.badRequest('Unable load requests');
 				}
+				for (var i = requests.length - 1; i >= 0; i--) {
+					requests[i].project = requests[i].project.reduce();
+				};
 				return res.send(requests);
 			});
 			
