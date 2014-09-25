@@ -26,7 +26,11 @@ module.exports = {
         function (err, user, info) {
           if(user){
             req.session.user = user;
-            res.redirect('/profile/' + user.id);
+            if(user.isNew){
+              res.redirect('/profile/' + user.id + '/edit');
+            }else{
+              res.redirect('/profile/' + user.id);
+            }
           }
           else{
             console.log(info);

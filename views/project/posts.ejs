@@ -1,0 +1,19 @@
+<div class='col-md-2'>
+</div>
+<div class='col-md-10'>
+	<% if (project.posts && project.posts.length) { %>
+	    <% for(var i=0; i<project.posts.length; i++) { %>
+			<% if(!project.posts[i].isPrivate || isMember) { %>
+	        <div class='row post-info'>
+	            <a href='/post/<%= project.posts[i].id %>'><%= project.posts[i].title %> </a>,
+	             <%= project.posts[i].author.name %>
+	            <div class='createdAt'>
+	            	<%= (new Date(project.posts[i].createdAt)).toDateString() %>
+	            </div>
+	        </div>
+	        <% } %>
+	    <% } %>
+	<% } %>	
+</div>
+<div class='col-md-2'>
+</div>

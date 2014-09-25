@@ -427,3 +427,5 @@ a.chat-link:link{
 .post-credits .createdAt{clear: both;font-size: 85%;}
 .post-title{clear: both;padding-top: 10px;text-align: center;}
 .post-actions{float: left;clear: both;}
+.post-info{font-size: 150%;}
+.post-info .createdAt{font-size: 75%; color: #7C7568;}

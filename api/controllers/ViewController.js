@@ -101,6 +101,37 @@ module.exports = {
 		});
 	},
 
+	projectPosts : function(req, res){
+		var projectId = req.param('id');
+		var proj_q = Project.findOne(projectId)
+		.populate('members');		
+
+		var posts_q = Post.find({sort: 'createdAt DESC', where: {project:projectId}})
+		.populate('author');
+		Q.all([proj_q, posts_q]).then(function(data){
+			var project = data[0];
+			project.posts = data[1];
+			var isAuthor = false;
+			var isMember = false;
+			var isRequesting = false;
+			if(req.session && req.session.user){ 
+				isAuthor = project.author == req.session.user.id;
+				for (var i = project.members.length - 1; i >= 0; i--) {
+					 if(project.members[i].id ===  req.session.user.id){
+					 	isMember = true;
+					 	break;
+					 }
+				};
+			}
+			return res.view('project/posts', 
+			{
+		      project: project,
+		      isAuthor: isAuthor,
+		      isMember: isMember,
+		    });
+		});
+	},
+
 	chats : function(req, res){
 		// Project
 		// .find()

@@ -58,8 +58,9 @@ passport.use(new FacebookStrategy({
           // as long as it is in your model
 
         }).exec(function (err, user) {
-          if (user) {
+          if (user) {            
             console.log('Logged In Successfully, new user');
+            user.isNew = true;
             return done(null, user, {
               message: 'Logged In Successfully'
             });

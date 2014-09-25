@@ -126,11 +126,14 @@
 		<% } %>	
 		<% if (project.posts && project.posts.length) { %>
 		<h3>Recent posts</h3>	
+		<h4><a href="/posts/forProject/<%= project.id %>">See all posts</a> </h4>
 		<ul>
 			    <% for(var i=0; i<project.posts.length; i++) { %>
+					<% if(!project.posts[i].isPrivate || isMember) { %>
 			        <li>
 			            <a href='/post/<%= project.posts[i].id %>'><%= project.posts[i].title %> (<%= (new Date(project.posts[i].createdAt)).toDateString() %>)</a>
 			        </li>
+			        <% } %>
 			    <% } %>
 			</ul>
 		<% } %>	

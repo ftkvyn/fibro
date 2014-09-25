@@ -44,6 +44,8 @@ module.exports.routes = {
 
   '/post/new/:projectId' : 'ViewController.newPost',
 
+  '/posts/forProject/:id': 'ViewController.projectPosts',
+
   '/post/:id': 'ViewController.post',
 
   '/post/:id/edit': 'ViewController.editPost',
