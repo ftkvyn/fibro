@@ -48,6 +48,8 @@ module.exports.routes = {
 
   '/post/:id': 'ViewController.post',
 
+  '/news': 'ViewController.recentPosts',
+
   '/post/:id/edit': 'ViewController.editPost',
 
   '/chats': 'ViewController.chats',

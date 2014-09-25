@@ -133,6 +133,11 @@ module.exports = {
 		});
 	},
 
+	recentPosts : function(req,res){
+
+		return res.view('post/recent');
+	},
+
 	chats : function(req, res){
 		// Project
 		// .find()
@@ -197,6 +202,10 @@ module.exports = {
 			fellows: []
 		};
 
+		var sendResult = function(){
+			res.view('search/users', viewBag);
+		}
+
 		if(req.session.user){
 			User.findOne(req.session.user.id)
 			.populate('projects')
@@ -222,11 +231,7 @@ module.exports = {
 					
 		}else{
 			sendResult();
-		}
-
-		var sendResult = function(){
-			res.view('search/users', viewBag);
-		}
+		}		
 	},
 
 	searchProject: function(req, res){
