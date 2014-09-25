@@ -37,7 +37,12 @@ module.exports = {
   		comments:{
 			  collection: 'comment',
 	      via: 'post'
-		},
+		  },
+
+      reduce: function(){
+        delete this.text;
+        return this;
+      }
   },
   beforeCreate: function (values, cb) {
     if(values.text)

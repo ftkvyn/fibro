@@ -66,16 +66,15 @@ fibroApp.controller('PostController', ['$http','$scope', function($http, $scope)
 		},
 
 		$scope.loadOnMain = function(){
-			return;
 			me.isLoading = true;
-			$http.get('/api/project/forMain/'+me.count)
+			$http.get('/api/post/forMain/0/'+me.count)
 			.success(function(data){
-				me.projects = data;
+				me.posts = data;
 				me.isLoading = false;
 			})
 			.error(function(data){
 				console.log(data);
-				alert('Error occured while loading projects.');
+				alert('Error occured while loading posts.');
 			});	
 		}
 	}]);

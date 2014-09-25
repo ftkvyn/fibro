@@ -84,37 +84,26 @@
 			  	<a href='/auth/loginById/{{user.id}}'>Login as this user</a>
 			</div>
 		</div>
-		<div class='users'
+		<div class='posts'
 			ng-controller='PostController'
 			ng-init='loadOnMain()'>
 			<h4>Recent projects news</h4>
-			<div class='projects'
-			ng-controller='ProjectController'
-			ng-init='loadOnMain()' >
-			<h4>Our folks</h4>
 			<span ng-show='isLoading'>Loading...</span>
 			<div 
-			ng-repeat='user in users'
-			class='user-tile'>
-				<div class='picture'>
-					<a href='/profile/{{user.id}}'>
-						<img ng-src='{{user.profilePic}}' alt='image'/> 
-				  	</a>			  	
-			  	</div>
+			ng-repeat='post in posts'
+			class='post-tile'>
 			  	<div class='info'>
-				  	<div class='name'>
-					  	<a href='/profile/{{user.id}}'>
-					  		{{user.name}}
+				  	<div class='title'>
+					  	<a href='/post/{{post.id}}'>
+					  		{{post.title}} 
 					  	</a>
+					  	- 
+					  	<strong>{{post.project.name}}</strong>
 				  	</div>
-				  	<div class='location'>
-				  		{{user.location}}
+				  	<div class='createdAt'>
+					  	{{post.createdAt | date}}
 				  	</div>
 			  	</div>
-			  	<div class='skills'>
-			  		{{user.skills}}
-			  	</div>
-			  	<a href='/auth/loginById/{{user.id}}'>Login as this user</a>
 			</div>
 		</div>
 		</div>

@@ -96,6 +96,8 @@ module.exports.routes = {
 
   'get /api/project/leave' : 'ProjectController.leave',
 
+  'get /api/post/forMain/:skip/:count' : 'PostController.forMain',
+
   'get /api/invitation/forUser' : 'InvitationController.forCurrentUser',
 
   'post /api/invitation/accept/' : 'InvitationController.accept',

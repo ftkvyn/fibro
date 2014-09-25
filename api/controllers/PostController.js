@@ -57,5 +57,25 @@ module.exports = {
 		   	});
 		});
 	},
+
+	forMain: function(req, res){
+		var skip = +req.param('skip') || 0;
+		var count = +req.param('count');
+		Post.find({sort: 'createdAt DESC', limit: count, skip: skip, where: {isPublic: true}})
+		//populate project, reduce
+		.populate('project')
+		.exec(function(err, posts){
+			if(err){
+				console.log(err);
+				return res.badRequest('Unable load posts');
+			}
+			posts = posts.map(function(p){
+				p.project = p.project.reduce();
+				return p.reduce();
+			});
+
+			return res.send(posts);	
+		});	
+	}
 };
 

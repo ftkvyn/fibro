@@ -364,6 +364,9 @@ a:link.project-tile-link{
 	clear: both;
 	padding-top: 10px;
 }
+.post-tile{margin-bottom: 10px;}
+.post-tile .info a{font-size: 120%;}
+.post-tile .createdAt{font-size: 10px;color: #7C7568;}
 .project-view .author{
 	font-size: 95%;
 }

@@ -67,7 +67,8 @@ module.exports.policies = {
 
     create: 'sessionAuth',
 
-    find: true
+    find: true,
+    forMain: true
   },
 
   InvitationController: {
