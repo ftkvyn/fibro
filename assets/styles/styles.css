@@ -14,8 +14,24 @@
 }
 .greetings-overlay{
 	background-color: rgba(135,135,135,0.25);
-	height: 100%;
-	padding: 25px 50px;
+	height: 200px;
+	padding: 25px 50px 0px 50px;
+}
+.greetings-description{
+	height: 200px;
+	background-color: rgba(135,135,135,0.40);
+	margin: 63px -50px 0px -50px;
+	border-top: 2px dashed #F0EFEE;
+}
+.greetings-description table{
+	height: 200px;
+	width: 100%;
+}
+.greetings-description td{
+	padding-left: 30px;
+}
+.border-td{
+	border-right: 2px dashed #F0EFEE;
 }
 .ng-dirty.ng-invalid{
 	border-color: red;
