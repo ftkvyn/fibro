@@ -43,8 +43,9 @@
 	<% } %>
 	<% if (isAuthor) { %>
 	<a class='action-link' href="/project/<%= project.id %>/edit">>>Edit project<<</a>
-	<div 		
-
+	<% if (false) { %>
+	Maybe will be back once.
+	<div 
 		ng-controller='InviteController as inviteCtrl' 
 		ng-show='inviteCtrl.users.length'
 		ng-init='inviteCtrl.loadUsers()'>
@@ -60,6 +61,7 @@
 			<textarea rows="3" cols="40" ng-model='inviteCtrl.new.message' class='form-control' id='message'></textarea><br/>
 			<button class='btn btn-success' ng-click='inviteCtrl.send(inviteCtrl.new.user ,<%= project.id %>)'>Invite!</button>
 		</div>
+	<% } %>
 	<% } %>
 	<% if(invitation) { %>
 		<div 

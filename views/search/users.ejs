@@ -1,6 +1,13 @@
 <script type="text/javascript" src='/js/app/controllers/searchController.js'></script>
-<h3>Search user</h3>
+<div class='col-md-2'></div>
 <div ng-controller='SearchController' ng-init='initUsers()' class='col-md-10'>
+	<h3>Users</h3>
+	<% if (currentUser) { %>
+		<ng-include
+		  src="'/templates/home/requests.html'">
+		</ng-include>			
+	<% } %>
+
 	<div class='search-options'>
 		<div class='row'>
 			Search by:
@@ -27,7 +34,9 @@
 				Searching...
 			</span>
 		</div>
-		<a href="/profile/{{user.id}}" ng-repeat='user in items' class='search-result-link'>
+		<a href="/profile/{{user.id}}" ng-repeat='user in items' 
+		ng-show='user'
+		class='ng-hide search-result-link'>
 			<div class='row search-result'>
 				<div class='title'>
 					<img ng-src="{{user.profilePic}}"></img>

@@ -12,7 +12,8 @@ module.exports = {
 			var isMe = false;
 			if(req.session && req.session.user){ 
 				isMe = user.id == req.session.user.id;
-			}
+			}			
+			user.projects = arrayService.distinct(user.projects, user.createdProjects);
 			return res.view('user/profile', 
 			{
 		      user: user,
@@ -196,8 +197,40 @@ module.exports = {
 	},
 
 	searchProject: function(req, res){
+		//createdProjects
+		//projects
+		var viewBag = {
+			createdProjects: [],
+			projects: []
+		};
 
-		return res.view('search/projects');
+		var sendResult = function(){
+			res.view('search/projects', viewBag);
+		}
+
+		if(req.session.user){
+			User.findOne(req.session.user.id)
+			.populate('projects')
+			.populate('createdProjects')		
+			.exec(function(err, user){
+				if(err || (!user)){
+					return res.badRequest('User not found.');
+				}
+				var projects = [];
+				for (var i = user.projects.length - 1; i >= 0; i--) {
+					if (user.createdProjects.indexOf(user.projects[i]) == -1){
+						projects.push(user.projects[i]);
+					}
+				};
+				viewBag.projects = arrayService.distinct(user.projects, user.createdProjects);
+				viewBag.createdProjects = user.createdProjects;
+				sendResult();
+			});		
+		}else{
+			sendResult();
+		}
+
+		
 	},
 
 	newPost : function(req, res){

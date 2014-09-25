@@ -1,6 +1,39 @@
 <script type="text/javascript" src='/js/app/controllers/searchController.js'></script>
-<h3>Search project</h3>
+<div class='col-md-2'></div>
 <div ng-controller='SearchController' ng-init='initProjects()' class='col-md-10'>
+	<h3>Projects</h3>
+	<% if (currentUser) { %>
+		<ng-include
+		  src="'/templates/home/invites.html'">
+		</ng-include>	
+
+		<% if (createdProjects && createdProjects.length) { %>
+			<div>
+				<h4>Created Projects</h4>
+				<ul>
+				    <% for(var i=0; i<createdProjects.length; i++) { %>
+				        <li>
+				            <a href='/project/<%= createdProjects[i].id %>'><%= createdProjects[i].name %></a>
+				        </li>
+				    <% } %>
+				</ul>
+			</div>
+		<% } %>
+
+		<% if (projects && projects.length) { %>
+			<div>
+				<h4>Also taking part in</h4>
+				<ul>
+				    <% for(var i=0; i<projects.length; i++) { %>
+				        <li>
+				            <a href='/project/<%= projects[i].id %>'><%= projects[i].name %></a>
+				        </li>
+				    <% } %>
+				</ul>
+			</div>
+		<% } %>			
+	<% } %>
+	
 	<div class='search-options'>
 		<div class='row'>
 			Search by:
@@ -26,7 +59,9 @@
 				Searching...
 			</span>
 		</div>
-		<a href="/project/{{project.id}}" ng-repeat='project in items' class='search-result-link'>
+		<a href="/project/{{project.id}}" ng-repeat='project in items' 
+		ng-show='project'
+		class='ng-hide search-result-link'>
 			<div class='row search-result'>
 				<div class='title'>
 					<span class='name'>{{project.name}}</span>
@@ -46,3 +81,4 @@
 		</a>
 	</div>
 </div>
+<div class='col-md-1'></div>
