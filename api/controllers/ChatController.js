@@ -56,16 +56,19 @@ module.exports = {
 				console.log(err);
 				return res.badRequest('Unable load chat');
 			}
-			chat.unreadMessages = 0;
-			chat.save(function(err){
-				if(err){
-					console.log(err);
-				}
-				res.send(200);
+			if(chat){
+				chat.unreadMessages = 0;
+				chat.save(function(err){
+					if(err){
+						console.log(err);
+					}
+					res.send(200);
 
-				notificationsService.updateUnreadChats(req.session.user.id);
-			});
-
+					notificationsService.updateUnreadChats(req.session.user.id);
+				});
+			}else{
+				res.send(200);				
+			}
 		});
 	},
 

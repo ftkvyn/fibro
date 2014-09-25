@@ -73,6 +73,7 @@ module.exports = {
       delete obj.fb_token;
       delete obj.fb_id;
       delete obj.password;
+      delete obj.email;
       return obj;
     },
 

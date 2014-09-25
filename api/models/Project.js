@@ -46,6 +46,11 @@ module.exports = {
 		model:'user',
 		required:true
 	},
+	// category:{
+	// 	type: 'string',
+	// 	enum: ['other', 'music', 'art', 'games', ],
+	// 	required: true
+	// }
 	posts:{
 		collection: 'post',
         via: 'project'
