@@ -40,7 +40,9 @@ fibroApp.controller('MembershipRequestController', ['$http', function($http){
 	this.accept = function(id){
 		$http.post('/api/membershipRequest/accept/', {id:id})
 		.success(function(data){
-			me.loadRequests();
+			// me.loadRequests();
+			location.reload();
+			return;
 		})
 		.error(function(data){
 			console.log(data);

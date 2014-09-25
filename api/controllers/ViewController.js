@@ -193,7 +193,40 @@ module.exports = {
 
 	searchUser: function(req, res){
 
-		return res.view('search/users');
+		var viewBag = {
+			fellows: []
+		};
+
+		if(req.session.user){
+			User.findOne(req.session.user.id)
+			.populate('projects')
+			.exec(function(err, user){
+				var ids = user.projects.map(function(p){return p.id});
+				Project.find({id: ids})
+				.populate('members')
+				.exec(function(err, projects){
+					if(err){					
+						return sendResult();
+					}
+					viewBag.fellows = [];
+					for (var i = projects.length - 1; i >= 0; i--) {
+						for (var j = projects[i].members.length - 1; j >= 0; j--) {
+							if(!arrayService.contains(viewBag.fellows, projects[i].members[j])){
+								viewBag.fellows.push(projects[i].members[j]);
+							} 
+						};
+					};
+					sendResult();
+				});
+			});
+					
+		}else{
+			sendResult();
+		}
+
+		var sendResult = function(){
+			res.view('search/users', viewBag);
+		}
 	},
 
 	searchProject: function(req, res){

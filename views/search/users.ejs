@@ -5,7 +5,20 @@
 	<% if (currentUser) { %>
 		<ng-include
 		  src="'/templates/home/requests.html'">
-		</ng-include>			
+		</ng-include>		
+
+		<% if (fellows && fellows.length) { %>
+			<div>
+				<h4>Fellows</h4>
+				<ul>
+				    <% for(var i=0; i<fellows.length; i++) { %>
+				        <li>
+				            <a href='/profile/<%= fellows[i].id %>'><%= fellows[i].name %></a>
+				        </li>
+				    <% } %>
+				</ul>
+			</div>
+		<% } %>	
 	<% } %>
 
 	<div class='search-options'>

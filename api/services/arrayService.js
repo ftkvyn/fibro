@@ -15,3 +15,12 @@ exports.distinct = function(bigArr, smallArr){
 	};
 	return result;
 }
+
+exports.contains = function(arr, val){
+	for (var i = arr.length - 1; i >= 0; i--) {
+		if(arr[i].id == val.id){
+			return true;
+		}
+	};
+	return false;
+}
