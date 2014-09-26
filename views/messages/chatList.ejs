@@ -21,9 +21,9 @@
 			 	<span ng-show='chat.targetUser'>
 			 		{{chat.targetUser.name}}
 			 	</span>
-			 	<span ng-show='chat.targetProject'>
+			 	<strong ng-show='chat.targetProject'>
 			 		{{chat.targetProject.name}}
-			 	</span><br/>
+			 	</strong><br/>
 			 	<span ng-show='chat.lastMessage' class='createdAt'>
 			 		{{chat.lastMessage.createdAt | date:'dd-MM-yyyy HH:mm:ss'}}
 			 	</span>

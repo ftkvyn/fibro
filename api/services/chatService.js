@@ -29,10 +29,12 @@ exports.processNewMessage = function (message){
 			return;
 		}
 		var saves = [];
+		var date = new Date();
 		for (var i = chats.length - 1; i >= 0; i--) {
 			chats[i].lastMessage = message.id;
 			if(chats[i].owner != message.from){
 				chats[i].unreadMessages++;
+				chats[i].updatedAt = date;
 			}
 
 			saves.push(chats[i].save());
@@ -41,17 +43,20 @@ exports.processNewMessage = function (message){
 	}
 
 	var createMessageChats = function(){
+		var date = new Date();
 		Q.all([
 		Chat.create({
 			owner: message.from,
 			targetUser: message.toUser,
 			unreadMessages: 0,
+			updatedAt: date,
 			lastMessage: message.id
 		}),
 		Chat.create({
 			owner: message.toUser,
 			targetUser: message.from,
 			unreadMessages: 1,
+			updatedAt: date,
 			lastMessage: message.id
 		})]).then(cb);
 	}
@@ -63,21 +68,35 @@ exports.processNewMessage = function (message){
 				console.log(err);	
 				return;
 			}
+			var date = new Date();
 			var saves = [];
 			var members = [];
 			for (var i = chats.length - 1; i >= 0; i--) {
 				chats[i].lastMessage = message.id;
+				chats[i].updatedAt = date;
 				if(message.from !== chats[i].owner){
-					chats[i].unreadMessages++;
+					chats[i].unreadMessages++;					
 				}
-				saves.push(chats[i].save());
+				// saves.push(chats[i].save());
+				chats[i].save(function(err, chat){
+					if(err){
+						console.log(err);
+					}
+				});
 				members.push(chats[i].owner);
 			};
-			Q.all(saves).done(function(){
+			
+			//	For some reason working bad.
+			//	Owners last message wasn't updated.			
+			// Q.all(saves).done(function(data){
+				
+				// for (var i = data.length - 1; i >= 0; i--) {
+					// console.log(data[i].lastMessage);
+				// };
 				for (var i = members.length - 1; i >= 0; i--) {
 					notificationsService.updateUnreadChats(members[i]);
 				};
-			});
+			// });
 		});
 	}
 
@@ -110,6 +129,7 @@ exports.processNewMessage = function (message){
 exports.addUserToProjectChat = function(userId, projectId){
 	Chat.create({
 		owner: userId,
+		updatedAt: new Date(),
 		targetProject: projectId
 	}).exec(function(){
 		notificationsService.updateUnreadChats(userId);	

@@ -84,6 +84,17 @@ fibroApp.controller('ChatController', ['$http', '$scope', function($http, $scope
 			alert('Error occured while loading messages.');
 		});
 	}
+	$scope.getUserName = function(id){
+		if($scope.users[id]){
+			return $scope.users[id].name;
+		}
+		$http.get('/api/user/reduced/'+ id)
+		.success(function(data){
+			$scope.users[data.id] = data;
+			// $scope.$apply();
+		});
+		return "";
+	}
 
 	$scope.socketMagic = function(){
 		var socket = io.connect();

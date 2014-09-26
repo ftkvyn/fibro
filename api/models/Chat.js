@@ -6,8 +6,9 @@
 */
 
 module.exports = {
-
-  attributes: {
+ 	autoUpdatedAt: false,
+ 	
+  	attributes: {
 		owner: {
 			model: 'user',
 			required: true,
@@ -26,6 +27,12 @@ module.exports = {
 			required: true,
 			defaultsTo: 0,
 		},
+
+
+		updatedAt: {
+	        type: 'datetime',
+	        defaultsTo: function() {return new Date();}
+	    }
 
   }
 };

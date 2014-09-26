@@ -125,7 +125,6 @@ module.exports = {
 		    var io = sails.io;
 		    
 		    if(message.toProject){		
-		    	console.log(message);
 		    	io.sockets.in('project_' + message.toProject).emit('message', message);
 			} else if(message.toUser){
 				io.sockets.in('user_' + message.toUser).emit('message', message);

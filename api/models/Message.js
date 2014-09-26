@@ -32,10 +32,10 @@ module.exports = {
         defaultsTo: false
       },
 
-      isSystem: {
-        type: 'boolean',
-        defaultsTo: false
-      }
+      // isSystem: {
+      //   type: 'boolean',
+      //   defaultsTo: false
+      // }
   }
 };
 

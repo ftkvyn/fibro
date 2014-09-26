@@ -58,6 +58,19 @@ module.exports = {
 			});
 			return res.send(users);	
 		});	
+	},
+
+	reduced: function(req, res){
+		var id = +req.param('id');
+		User.findOne(id)
+		.exec(function(err, user){
+			if(err){
+				console.log(err);
+				return res.badRequest('Unable load user');
+			}
+			user = user.reduce();
+			return res.send(user);	
+		});	
 	}
 };
 
