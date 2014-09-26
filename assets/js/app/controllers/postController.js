@@ -1,4 +1,4 @@
-fibroApp.controller('PostController', ['$http','$scope', function($http, $scope){
+fibroApp.controller('PostController', ['$http','$scope', 'nicService', function($http, $scope, nicService){
 		$scope.model = {};
 		var me = $scope;
 		me.posts = [];
@@ -7,7 +7,7 @@ fibroApp.controller('PostController', ['$http','$scope', function($http, $scope)
 		me.isNew = undefined;
 		me.count = 4;
 		if(document.getElementById('text')){
-				new nicEditor().panelInstance('text');
+				nicService.create('text');
 		}
 		
 		$scope.save = function(){

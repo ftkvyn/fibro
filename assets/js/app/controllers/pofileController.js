@@ -1,4 +1,4 @@
-fibroApp.controller('ProfileController', ['$http', '$scope', function($http, $scope){
+fibroApp.controller('ProfileController', ['$http', '$scope', 'nicService', function($http, $scope,nicService){
 		$scope.user = {};
 		var me = $scope;
 		me.count = 5;
@@ -6,7 +6,7 @@ fibroApp.controller('ProfileController', ['$http', '$scope', function($http, $sc
 		me.isLoading = false;
 
 		if(document.getElementById('about')){
-				new nicEditor().panelInstance('about');
+				nicService.create('about');
 		}
 
 		$scope.save = function(){

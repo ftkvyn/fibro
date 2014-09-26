@@ -1,4 +1,4 @@
-fibroApp.controller('ProjectController', ['$http', function($http){
+fibroApp.controller('ProjectController', ['$http', 'nicService', function($http, nicService){
 		this.model = {};
 		var me = this;
 		me.isSaving = false;
@@ -11,8 +11,8 @@ fibroApp.controller('ProjectController', ['$http', function($http){
 		me.skip = 0;
 		me.count = 6;
 		if(document.getElementById('info')){
-			new nicEditor().panelInstance('description');
-			new nicEditor().panelInstance('info');
+			nicService.create('description');
+			nicService.create('info');
 		}
 
 		this.save = function(){

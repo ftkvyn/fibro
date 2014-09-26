@@ -98,7 +98,7 @@
 	</div>		
 		<% if (project.members && project.members.length) { %>
 		
-			<h3>Fellows</h3>
+			<h3>Crew</h3>
 			<ul>
 			    <% for(var i=0; i<project.members.length; i++) { %>
 			        <li>
@@ -139,7 +139,7 @@
 			    <% } %>
 			</ul>
 		<% } %>	
-		<% if(isMember) { %>
+		<% if(isMember && !isAuthor) { %>
 		<button ng-click='project.leave(<%= project.id %>)' class='btn btn-warning'>Leave project</button>
 		<% } %>	
 	</div>

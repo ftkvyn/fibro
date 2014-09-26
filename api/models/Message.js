@@ -11,7 +11,7 @@ module.exports = {
 
   		from: {
   			model: 'user',
-			  required:true
+			  required:false
   		},
 
   		toUser: {
@@ -28,6 +28,11 @@ module.exports = {
   		},
 
       isRead: {
+        type: 'boolean',
+        defaultsTo: false
+      },
+
+      isSystem: {
         type: 'boolean',
         defaultsTo: false
       }
