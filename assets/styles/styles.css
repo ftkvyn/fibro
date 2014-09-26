@@ -14,21 +14,24 @@
 }
 .greetings-overlay{
 	background-color: rgba(135,135,135,0.25);
-	height: 200px;
+	height: 250px;
 	padding: 25px 50px 0px 50px;
 }
 .greetings-description{
-	height: 200px;
-	background-color: rgba(135,135,135,0.40);
-	margin: 63px -50px 0px -50px;
+	height: 150px;
+	padding-top: 0px;
+	background-color: rgba(135,135,135,0.70);
+	margin: 113px -50px 0px -50px;
 	border-top: 2px dashed #F0EFEE;
+	color: #fff;
 }
 .greetings-description table{
-	height: 200px;
+	height: 150px;
 	width: 100%;
 }
 .greetings-description td{
 	padding-left: 30px;
+	width: 33%;
 }
 .border-td{
 	border-right: 2px dashed #F0EFEE;
@@ -48,11 +51,30 @@ body{
 	height: 60px;
 	width: 100%;
 	clear: both;
-	background-color: #f5efd0;
+	background-color: #836D3F;
+	color: #f5efd0;
 	padding-right: 10px;
 	overflow: hidden;
 	border-bottom: 3px solid rgb(30, 168, 30);
 	box-shadow: 0px 0px 11px 4px #8BDF49;
+	position: relative;
+}
+
+.fibro-header .account-info{
+	float: right;
+	margin-right: 20px;	
+	margin-top: 10px;
+	padding-top: 10px;
+}
+
+.fibro-header a{
+	font-size: 16px;
+	color: #f5efd0;
+}
+
+
+.fibro-header a:hover{
+	color: #FFFFFF;	
 }
 
 .fibro-header .logo{
@@ -91,20 +113,22 @@ width:20px; height: 20px;text-align: center; position: relative;border-radius: 1
 
 .header-menu a:hover{
 	text-shadow: 1px 1px 2px #B4892E;
-	color: #745F35;
+	color: #FFFFFF;
 }
 .create-project-box{
 	margin: 5px;
 	padding: 5px;
 	font-size: 24px;
 	width: 207px;
-	border-width: 1px;
+	border-width: 2px;
 	border-style: solid;
 	border-radius: 4px;
 	border-color: #b29966;
 	background-color: #f5f5eb;
 	display: block;
 	box-shadow: 0px 0px 6px 1px #8BDF49;
+	background: #8BDF49;
+	color: #6F6A55;
 }
 .create-project-box:hover{
 	box-shadow: 0px 0px 11px 4px #8BDF49;
@@ -114,22 +138,6 @@ a.create-project-link:link{
 	text-decoration: none;
 }
 
-.fibro-header .account-info{
-	float: right;
-	margin-right: 20px;	
-	margin-top: 10px;
-	padding-top: 10px;
-}
-
-.fibro-header a{
-	font-size: 16px;
-	color: #836D3F;
-}
-
-
-.fibro-header a:hover{
-	color: #b29966;	
-}
 
 .fibro-content{
 	margin: 0px;
@@ -142,6 +150,7 @@ a.create-project-link:link{
 	overflow: hidden;
 	display: block;
 	padding: 20px 30px 20px 60px; 
+	margin-left:auto; margin-right:auto;
 }
 .fibro-content a{
 	color: #725f35;
