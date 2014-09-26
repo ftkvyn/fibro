@@ -254,7 +254,7 @@ width:20px; height: 20px;text-align: center; position: absolute;left: 50px; top:
 	text-align: left; 
 }
 .message .author, .message .date{
-	color: #bebebe;
+	color: #919191;
 	font-size: 10px;
 }
 .search-result{
@@ -285,7 +285,7 @@ a:link.search-result-link{
 .comment{
 	display: inline-block;
 	clear: both;
-	margin: 5px;
+	margin: 5px 15px;
 	padding: 4px;
 	border-style: solid;
 	border-color: #D3D3D3;
@@ -299,7 +299,7 @@ a:link.search-result-link{
 
 }
 .comment .date{
-	color: #bebebe;
+	color: #919191;
 	font-size: 10px;
 }
 .comment .author{
@@ -444,13 +444,16 @@ a:link.project-tile-link{
 a.chat-link:link{
 	text-decoration: none;
 }
-.post-credits{text-align: left;}
-.post-credits img{border-radius: 25px;}
-.post-credits .picture{float: left;}
-.post-credits .name{clear: both;}
-.post-credits .info{float: left;margin-left: 10px;}
-.post-credits .createdAt{clear: both;font-size: 85%;}
+.post-view{text-align: left;}
+.post-view .picture img{border-radius: 25px;}
+.post-view .picture{float: left;}
+.post-view .name{clear: both;}
+.post-view .info{float: left;margin-left: 10px;}
+.post-view .createdAt{clear: both;font-size: 85%;}
+.post-view hr{background-color:#b29966;margin: 30px 20px 30px 20px;height: 1px; }
 .post-title{clear: both;padding-top: 10px;text-align: center;}
-.post-actions{float: left;clear: both;}
+.post-actions{float: right;}
 .post-info{font-size: 150%;}
 .post-info .createdAt{font-size: 75%; color: #7C7568;}
+.post-comment-new{margin-top: 30px;}
+.post-comment-new textarea{width: 500px;height: 70px;}

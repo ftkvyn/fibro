@@ -1,10 +1,12 @@
 <script type="text/javascript" src='/js/app/controllers/postController.js'></script>
 <% if(isNew){ %>
-	<h1>New Post</h1>
+	<h1 class='center'>New Post</h1>
 <% } else { %>
-	<h1>Edit Post</h1>
+	<h1 class='center'>Edit Post</h1>
 <% } %>
-<div class='col-md-10' ng-controller='PostController'
+
+<div class='col-md-1'></div>
+<div class='col-md-9' ng-controller='PostController'
 		ng-init='load(<%= isNew %>, <%= projectId %>, <%= postId %>)'>
 	<div name='projectForm'>
 		<div class='row'>
@@ -15,7 +17,30 @@
 			<label for='text'>Text:</label><br/>
 			<textarea class='editor-area' name='text' id='text'></textarea>
 		</div>
-		<button ng-show='isNew' ng-click='save()' class='btn btn-success'>Create!</button>
-		<button ng-hide='isNew' ng-click='save()' class='btn btn-success'>Save</input>
+		<button ng-show='isNew' ng-click='save()' class='save btn btn-success'>Create!</button>
+		<button ng-hide='isNew' ng-click='save()' class='save btn btn-success'>Save</input>
+		<% if (!isNew) { %>
+		<button ng-click='toggleDialog(true)' 
+		style='margin:10px 0px 0px 10px;'
+		class='btn btn-danger'>Delete post</button>
+
+
+		<modal-dialog 		
+		show='deleteDialogVisible' 
+		dialog-title='Deleting post {{model.title}}'>
+		  <div class='ng-hide' ng-show='deleteDialogVisible'>
+			  <div class='row' style='margin:5px;'>
+				  <p>Are you shure you want to delete post?</p>
+				  <p>Deleting post is irreversible.</p>
+			  </div>
+			  <button 
+			  ng-click='delete(<%= postId %>)' class='btn btn-danger'>Delete</button>
+			  <button ng-click='toggleDialog(false)' 
+			   class='btn btn-warning'>Cancel</button>
+		   </div>
+		</modal-dialog>
+
+		<% }  %>
 	</div>
 </div>
+<div class='col-md-3'></div>

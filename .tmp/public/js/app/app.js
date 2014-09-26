@@ -22,11 +22,11 @@ fibroApp.service('nicService', function(){
 				,'outdent'
 				,'hr'
 				,'image'
-				,'upload' 
 				,'forecolor'
-				,'bgcolor'
 				,'link'
-				,'unlink' ]
+				,'unlink' 
+				,'fontSize'
+				,'fontFormat']
 			}
     	return new nicEditor(options).panelInstance(id); 
     };

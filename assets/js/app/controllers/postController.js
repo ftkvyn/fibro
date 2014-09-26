@@ -6,6 +6,7 @@ fibroApp.controller('PostController', ['$http','$scope', 'nicService', function(
 		me.isLoading = false;
 		me.isNew = undefined;
 		me.count = 4;
+		me.deleteDialogVisible = false;
 		if(document.getElementById('text')){
 				nicService.create('text');
 		}
@@ -51,6 +52,10 @@ fibroApp.controller('PostController', ['$http','$scope', 'nicService', function(
 			}else{
 				me.model.project = projectId;
 			}
+		}
+
+		$scope.toggleDialog = function(val){
+			me.deleteDialogVisible = val;
 		}
 
 		$scope.delete = function(id){

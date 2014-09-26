@@ -1,11 +1,18 @@
 <script type="text/javascript" src='/js/app/controllers/postController.js'></script>
-<div class='col-md-12' ng-controller='PostController'>
+<div class='col-md-1'></div>
+<div class='col-md-9 post-view' ng-controller='PostController'>
 	<div class='post-credits'>
 		 <div class='post-title'>
 			<h1><%= post.title %></h1>
 			<h4><a href='/project/<%= post.project.id %>'><%- post.project.name %></a></h4>
-		</div>
-		<div class='picture'>
+		</div>		
+	</div>
+	<div class='row'>
+	<div class='postContent'>
+		<%- post.text %>
+	</div>
+	<hr/>
+	<div class='picture'>
 			<a href='/profile/<%= post.author.id %>'>
 				<img ng-src='<%= post.author.profilePic %>' alt='image'/> 
 		  	</a>			  	
@@ -28,25 +35,13 @@
 	<% if (isAuthor) { %>
 	<div class='post-actions'>
 		<a href="/post/<%= post.id %>/edit" class='action-link'>>>Edit post<<</a>
-		<button ng-click='delete(<%= post.id %>)' class='btn btn-danger'>Delete post</button>
 	</div>
 	<% }  %>
-	</div>
 	<div class='clear'></div>
-	<div class='row'>
-	<div class='col-md-1'></div>
-	<div class='col-md-10'>
-		<div class='row'>
-		
-		<div class='postContent'>
-			<%- post.text %>
-		</div>
-	</div>
-
 	<div class='row' ng-controller='CommentController' ng-init='load(<%= post.id %>)'>
 	<% if (currentUser) { %>
-		<div>
-			Add comment<br/>
+		<div class='post-comment-new'>
+			<h4>Add comment</h4>
 			<textarea ng-model='text' ng-keypress='keyPressed()'></textarea><br/>
 			<button class='btn btn-success' ng-click='send()'>Send</button>
 		</div>
@@ -69,7 +64,6 @@
 		</div>
 	</div>
 
-	</div>
-	<div class='col-md-1'></div>
 </div>
 </div>
+<div class='col-md-3'></div>
