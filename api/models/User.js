@@ -4,7 +4,6 @@
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
-
 module.exports = {
 
   attributes: {
@@ -19,10 +18,10 @@ module.exports = {
 	    type: 'string'	    
 	},
 	profilePic: {
-		type: 'url'
+		type: 'string'
 	},
 	profilePicLarge: {
-		type: 'url'
+		type: 'string'
 	},
 	friendlyId:{
 		type:'string',
@@ -64,7 +63,7 @@ module.exports = {
 	},
 	fb_id: {
 	    type: 'string',
-      	required: true,
+      	// required: true,
       	unique: true
 	},
 

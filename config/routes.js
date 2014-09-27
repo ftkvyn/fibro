@@ -118,6 +118,10 @@ module.exports.routes = {
 
   'get /auth/facebook': 'AuthController.fb_authenticate',
 
+  'post /auth/email': 'AuthController.loginByEmail',
+
+  'post /auth/email/register': 'AuthController.register',
+
   'get /auth/facebook/callback': 'AuthController.fb_authenticate_callback',
 
   'get /auth/logout': 'AuthController.logout',

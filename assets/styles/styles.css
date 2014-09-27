@@ -115,6 +115,34 @@ width:20px; height: 20px;text-align: center; position: relative;border-radius: 1
 	text-shadow: 1px 1px 2px #B4892E;
 	color: #FFFFFF;
 }
+.auth-popup{color: black;}
+.auth-popup a{color: #6F6A55;}
+.auth-popup a:hover{color: #b29966;cursor: pointer;}
+.auth-popup span{color: black;}
+.auth-popup hr{background: #999;height: 2px;margin: 20px 0px;}
+.auth-popup .message {font-size: 150%; background: rgba(200,200,200,0.3);padding:10px; }
+
+.fb-button-box{
+	margin: 5px;
+	padding: 10px;
+	font-size: 24px;
+	width: auto;
+	height: 55px;
+	border-width: 2px;
+	border-style: solid;
+	border-radius: 4px;
+	border-color: #3B5998;
+	background-color: #3B5998;
+	display: inline-block;
+	color: #FFF;
+	white-space: nowrap;
+}
+.fb-button-box img{
+	margin-top: -5px;
+}
+.fb-button-link{text-decoration: none;}
+.fb-button-link span{color: #FFF;}
+
 .create-project-box{
 	margin: 5px;
 	padding: 5px;

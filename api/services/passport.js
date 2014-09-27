@@ -54,9 +54,6 @@ passport.use(new FacebookStrategy({
           profilePic: 'http://graph.facebook.com/' + profile.id + '/picture',
           profilePicLarge: 'http://graph.facebook.com/' + profile.id + '/picture?type=large',
 
-          // You can also add any other data you are getting back from Facebook here 
-          // as long as it is in your model
-
         }).exec(function (err, user) {
           if (user) {            
             console.log('Logged In Successfully, new user');

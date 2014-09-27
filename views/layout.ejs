@@ -45,6 +45,7 @@
     <script src="/js/angular/ng-flow.min.js"></script>
     <script src="/js/angular/ng-modal.min.js"></script>
     <script src="/js/app/app.js"></script>
+    <script src="/js/app/controllers/authController.js"></script>
     <script src="/js/app/controllers/chatCtrl.js"></script>
     <script src="/js/app/controllers/chatListCtrl.js"></script>
     <script src="/js/app/controllers/commentController.js"></script>
@@ -108,12 +109,95 @@
           About
         </a>
       </div>
-      <div class='account-info'>
+      <div 
+      ng-controller='AuthController as auth'
+      class='account-info'>
         <% if(currentUser) { %>
-          <a href="/profile/<%= currentUser.id %>"> <strong><%= currentUser.name %></strong></a>
-          <a href="/auth/logout">Logout</a>
+          <a href="/profile/<%= currentUser.id %>"> <strong>
+            <%= (currentUser.name || "Unknown") %>
+          </strong></a>
+          <a href="/auth/logout">Log off</a>
         <% } else { %>
-          <a href="/auth/facebook">Login with Facebook</a>
+          <modal-dialog     
+          class='auth-popup'
+          show='auth.loginPopup' 
+          dialog-title='Log in'>
+            <div class='ng-hide' ng-show='auth.loginPopup'>
+            <div class='row' style='margin:5px;'>
+              <a href="/auth/facebook" class='fb-button-link'>
+                <div class='fb-button-box'>
+                  <img src="/images/facebook_logo.png">
+                  <span>Log in with facebook</span>
+                </div>
+              </a>
+              <hr/>
+              <div class='message' ng-show='auth.message'>
+                <span>{{auth.message}}</span>
+              </div>
+              <span style='font-size:130%;'>or using your E-mail</span><br/>
+
+              <input placeholder='E-mail'
+                id='email' name='email'
+                ng-model='auth.model.email'
+                type='email'></input>
+              <input placeholder='Password' 
+                ng-model='auth.model.password'
+                id='password' name='password'
+                type='password'></input><br/>
+              <a ng-click='auth.resetPassword()'>Recover password</a>
+            
+            </div>
+            <button ng-click='auth.login()' 
+             class='btn btn-success'>Enter</button>
+            <button ng-click='auth.loginPopup = false' 
+             class='btn btn-warning'>Cancel</button>
+             </div>
+          </modal-dialog>    
+
+           <modal-dialog     
+          class='auth-popup'
+          show='auth.registerPopup' 
+          dialog-title='Register'>
+            <div class='ng-hide' ng-show='auth.registerPopup'>
+            <div class='row' style='margin:5px;'>
+              <a href="/auth/facebook" class='fb-button-link'>
+                <div class='fb-button-box'>
+                  <img src="/images/facebook_logo.png">
+                  <span>Register with facebook</span>
+                </div>
+              </a>
+              <hr/>
+              <div class='message' ng-show='auth.message'>
+                <span>{{auth.message}}</span>
+              </div>
+              <span style='font-size:130%;'>or using your E-mail</span><br/>
+
+              <input placeholder='E-mail'
+                id='email' name='email'
+                ng-model='auth.model.email'
+                type='email'></input><br/>
+              <input placeholder='Password' 
+                ng-model='auth.model.password'
+                id='password' name='password'
+                type='password'></input><br/>
+              <input placeholder='Confim password' 
+                ng-model='auth.model.passwordConfirm'
+                id='passwordConfirm' name='passwordConfirm'
+                type='password'></input><br/>
+            </div>
+            
+            
+            <button ng-click='auth.register()' 
+            ng-disabled='!auth.model.password || (auth.model.passwordConfirm != auth.model.password)'
+             class='btn btn-success'>Register</button>
+            <button ng-click='auth.registerPopup = false' 
+             class='btn btn-warning'>Cancel</button>
+             </div>
+          </modal-dialog>   
+
+          <a ng-click='auth.loginPopup = true'>Log in</a> | 
+          <a ng-click='auth.registerPopup = true'>Register</a>
+        </div>
         <% } %>        
       </div>
     </div>
