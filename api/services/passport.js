@@ -23,6 +23,18 @@ function findByFacebookId(id, fn) {
   });
 }
 
+function findByEmail(email, fn) {
+  User.findOne({
+    email: email
+  }).exec(function (err, user) {
+    if (err) {
+      return fn(null, null);
+    } else {
+      return fn(null, user);
+    }
+  });
+}
+
 passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
@@ -40,33 +52,52 @@ passport.use(new FacebookStrategy({
     enableProof: false
   }, function (accessToken, refreshToken, profile, done) {
     //console.log(profile);
-    findByFacebookId(profile.id, function (err, user) {
 
+    findByFacebookId(profile.id, function (err, user) {
       // Create a new User if it doesn't exist yet
       if (!user) {
-        console.log('Create new user');
-        User.create({
+        findByEmail(profile.emails[0].value, function (err, user) {
+          if(user){
+            console.log('Connect fb to user user');
+            user.fb_id = profile.id;
+            user.fb_token = profile.accessToken;
+            user.save(function(err, user){
+              if(err){
+                return done(err, null, {
+                  message: 'There was an error logging you in with Facebook'
+                });
+              }
+              return done(null, user, {
+                message: 'Logged In Successfully'
+              });
+            });    
+          }else{
+              console.log('Create new user');
+              User.create({
 
-          fb_id: profile.id,
-          fb_token: accessToken,
-          name: profile.displayName,
-          email: profile.emails[0].value,
-          profilePic: 'http://graph.facebook.com/' + profile.id + '/picture',
-          profilePicLarge: 'http://graph.facebook.com/' + profile.id + '/picture?type=large',
+                fb_id: profile.id,
+                fb_token: accessToken,
+                name: profile.displayName,
+                email: profile.emails[0].value,
+                profilePic: 'http://graph.facebook.com/' + profile.id + '/picture',
+                profilePicLarge: 'http://graph.facebook.com/' + profile.id + '/picture?type=large',
 
-        }).exec(function (err, user) {
-          if (user) {            
-            console.log('Logged In Successfully, new user');
-            user.isNew = true;
-            return done(null, user, {
-              message: 'Logged In Successfully'
-            });
-          } else {
-            return done(err, null, {
-              message: 'There was an error logging you in with Facebook'
-            });
+              }).exec(function (err, user) {
+                if (user) {            
+                  console.log('Logged In Successfully, new user');
+                  user.isNew = true;
+                  return done(null, user, {
+                    message: 'Logged In Successfully'
+                  });
+                } else {
+                  return done(err, null, {
+                    message: 'There was an error logging you in with Facebook'
+                  });
+                }
+              });
           }
         });
+        
 
       // If there is already a user, return it
       } else {
