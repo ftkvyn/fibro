@@ -61,6 +61,8 @@ passport.use(new FacebookStrategy({
             console.log('Connect fb to user user');
             user.fb_id = profile.id;
             user.fb_token = profile.accessToken;
+            user.profilePic = 'http://graph.facebook.com/' + profile.id + '/picture';
+            user.profilePicLarge = 'http://graph.facebook.com/' + profile.id + '/picture?type=large';
             user.save(function(err, user){
               if(err){
                 return done(err, null, {
