@@ -164,6 +164,7 @@ module.exports = {
 		// 		users[i].save(function(){});
 		// 	};
 		// });
+		emailService.sendTestMail();
 		res.view('messages/chatList');
 	},
 

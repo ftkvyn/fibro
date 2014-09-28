@@ -15,6 +15,7 @@
     "q" : "*",
     "html-to-text" : "0.1.0",
     "nodemailer" : "0.7.1",
+    "fs" : "~0.0.2",
     "cloudinary" : "1.0.11",
     "rc": "~0.5.0",
     "include-all": "~0.1.3",
