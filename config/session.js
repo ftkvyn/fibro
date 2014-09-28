@@ -12,9 +12,11 @@
  * http://sailsjs.org/#/documentation/reference/sails.config/sails.config.session.html
  */
 
-var redisSessionUri = 'redis://rediscloud:bn3T0K3d8nRVJdzc@pub-redis-17557.eu-west-1-1.2.ec2.garantiadata.com:17557';
+var redisSessionUri = 
+process.env.REDISCLOUD_URL ||
+ 'redis://rediscloud:bn3T0K3d8nRVJdzc@pub-redis-17557.eu-west-1-1.2.ec2.garantiadata.com:17557';
 
-var mongoUri = 'mongodb://heroku_app28099255:scdkeb21vpo30d3ifokkdh4o@ds053479.mongolab.com:53479/heroku_app28099255/_sessions'
+// var mongoUri = 'mongodb://heroku_app28099255:scdkeb21vpo30d3ifokkdh4o@ds053479.mongolab.com:53479/heroku_app28099255/_sessions'
 
 module.exports.session = {
 
@@ -45,8 +47,8 @@ module.exports.session = {
   * session store that can be shared across multiple Sails.js servers        *
   ***************************************************************************/
 
-  // adapter: 'redis',
-  // url: redisSessionUri,
+  adapter: 'redis',
+  url: redisSessionUri,
 
   /***************************************************************************
   *                                                                          *
@@ -72,8 +74,8 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  adapter: 'mongo',
-  url: mongoUri,
+  // adapter: 'mongo',
+  // url: mongoUri,
   // host: 'ds053479.mongolab.com',
   // port: 53479,
   // db: 'heroku_app28099255',

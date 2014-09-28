@@ -106,7 +106,9 @@ fibroApp.controller('ChatController', ['$http', '$scope', function($http, $scope
 		socket.on('message', function(msg){
 				me.messages.unshift(msg);
 				$scope.$apply();
-				$scope.markChatRead();
+				if($scope.currentUserId != msg.from){
+					$scope.markChatRead();
+				}
 			});		
 
 		socket.get('/api/message/subscribe/'+ $scope.type + '/' + $scope.id);

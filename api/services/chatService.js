@@ -78,10 +78,12 @@ exports.processNewMessage = function (message){
 					chats[i].unreadMessages++;					
 				}
 				// saves.push(chats[i].save());
+				// console.log(chats[i]);
 				chats[i].save(function(err, chat){
 					if(err){
 						console.log(err);
 					}
+					// console.log(chat);
 				});
 				members.push(chats[i].owner);
 			};
