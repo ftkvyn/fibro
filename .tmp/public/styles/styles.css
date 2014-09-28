@@ -46,6 +46,7 @@ body{
 	font-family: 'Arvo', serif !important;
 	background-color: #b29966  !important;
 	color: #2a1d02  !important;
+	width: 100%;
 }
 .fibro-header{
 	height: 60px;

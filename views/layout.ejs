@@ -66,7 +66,11 @@
 
   </head>
 
-  <body>
+  <body
+<% if(!currentUser) { %>
+  ng-controller='AuthController as auth'
+<% } %>
+  >
     <% if(currentUser) { %>
     <div class='fibro-header' ng-controller='NotificationsController'>
     <% } else { %>
@@ -109,8 +113,7 @@
           About
         </a>
       </div>
-      <div 
-      ng-controller='AuthController as auth'
+      <div
       class='account-info'>
         <% if(currentUser) { %>
           <a href="/profile/<%= currentUser.id %>"> <strong>
@@ -118,7 +121,19 @@
           </strong></a>
           <a href="/auth/logout">Log off</a>
         <% } else { %>
-          <modal-dialog     
+          <a ng-click='auth.loginPopup = true'>Log in</a> | 
+          <a ng-click='auth.registerPopup = true'>Register</a>
+        
+        <% } %>        
+        </div>
+      </div>
+    </div>
+
+    <div class='fibro-content'>
+      <%- body %>
+    </div>
+    <% if(!currentUser) { %>
+        <modal-dialog     
           class='auth-popup'
           show='auth.loginPopup' 
           dialog-title='Log in'>
@@ -198,19 +213,7 @@
              class='btn btn-warning'>Cancel</button>
              </div>
           </modal-dialog>   
-
-          <a ng-click='auth.loginPopup = true'>Log in</a> | 
-          <a ng-click='auth.registerPopup = true'>Register</a>
-        
-          <% } %>        
-        </div>
-      </div>
-    </div>
-
-    <div class='fibro-content'>
-      <%- body %>
-    </div>
-
+    <% } %>
 
     <!--
         Client-side Templates
