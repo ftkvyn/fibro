@@ -131,7 +131,8 @@ module.exports = {
                   if (user) {            
                     // Send email
                     req.session.user = user;
-                    return res.send({success:true, userId: user.id});
+                    res.send({success:true, userId: user.id});
+                    emailService.registeredMail(user.email);
                   } else {
                     console.log(err);
                     return res.send({success:false,message:'Error occured.'});

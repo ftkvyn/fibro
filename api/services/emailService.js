@@ -11,12 +11,11 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
 
 exports.sendTestMail = function () {
 	// body...
-	console.log(__dirname);
 	var templatePath = __dirname + '/../../views/emailTemplates/registered.html';
 	var templateContent = fs.readFileSync(templatePath, encoding="utf8");
 	var mailOptions = {
 	   from: "noreply@projectfellows.com", 
-	   to: "ftkvyn@gmail.com", 
+	   to: "XXX@XXX", 
 	   subject: "Hello ✔", 
 	   html: templateContent
 	};
@@ -33,12 +32,13 @@ exports.sendTestMail = function () {
 
 exports.registeredMail = function (email) {
 	// body...
-
+	var templatePath = __dirname + '/../../views/emailTemplates/registered.html';
+	var templateContent = fs.readFileSync(templatePath, encoding="utf8");
 	var mailOptions = {
-	   from: "noreply@projectfellows.com", // sender address
-	   to: email, // list of receivers
-	   subject: "Welcome to Project Fellows", // Subject line
-	   text: "Hello!\n" // plaintext body
+	   from: "noreply@projectfellows.com", 
+	   to: email, 
+	   subject: "Welcome to Project Fellows", 
+	   html: templateContent
 	};
 
 	smtpTransport.sendMail(mailOptions, function(error, response){
