@@ -23,10 +23,7 @@ module.exports = {
 	},
 
 	editProfile: function(req, res){
-		if(+req.param('id') !== req.session.user.id){
-			return res.send(403);
-		}
-		return res.view('user/edit', {userId : req.param('id')});
+		return res.view('user/edit', {userId : req.session.user.id});
 	},
 
 	newProject : function(req, res){
@@ -321,6 +318,24 @@ module.exports = {
 					return res.view('post/view',{post: post, isAuthor: isAuthor});
 				});				
 			});
+	},
+
+	resetPassword : function(req,res){
+		var key = req.param('key');
+		if(!key){
+			return res.notFound();
+		}
+		User.findOne({recoveryKey: key}).exec(function(err, user){
+			if(err){
+				console.log(err);
+				return res.notFound();
+			}
+			if(!user){
+				return res.notFound();	
+			}
+			req.session.key = key;
+			res.view('resetPassword');
+		});
 	},
 };
 

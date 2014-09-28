@@ -122,6 +122,9 @@ width:20px; height: 20px;text-align: center; position: relative;border-radius: 1
 .auth-popup span{color: black;}
 .auth-popup hr{background: #999;height: 2px;margin: 20px 0px;}
 .auth-popup .message {font-size: 150%; background: rgba(200,200,200,0.3);padding:10px; }
+.password-reset-view input,
+.password-reset-view button
+{margin-left: auto;margin-right: auto;margin-top: 10px;}
 
 .fb-button-box{
 	margin: 5px;

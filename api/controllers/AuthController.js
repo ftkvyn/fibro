@@ -6,6 +6,8 @@
  */
 var bcrypt = require('bcrypt');
 var passport = require('passport');
+var gravatar = require('gravatar');
+var uuid = require('node-uuid');
 
 module.exports = {
   
@@ -28,7 +30,7 @@ module.exports = {
           if(user){
             req.session.user = user;
             if(user.isNew){
-              res.redirect('/profile/' + user.id + '/edit');
+              res.redirect('/profile/edit');
             }else{
               res.redirect('/profile/' + user.id);
             }
@@ -122,14 +124,22 @@ module.exports = {
                 console.log(err);
                 return res.badRequest('Error.');
               }else{
+                var pic = gravatar.url(email, {
+                  size:50,
+                  // default:'/images/anonymous.jpg'
+                });
+                var picLarge = gravatar.url(email, {
+                  size:200,
+                  // default:'/images/anonymous.jpg'
+                });
                 User.create({
                   email: email,
                   password: hash,
-                  profilePic: '/images/anonymous.jpg',
-                  profilePicLarge: '/images/anonymous.jpg',
+                  name: req.body.name,
+                  profilePic: pic,
+                  profilePicLarge: picLarge,
                 }).exec(function (err, user) {
                   if (user) {            
-                    // Send email
                     req.session.user = user;
                     res.send({success:true, userId: user.id});
                     emailService.registeredMail(user.email);
@@ -142,8 +152,77 @@ module.exports = {
             });
           });
         });
+      },
+
+
+  recoverPassword: function(req, res){
+    var email = req.body.email;
+    User.findOne({email: email}).exec(function(err, user){
+      if(err){
+        console.log(err);
+        return res.send({message: 'Unable process request.'});
+      }
+      if(!user)
+      {
+        return res.send({message: 'User with given email not found.'});
+      }
+      if(!user.password && user.fb_id){
+        return res.send({message: 'User with given email was registered using facebok. Try to login with facebook.'}); 
+      }
+      user.recoveryKey = uuid.v4();
+      user.save(function(err,user){
+          if(err){
+            console.log(err);
+            return res.send({message: 'Unable process request.'});
+          }
+          emailService.resetPassword(user);   
+          return res.send({message: 'Instructions on reset password were sent to ' + user.email});
+        }
+      );
+
+    })
+  },
+
+  resetPassword: function(req,res){
+      var password = req.body.password;
+      if(password.length < 6){
+        return res.send({
+                  success: false,
+                  message: 'Password should be at least 6 characters long.'
+                });
+      }
+      var key = req.session.key;
+
+      User.findOne({recoveryKey:key}).exec(
+        function(err,user){
+          if(err){
+            console.log(err);
+            return res.send({
+                  success: false,
+                  message: 'Unable process request.'
+                });
+          }
+          bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(password, salt, function(err, hash) {
+              if (err) {
+                console.log(err);
+                return res.badRequest('Error.');
+              }else{
+                user.password = hash;
+                user.recoveryKey = null;
+                req.session.key = null;
+                user.save(function (err, user) {
+                  if (user) {            
+                    res.send({success:true, message: 'Password was changed successfuly.'});
+                  } else {
+                    console.log(err);
+                    return res.send({success:false,message:'Error occured.'});
+                  }
+                });
+              }
+            });
+          });
+        });
+
   }
-
 };
-
-

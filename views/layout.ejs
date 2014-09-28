@@ -144,7 +144,7 @@
                 ng-model='auth.model.password'
                 id='password' name='password'
                 type='password'></input><br/>
-              <a ng-click='auth.resetPassword()'>Recover password</a>
+              <a ng-click='auth.requestResetPassword()'>Recover password</a>
             
             </div>
             <button ng-click='auth.login()' 
@@ -172,18 +172,22 @@
               </div>
               <span style='font-size:130%;'>or using your E-mail</span><br/>
 
+              <input placeholder='Name'
+                id='name' name='name'
+                ng-model='auth.model.name'
+                type='text'></input>*</br>
               <input placeholder='E-mail'
                 id='email' name='email'
                 ng-model='auth.model.email'
-                type='email'></input><br/>
+                type='email'></input>*<br/>
               <input placeholder='Password' 
                 ng-model='auth.model.password'
                 id='password' name='password'
-                type='password'></input><br/>
+                type='password'></input>*<br/>
               <input placeholder='Confim password' 
                 ng-model='auth.model.passwordConfirm'
                 id='passwordConfirm' name='passwordConfirm'
-                type='password'></input><br/>
+                type='password'></input>*<br/>
             </div>
             
             

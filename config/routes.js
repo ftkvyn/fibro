@@ -32,9 +32,9 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
   
-  '/profile/:id': 'ViewController.profile',
+  '/profile/edit': 'ViewController.editProfile',
 
-  '/profile/:id/edit': 'ViewController.editProfile',
+  '/profile/:id': 'ViewController.profile',  
 
   '/project/new' : 'ViewController.newProject',
 
@@ -59,6 +59,8 @@ module.exports.routes = {
   '/search/project': 'ViewController.searchProject',
 
   '/chat/:type/:id': 'ViewController.chat',
+
+  '/resetPassword/:key': 'ViewController.resetPassword',
 
   'get /api/chats/:skip/:count' : 'ChatController.find',
 
@@ -125,6 +127,10 @@ module.exports.routes = {
   'get /auth/facebook/callback': 'AuthController.fb_authenticate_callback',
 
   'get /auth/logout': 'AuthController.logout',
+
+  'post /auth/recoverPasswordRequest' :'AuthController.recoverPassword',
+
+  'post /auth/resetPassword': 'AuthController.resetPassword',
 
   //temp method
   'get /auth/loginById/:id':'AuthController.loginById',

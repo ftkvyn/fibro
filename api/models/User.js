@@ -42,6 +42,9 @@ module.exports = {
 	location:{
 		type:'string'
 	},
+	recoveryKey: {
+		type: 'string'
+	},
 
 
 

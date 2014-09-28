@@ -23,8 +23,17 @@ fibroApp.controller('AuthController', ['$http', '$scope',
 		}
 
 		me.register = function(){
+			me.message = '';
 			if(me.model.password.length < 6){
 				me.message = 'Password should be at least 6 characters long.'
+			}
+			if(!me.model.name){
+				me.message += ' Name is required.'
+			}
+			if(!me.model.email){
+				me.message += ' Email is required.'
+			}
+			if(me.message){
 				return;
 			}
 			$http.post('/auth/email/register', me.model)
@@ -33,7 +42,7 @@ fibroApp.controller('AuthController', ['$http', '$scope',
 					me.message = data.message;
 				}else{
 					me.registerPopup = false;
-					location = '/profile/' + data.userId + '/edit';					
+					location = '/profile/edit';					
 				}
 			})
 			.error(function(data){
@@ -42,8 +51,35 @@ fibroApp.controller('AuthController', ['$http', '$scope',
 			});
 		}
 
+		me.requestResetPassword = function(){
+			me.message = '';
+			if(!me.model.email){
+				me.message += 'Please, provide email.'
+				return;
+			}
+			$http.post('/auth/recoverPasswordRequest', me.model)
+			.success(function(data){	
+				me.message = data.message;
+			})
+			.error(function(data){
+				console.log(data);
+				alert('Error occured while reseting password.');
+			});	
+		}
+
 		me.resetPassword = function(){
-			me.message = 'Instructions about recovering password were sent to ' + me.model.email;
+			if(me.model.password.length < 6){
+				me.message = 'Password should be at least 6 characters long.'
+			}
+			$http.post('/auth/resetPassword', me.model)
+			.success(function(data){	
+				me.message = data.message;
+			})
+			.error(function(data){
+				console.log(data);
+				alert('Error occured while resetting password.');
+			});
+
 		}
 
 
