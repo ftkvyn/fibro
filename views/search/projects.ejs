@@ -1,8 +1,55 @@
 <script type="text/javascript" src='/js/app/controllers/searchController.js'></script>
+<h3 class='center'>Projects</h3>
 <div class='col-md-2'></div>
-<div ng-controller='SearchController' ng-init='initProjects()' class='col-md-10'>
-	<h3>Projects</h3>
-	<% if (currentUser) { %>
+<div ng-controller='SearchController' ng-init='initProjects()' class='col-md-6'>
+	<div class='search-options'>
+		<div class='row'>
+			Search by:
+			<input type="radio" ng-model="criteria" value="neededMembers" ng-change='search()'>Needed members</input>
+			<input type='radio' ng-model="criteria" value="name" ng-change='search()'>Name</input>
+			<input type='radio' ng-model="criteria" value="description" ng-change='search()'>Description</input>
+		</div>
+		<input type='text' ng-model='pattern' placeholder='Enter search text' ng-change='search()'></input>
+	</div>
+	<div class='search-results' ng-model='items'>
+		<div class='no-result' ng-show='!items.length'>
+			<div ng-hide='isSearching'>
+				<span ng-show='!pattern.length'>
+					Please, enter search text.
+				</span>
+				<span ng-hide='!pattern.length'>
+					Sorry, no resuts maching your criteria found :(
+				</span>
+			</div>
+		</div>
+		<div ng-show='isSearching'>
+			<span>
+				Searching...
+			</span>
+		</div>
+		<a href="/project/{{project.id}}" ng-repeat='project in items' 
+		ng-show='project'
+		class='ng-hide search-result-link'>
+			<div class='row search-result'>
+				<div class='title'>
+					<span class='name'>{{project.name}}</span>
+				</div>
+				<div class='info'>
+					<ul>
+						<li ng-show='project.neededMembers'>
+							{{project.neededMembers}}
+						</li>
+						<li ng-show='project.description_plainText'>
+							{{project.description_plainText}}
+						</li>
+					</ul>
+				</div>
+			
+			</div>
+		</a>
+	</div>
+</div>
+<div class='col-md-4'><% if (currentUser) { %>
 		<ng-include
 		  src="'/templates/home/invites.html'">
 		</ng-include>	
@@ -33,52 +80,4 @@
 			</div>
 		<% } %>			
 	<% } %>
-	
-	<div class='search-options'>
-		<div class='row'>
-			Search by:
-			<input type="radio" ng-model="criteria" value="neededMembers" ng-change='search()'>Needed members</input>
-			<input type='radio' ng-model="criteria" value="name" ng-change='search()'>Name</input>
-			<input type='radio' ng-model="criteria" value="description" ng-change='search()'>Description</input>
-		</div>
-		<input type='text' ng-model='pattern' ng-change='search()'></input>
 	</div>
-	<div class='search-results' ng-model='items'>
-		<div class='no-result' ng-show='!items.length'>
-			<div ng-hide='isSearching'>
-				<span ng-show='!pattern.length'>
-					Please, enter search text.
-				</span>
-				<span ng-hide='!pattern.length'>
-					Sorry, no resuts maching your criteria found :(
-				</span>
-			</div>
-		</div>
-		<div ng-show='isSearching'>
-			<span>
-				Searching...
-			</span>
-		</div>
-		<a href="/project/{{project.id}}" ng-repeat='project in items' 
-		ng-show='project'
-		class='ng-hide search-result-link'>
-			<div class='row search-result'>
-				<div class='title'>
-					<span class='name'>{{project.name}}</span>
-				</div>
-				<div class='info'>
-					<ul>
-						<li ng-show='project.neededMembers'>
-							{{project.neededMembers}}
-						</li>
-						<li ng-show='project.description'>
-							{{project.description_plainText}}
-						</li>
-					</ul>
-				</div>
-			
-			</div>
-		</a>
-	</div>
-</div>
-<div class='col-md-1'></div>

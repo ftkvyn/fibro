@@ -1,25 +1,7 @@
 <script type="text/javascript" src='/js/app/controllers/searchController.js'></script>
+<h3 class='center'>Users</h3>
 <div class='col-md-2'></div>
-<div ng-controller='SearchController' ng-init='initUsers()' class='col-md-10'>
-	<h3>Users</h3>
-	<% if (currentUser) { %>
-		<ng-include
-		  src="'/templates/home/requests.html'">
-		</ng-include>		
-
-		<% if (fellows && fellows.length) { %>
-			<div>
-				<h4>Fellows</h4>
-				<ul>
-				    <% for(var i=0; i<fellows.length; i++) { %>
-				        <li>
-				            <a href='/profile/<%= fellows[i].id %>'><%= fellows[i].name %></a>
-				        </li>
-				    <% } %>
-				</ul>
-			</div>
-		<% } %>	
-	<% } %>
+<div ng-controller='SearchController' ng-init='initUsers()' class='col-md-6'>
 
 	<div class='search-options'>
 		<div class='row'>
@@ -29,7 +11,7 @@
 			<input type='radio' ng-model="criteria" value="about" ng-change='search()'>About</input>
 			<input type='radio' ng-model="criteria" value="location" ng-change='search()'>Location</input>
 		</div>
-		<input type='text' ng-model='pattern' ng-change='search()'></input>
+		<input type='text' ng-model='pattern' placeholder='Enter search text' ng-change='search()'></input>
 	</div>
 	<div class='search-results' ng-model='items'>
 		<div class='no-result' ng-show='!items.length'>
@@ -57,13 +39,13 @@
 				</div>
 				<div class='info'>
 					<ul>
-						<li ng-show='user.skills'>
-							{{user.skills}}
-						</li>
 						<li ng-show='user.location'>
 							{{user.location}}
 						</li>
-						<li ng-show='user.about'>
+						<li ng-show='user.skills'>
+							{{user.skills}}
+						</li>						
+						<li ng-show='user.about_plainText'>
 							{{user.about_plainText}}
 						</li>
 					</ul>
@@ -72,4 +54,24 @@
 			</div>
 		</a>
 	</div>
+</div>
+<div class='col-md-4'>
+<% if (currentUser) { %>
+		<ng-include
+		  src="'/templates/home/requests.html'">
+		</ng-include>		
+
+		<% if (fellows && fellows.length) { %>
+			<div>
+				<h4>Fellows</h4>
+				<ul>
+				    <% for(var i=0; i<fellows.length; i++) { %>
+				        <li>
+				            <a href='/profile/<%= fellows[i].id %>'><%= fellows[i].name %></a>
+				        </li>
+				    <% } %>
+				</ul>
+			</div>
+		<% } %>	
+	<% } %>
 </div>

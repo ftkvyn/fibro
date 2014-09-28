@@ -32,11 +32,10 @@ exports.processNewMessage = function (message){
 		var date = new Date();
 		for (var i = chats.length - 1; i >= 0; i--) {
 			chats[i].lastMessage = message.id;
+			chats[i].updatedAt = date;
 			if(chats[i].owner != message.from){
-				chats[i].unreadMessages++;
-				chats[i].updatedAt = date;
+				chats[i].unreadMessages++;				
 			}
-
 			saves.push(chats[i].save());
 		};		
 		Q.all(saves).then(cb);

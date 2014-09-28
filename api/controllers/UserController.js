@@ -54,7 +54,7 @@ module.exports = {
 				return res.badRequest('Unable load users');
 			}
 			users = users.map(function(u){
-				return u.reduce();
+				return u.reduce(true);
 			});
 			return res.send(users);	
 		});	

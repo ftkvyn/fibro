@@ -244,9 +244,9 @@ a:link.chat-link{
 .chat-info .createdAt{font-size: 80%;}
 .chat-info .info{white-space: nowrap;}
 .chat-info .picture{float: left; margin-right: 20px;}
-.chat-info .unread-messages{display: inline-block;background-color: #8BDF49;color: #fff;
-width:20px; height: 20px;text-align: center; position: relative;left: -15px; top: -13px;border-radius: 10px;}
-.project .chat-info .unread-messages{left: -7px;top: 5px;}
+.unread-messages{display: inline-block;background-color: #8BDF49;color: #fff;
+width:20px; height: 20px;text-align: center; float: left; position: relative;left: -32px; top: 0px;border-radius: 10px;}
+.project .unread-messages{left: 0px;top: 0px;}
 .last-message{
 	display: inline-block;
 	float: left;
@@ -254,7 +254,7 @@ width:20px; height: 20px;text-align: center; position: relative;left: -15px; top
 	height: 100%;
 	text-align: left;
 }
-
+.unread .user-name{margin-left: -20px;}
 .chat-screen{
 	display: block;
   	text-align: center; 
@@ -490,3 +490,5 @@ a.chat-link:link{
 .post-info .createdAt{font-size: 75%; color: #7C7568;}
 .post-comment-new{margin-top: 30px;}
 .post-comment-new textarea{width: 500px;height: 70px;}
+
+.search-options input{margin: 10px 0px 10px -15px;}

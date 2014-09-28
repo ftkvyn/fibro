@@ -11,14 +11,15 @@
 	 		<div class='picture'>
 			 	<img ng-show='chat.targetUser' 
 			 	ng-src="{{chat.targetUser.profilePic}}"></img>
-			 	<div
+			 	
+		 	</div>
+		 	<div
 			 	class='unread-messages' 
 			 	ng-show='chat.unreadMessages'>
 			 		{{chat.unreadMessages}}
 			 	</div>
-		 	</div>
 		 	<div class='info'>
-			 	<span ng-show='chat.targetUser'>
+			 	<span ng-show='chat.targetUser' class='user-name'>
 			 		{{chat.targetUser.name}}
 			 	</span>
 			 	<strong ng-show='chat.targetProject'>
