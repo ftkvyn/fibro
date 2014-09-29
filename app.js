@@ -19,6 +19,7 @@
  */
 
 // Ensure a "sails" can be located:
+require('newrelic');
 (function() {
   var sails;
   try {

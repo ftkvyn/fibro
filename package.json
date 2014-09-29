@@ -15,7 +15,7 @@
     "q" : "*",
     "html-to-text" : "0.1.0",
     "nodemailer" : "0.7.1",
-    "fs" : "~0.0.2",
+    "newrelic" : "1.11.3",
     "underscore":"1.7.0",
     "gravatar":"*",
     "node-uuid":"1.4.1",
