@@ -132,13 +132,15 @@ module.exports = {
                   size:200,
                   // default:'/images/anonymous.jpg'
                 });
-                User.create({
+                var userData = {
                   email: email,
                   password: hash,
                   name: req.body.name,
                   profilePic: pic,
                   profilePicLarge: picLarge,
-                }).exec(function (err, user) {
+                };
+                // console.log(userData);
+                User.create(userData).exec(function (err, user) {
                   if (user) {            
                     req.session.user = user;
                     res.send({success:true, userId: user.id});
