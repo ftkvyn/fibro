@@ -20,6 +20,10 @@
 
 // Ensure a "sails" can be located:
 require('newrelic');
+// console.log(process.env.REDIS_HOST);
+// console.log(process.env.REDIS_PORT);
+// console.log(process.env.REDIS_PASS);
+// console.log(process.env.REDIS_DB);
 (function() {
   var sails;
   try {

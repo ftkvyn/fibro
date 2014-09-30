@@ -99,10 +99,10 @@ module.exports.sockets = {
   ***************************************************************************/
 
   adapter: 'redis',
-  host: 'pub-redis-17557.eu-west-1-1.2.ec2.garantiadata.com',
-  port: 17557,
-  db: 'redis-fibro-app',
-  pass: 'bn3T0K3d8nRVJdzc',
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
+  db: process.env.REDIS_DB,
+  pass: process.env.REDIS_PASS,
 
 
   /***************************************************************************
