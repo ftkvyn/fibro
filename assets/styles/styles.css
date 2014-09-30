@@ -214,6 +214,7 @@ a.create-project-link:link{
 	border-radius: 6px;
 	border-color: #b29966;
 	background-color: #f5f5eb;
+	overflow: hidden;
 }
 a:link.chat-link{
 	text-decoration: none;
@@ -253,6 +254,8 @@ width:20px; height: 20px;text-align: center; float: left; position: relative;lef
 	margin-left: 10px;
 	height: 100%;
 	text-align: left;
+	overflow: hidden;
+	width: 500px;
 }
 .unread .user-name{margin-left: -20px;}
 .chat-screen{

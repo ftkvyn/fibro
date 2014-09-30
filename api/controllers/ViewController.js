@@ -314,7 +314,10 @@ module.exports = {
 					for(var i = 0; i < post.comments.length; i++){
 						post.comments[i].author = usersMap[post.comments[i].author];
 					}					
-					var isAuthor = post.author.id === req.session.user.id;
+					var isAuthor = false;
+					if(req.session.user){
+						isAuthor = post.author.id === req.session.user.id;
+					}
 					return res.view('post/view',{post: post, isAuthor: isAuthor});
 				});				
 			});
