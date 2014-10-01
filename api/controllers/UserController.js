@@ -47,7 +47,12 @@ module.exports = {
 
 	forMain: function(req, res){
 		var count = +req.param('count');
-		User.find({sort: 'updatedAt DESC', limit: count})
+		//fix it!
+		User.find( 
+			{
+				sort: 'updatedAt DESC', 
+				limit: count
+			})
 		.exec(function(err, users){
 			if(err){
 				console.log(err);
