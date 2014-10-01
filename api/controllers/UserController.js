@@ -47,12 +47,12 @@ module.exports = {
 
 	forMain: function(req, res){
 		var count = +req.param('count');
-		User.find({sort: 'updatedAt DESC', limit: count})
+		User.find(sort: 'updatedAt DESC', limit: count})
 		.exec(function(err, users){
 			if(err){
 				console.log(err);
 				return res.badRequest('Unable load users');
-			}
+			}			
 			users = users.map(function(u){
 				return u.reduce(true);
 			});

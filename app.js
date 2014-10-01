@@ -19,7 +19,7 @@
  */
 
 // Ensure a "sails" can be located:
-require('newrelic');
+// require('newrelic');
 // console.log(process.env.REDIS_HOST);
 // console.log(process.env.REDIS_PORT);
 // console.log(process.env.REDIS_PASS);
