@@ -19,13 +19,13 @@
  * http://sailsjs.org/#/documentation/reference/sails.config/sails.config.connections.html
  */
 
-//process.env.CLEARDB_DATABASE_URL
+//
  
-// var mysqlConnection = 'mysql2://fibro_user:fibro5557@127.0.0.1:3306/fibro_db';
-
- // var mongoUri = process.env.MONGOLAB_URI ||
- // +  process.env.MONGOHQ_URL ||
- // +  'mongodb://localhost:27017/sails-db';
+var cs = process.env.CLEARDB_DATABASE_URL || 'mysql://be9b728805b4e7:429b6cb8@eu-cdbr-west-01.cleardb.com/heroku_2da6aff44e1e4e4?reconnect=true';
+process.env.MYSQL_HOST = cs.substring(32,32+27);
+process.env.MYSQL_USER = cs.substring(8,8+14);
+process.env.MYSQL_PASS = cs.substring(23,23+8);
+process.env.MYSQL_DB   = cs.substring(60,60+22);
 
 module.exports.connections = {
 

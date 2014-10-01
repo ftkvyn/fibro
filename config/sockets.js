@@ -9,6 +9,13 @@
  * For more information on sockets configuration, including advanced config options, see:
  * http://sailsjs.org/#/documentation/reference/sails.config/sails.config.sockets.html
  */
+var cs = process.env.REDISCLOUD_URL || 'redis://rediscloud:bn3T0K3d8nRVJdzc@pub-redis-17557.eu-west-1-1.2.ec2.garantiadata.com:17557';
+
+
+process.env.REDIS_DB  = 'redis-fibro-app';
+process.env.REDIS_PASS  = cs.substring(19,19+16);
+process.env.REDIS_HOST  = cs.substring(36,36+50);
+process.env.REDIS_PORT  = cs.substring(87);
 
 module.exports.sockets = {
 
@@ -60,7 +67,7 @@ module.exports.sockets = {
     'htmlfile',
     'xhr-polling',
     'jsonp-polling',
-    // 'flashsockets'
+    'flashsockets'
   ],
 
   /***************************************************************************
