@@ -106,7 +106,7 @@ passport.use(new FacebookStrategy({
       // If there is already a user, return it
       } else {
         console.log('Logged In Successfully, old user');
-        emailService.registeredMail(user);
+        // emailService.registeredMail(user);
         user.fb_token = accessToken;
         user.save(function(){
           return done(null, user, {
