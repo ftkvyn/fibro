@@ -71,13 +71,20 @@
 	</div>
 
 	<div class='col-md-4'>
+		
+		<a 
 		<% if(currentUser) { %>
-		<a href="/project/new" class='create-project-link'>
+			href="/project/new" 
+		<% } else { %>
+			ng-click='auth.loginPopup = true'
+			href=""
+		<% } %>
+		class='create-project-link'>
 			<div class='create-project-box'>
 				<span>+ Create project</span>
 			</div>
 		</a></br>
-		<% } %>
+		
 		<div class='users'
 			ng-controller='ProfileController'
 			ng-init='loadOnMain()' >
@@ -104,7 +111,6 @@
 			  	<div class='skills'>
 			  		{{user.skills}}
 			  	</div>
-			  	<a href='/auth/loginById/{{user.id}}'>Login as this user</a>
 			</div>
 		</div>
 		<div class='posts'

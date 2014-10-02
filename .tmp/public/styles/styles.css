@@ -215,6 +215,7 @@ a.create-project-link:link{
 	border-color: #b29966;
 	background-color: #f5f5eb;
 	overflow: hidden;
+	word-wrap: break-word;
 }
 a:link.chat-link{
 	text-decoration: none;
@@ -278,6 +279,7 @@ width:20px; height: 20px;text-align: center; float: left; position: relative;lef
 	border-radius: 4px;
 	min-width: 200px;
 	max-width: 500px;
+	word-wrap: break-word;
 }
 .message.self .container{
 	float: right;

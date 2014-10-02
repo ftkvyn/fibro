@@ -121,8 +121,8 @@
           </strong></a>
           <a href="/auth/logout">Log off</a>
         <% } else { %>
-          <a ng-click='auth.loginPopup = true'>Log in</a> | 
-          <a ng-click='auth.registerPopup = true'>Register</a>
+          <a ng-click='auth.loginPopup = true' href="">Log in</a> | 
+          <a ng-click='auth.registerPopup = true' href="">Register</a>
         
         <% } %>        
         </div>
@@ -159,8 +159,9 @@
                 ng-model='auth.model.password'
                 id='password' name='password'
                 type='password'></input><br/>
-              <a ng-click='auth.requestResetPassword()'>Recover password</a>
-            
+              <a ng-click='auth.requestResetPassword()'>Recover password</a><br/>
+              <a ng-click='auth.loginPopup = false;auth.registerPopup = true;'>
+                Register</a> if you don't have account yet.
             </div>
             <button ng-click='auth.login()' 
              class='btn btn-success'>Enter</button>
