@@ -88,13 +88,13 @@ passport.use(new FacebookStrategy({
                 if (user) {            
                   console.log('Logged In Successfully, new user');
                   user.isNew = true;
-                  emailService.registeredMail(user.email);
+                  emailService.registeredMail(user);
                   return done(null, user, {
                     message: 'Logged In Successfully'
                   });
                   
                 } else {
-                  emailService.registeredMail(user.email);
+                  emailService.registeredMail(user);
                   return done(err, null, {
                     message: 'There was an error logging you in with Facebook'
                   });
