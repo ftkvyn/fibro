@@ -15,7 +15,7 @@
 		<div class='row' style='margin:0px;'>
 		
 		<%- project.description %>
-	<% if (isMember) { %>		
+	<% if (isMember && project.privateInformation) { %>		
 		<h4>For members only:</h4>
 		<%- project.privateInformation || "Empty yet :("%>
 	<% } %>

@@ -56,7 +56,7 @@ fibroApp.controller('ChatController', ['$http', '$scope', function($http, $scope
 		})
 		.error(function(data){
 			console.log(data);
-			alert('Error occured while sending message.');
+			console.log('Error occured while sending message.');
 			me.isSending = false;
 		});
 	}
@@ -68,7 +68,7 @@ fibroApp.controller('ChatController', ['$http', '$scope', function($http, $scope
 		})
 		.error(function(data){
 			console.log(data);
-			alert('Error occured while loading messages.');
+			console.log('Error occured while loading messages.');
 		});
 	}
 
@@ -81,7 +81,7 @@ fibroApp.controller('ChatController', ['$http', '$scope', function($http, $scope
 		})
 		.error(function(data){
 			console.log(data);
-			alert('Error occured while loading messages.');
+			console.log('Error occured while loading messages.');
 		});
 	}
 	$scope.getUserName = function(id){
@@ -122,7 +122,7 @@ fibroApp.controller('ChatController', ['$http', '$scope', function($http, $scope
 		})
 		.error(function(data){
 			console.log(data);
-			// alert('Error occured while updating chat.');
+			// console.log('Error occured while updating chat.');
 		});
 		
 	}

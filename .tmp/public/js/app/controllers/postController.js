@@ -32,7 +32,7 @@ fibroApp.controller('PostController', ['$http','$scope', 'nicService', function(
 				.error(function(data){
 					console.log(data);
 					me.isSaving = false;
-					alert('Error occured while saving post.');
+					console.log('Error occured while saving post.');
 				});			
 			}
 		}
@@ -47,7 +47,7 @@ fibroApp.controller('PostController', ['$http','$scope', 'nicService', function(
 				})
 				.error(function(data){
 					console.log(data);
-					alert('Error occured while loading post.');
+					console.log('Error occured while loading post.');
 				});	
 			}else{
 				me.model.project = projectId;
@@ -66,7 +66,7 @@ fibroApp.controller('PostController', ['$http','$scope', 'nicService', function(
 			})
 			.error(function(data){
 				console.log(data);
-				alert('Error occured while deleting post.');
+				console.log('Error occured while deleting post.');
 			});
 		},
 
@@ -79,7 +79,7 @@ fibroApp.controller('PostController', ['$http','$scope', 'nicService', function(
 			})
 			.error(function(data){
 				console.log(data);
-				alert('Error occured while loading posts.');
+				console.log('Error occured while loading posts.');
 			});	
 		}
 	}]);

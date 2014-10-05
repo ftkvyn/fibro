@@ -53,7 +53,7 @@ fibroApp.controller('CommentController', ['$http','$scope', function($http, $sco
 		})
 		.error(function(data){
 			console.log(data);
-			alert('Error occured while creating comment.');
+			console.log('Error occured while creating comment.');
 			me.isSending = false;
 		});
 	}

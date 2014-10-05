@@ -19,7 +19,7 @@ fibroApp.controller('ProfileController', ['$http', '$scope', 'nicService', funct
 				})
 				.error(function(data){
 					console.log(data);
-					alert('Error occured while updating profile.');
+					console.log('Error occured while updating profile.');
 				});			
 			}
 		}
@@ -33,7 +33,7 @@ fibroApp.controller('ProfileController', ['$http', '$scope', 'nicService', funct
 			})
 			.error(function(data){
 				console.log(data);
-				alert('Error occured while uploading picture.');
+				console.log('Error occured while uploading picture.');
 			});
 		}
 
@@ -49,7 +49,7 @@ fibroApp.controller('ProfileController', ['$http', '$scope', 'nicService', funct
 			})
 			.error(function(data){
 				console.log(data);
-				alert('Error occured while loading profile.');
+				console.log('Error occured while loading profile.');
 			});
 		}
 
@@ -62,7 +62,7 @@ fibroApp.controller('ProfileController', ['$http', '$scope', 'nicService', funct
 			})
 			.error(function(data){
 				console.log(data);
-				alert('Error occured while loading users.');
+				console.log('Error occured while loading users.');
 			});	
 		}
 

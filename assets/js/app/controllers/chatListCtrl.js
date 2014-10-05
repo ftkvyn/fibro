@@ -11,7 +11,7 @@ fibroApp.controller('ChatListController', ['$http', '$scope', function($http, $s
 		})
 		.error(function(data){
 			console.log(data);
-			alert('Error occured while loading chats list.');
+			console.log('Error occured while loading chats list.');
 		});
 	}
 

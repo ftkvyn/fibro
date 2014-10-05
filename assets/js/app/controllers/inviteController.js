@@ -14,7 +14,7 @@ fibroApp.controller('InviteController', ['$http', function($http){
 		})
 		.error(function(data){
 			console.log(data);
-			alert('Error occured while loading users.');
+			console.log('Error occured while loading users.');
 		});
 	}
 
@@ -29,7 +29,7 @@ fibroApp.controller('InviteController', ['$http', function($http){
 		})
 		.error(function(data){
 			console.log(data);
-			alert('Error occured while loading projects 123.');
+			console.log('Error occured while loading projects 123.');
 		});
 	}
 
@@ -40,7 +40,7 @@ fibroApp.controller('InviteController', ['$http', function($http){
 		})
 		.error(function(data){
 			console.log(data);
-			alert('Error occured while loading invitations.');
+			console.log('Error occured while loading invitations.');
 		});
 	}
 
@@ -55,7 +55,7 @@ fibroApp.controller('InviteController', ['$http', function($http){
 		})
 		.error(function(data){
 			console.log(data);
-			alert('Error occured while accepting invitation.');
+			console.log('Error occured while accepting invitation.');
 		});
 	}
 
@@ -70,7 +70,7 @@ fibroApp.controller('InviteController', ['$http', function($http){
 		})
 		.error(function(data){
 			console.log(data);
-			alert('Error occured while declining invitation.');
+			console.log('Error occured while declining invitation.');
 		});
 	}
 
@@ -85,7 +85,7 @@ fibroApp.controller('InviteController', ['$http', function($http){
 		})
 		.error(function(data){
 			console.log(data);
-			alert('Error occured while creating invitation.');
+			console.log('Error occured while creating invitation.');
 		});			
 	}
 

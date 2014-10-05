@@ -26,7 +26,7 @@ fibroApp.controller('SearchController', ['$http', '$scope', function($http, $sco
 			})
 			.error(function(data){
 				console.log(data);
-				alert('Error occured while loading.');
+				console.log('Error occured while loading.');
 			});
 		}
 
@@ -47,7 +47,7 @@ fibroApp.controller('SearchController', ['$http', '$scope', function($http, $sco
 				})
 				.error(function(data){
 					console.log(data);
-					alert('Error occured while searching.');
+					console.log('Error occured while searching.');
 				});
 			}
 			else{

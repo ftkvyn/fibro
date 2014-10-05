@@ -18,7 +18,7 @@ fibroApp.controller('AuthController', ['$http', '$scope',
 			})
 			.error(function(data){
 				console.log(data);
-				alert('Error occured while logging in.');
+				console.log('Error occured while logging in.');
 			});
 		}
 
@@ -47,7 +47,7 @@ fibroApp.controller('AuthController', ['$http', '$scope',
 			})
 			.error(function(data){
 				console.log(data);
-				alert('Error occured while registering.');
+				console.log('Error occured while registering.');
 			});
 		}
 
@@ -63,7 +63,7 @@ fibroApp.controller('AuthController', ['$http', '$scope',
 			})
 			.error(function(data){
 				console.log(data);
-				alert('Error occured while reseting password.');
+				console.log('Error occured while reseting password.');
 			});	
 		}
 
@@ -77,7 +77,7 @@ fibroApp.controller('AuthController', ['$http', '$scope',
 			})
 			.error(function(data){
 				console.log(data);
-				alert('Error occured while resetting password.');
+				console.log('Error occured while resetting password.');
 			});
 
 		}

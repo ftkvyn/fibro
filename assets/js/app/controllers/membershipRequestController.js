@@ -17,7 +17,7 @@ fibroApp.controller('MembershipRequestController', ['$http', function($http){
 		})
 		.error(function(data){
 			console.log(data);
-			alert('Error occured while sending request.');
+			console.log('Error occured while sending request.');
 		});
 	}
 
@@ -33,7 +33,7 @@ fibroApp.controller('MembershipRequestController', ['$http', function($http){
 		})
 		.error(function(data){
 			console.log(data);
-			alert('Error occured while loading request.');
+			console.log('Error occured while loading request.');
 		});
 	}
 
@@ -46,7 +46,7 @@ fibroApp.controller('MembershipRequestController', ['$http', function($http){
 		})
 		.error(function(data){
 			console.log(data);
-			alert('Error occured while processing request.');
+			console.log('Error occured while processing request.');
 		});
 	}
 
@@ -57,7 +57,7 @@ fibroApp.controller('MembershipRequestController', ['$http', function($http){
 		})
 		.error(function(data){
 			console.log(data);
-			alert('Error occured while processing request.');
+			console.log('Error occured while processing request.');
 		});
 	}
 }]);

@@ -35,7 +35,7 @@ fibroApp.controller('ProjectController', ['$http', 'nicService', function($http,
 				.error(function(data){
 					console.log(data);
 					me.isSaving = false;
-					alert('Error occured while saving project.');
+					console.log('Error occured while saving project.');
 				});			
 			}
 		}
@@ -51,7 +51,7 @@ fibroApp.controller('ProjectController', ['$http', 'nicService', function($http,
 				})
 				.error(function(data){
 					console.log(data);
-					alert('Error occured while loading project.');
+					console.log('Error occured while loading project.');
 				});	
 			}
 		}
@@ -69,7 +69,7 @@ fibroApp.controller('ProjectController', ['$http', 'nicService', function($http,
 			})
 			.error(function(data){
 				console.log(data);
-				alert('Error occured while loading projects.');
+				console.log('Error occured while loading projects.');
 			});	
 		}
 
@@ -93,7 +93,7 @@ fibroApp.controller('ProjectController', ['$http', 'nicService', function($http,
 			})
 			.error(function(data){
 				console.log(data);
-				alert('Error occured while deleting project.');
+				console.log('Error occured while deleting project.');
 			});
 		}
 
@@ -105,7 +105,7 @@ fibroApp.controller('ProjectController', ['$http', 'nicService', function($http,
 			})
 			.error(function(data){
 				console.log(data);
-				alert('Error occured while leaving project.');
+				console.log('Error occured while leaving project.');
 			});
 		}
 	}]);
