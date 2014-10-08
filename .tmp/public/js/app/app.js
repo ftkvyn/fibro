@@ -22,6 +22,7 @@ fibroApp.service('nicService', function(){
 				,'outdent'
 				,'hr'
 				,'image'
+				,'upload' 
 				,'forecolor'
 				,'link'
 				,'unlink' 
