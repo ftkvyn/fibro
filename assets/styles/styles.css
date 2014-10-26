@@ -3,7 +3,7 @@
 	color: #F0EFEE;
 	text-align: left;
 	clear: both;
-	height: 400px;
+	height: 400px
 	background-image: url('../images/ttt.jpg');
 	background-position: center;
 	margin: -20px -30px 10px -60px;
@@ -406,6 +406,8 @@ a:link.project-tile-link{
 }
 .user-tile img{
 	border-radius: 25px;
+	height: 50px;
+	width: 50px;
 }
 .user-tile img:hover{
 
@@ -483,7 +485,7 @@ a.chat-link:link{
 	text-decoration: none;
 }
 .post-view{text-align: left;}
-.post-view .picture img{border-radius: 25px;}
+.post-view .picture img{border-radius: 25px;height: 50px;width: 50px;}
 .post-view .picture{float: left;}
 .post-view .name{clear: both;}
 .post-view .info{float: left;margin-left: 10px;}
