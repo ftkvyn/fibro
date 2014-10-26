@@ -133,7 +133,7 @@ module.exports.routes = {
   'post /auth/resetPassword': 'AuthController.resetPassword',
 
   //temp method
-  // 'get /auth/loginById/:id':'AuthController.loginById',
+  'get /auth/loginById/:id':'AuthController.loginById',
 
   /***************************************************************************
   *                                                                          *
