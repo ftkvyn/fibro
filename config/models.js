@@ -20,5 +20,5 @@ module.exports.models = {
 
   connection: 'mysqlServer',
   schema:true,
-  migrate:'alter'
+  migrate:'safe'
 };
