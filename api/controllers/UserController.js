@@ -21,6 +21,8 @@ module.exports = {
 			user.name = req.body.name;
 			user.skills = req.body.skills;
 			user.location = req.body.location;
+			user.profilePicLarge = req.body.profilePicLarge;
+			user.profilePic = req.body.profilePicLarge;
 			user.about = req.body.about;
 			if(user.birthDate){
 				user.birthDate = new Date(req.body.birthDate);
