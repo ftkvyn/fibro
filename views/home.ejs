@@ -46,21 +46,23 @@
 		ng-repeat='project in projectCtrl.projects' 
 		class='project-tile-link'>
 			<div class='project-tile'>
-				<div class='title'>
-					<span class='name'>{{project.name}}</span>
-				</div>
-				<div class='date'>
-					{{project.createdAt | date}}
-				</div>
 				<div class='info'>
-					<div class='description' ng-show='project.description_plainText'>
-						{{project.description_plainText}}
+					<div class='title'>
+						<span class='name'>{{project.name}}</span>
 					</div>
-					<hr width='90%'/>
-					<div class='needed' ng-show='project.neededMembers'>
-						We need: {{project.neededMembers}}
-					</div>						
-				</div>			
+					<div class='date'>
+						{{project.createdAt | date}}
+					</div>
+				
+					<div class='description' ng-show='project.description_plainText'>
+							{{project.description_plainText}}
+					</div>
+				</div>
+				<hr width='90%'/>
+				<div class='needed' ng-show='project.neededMembers'>
+					We need: {{project.neededMembers}}
+				</div>						
+							
 			</div>
 		</a>
 		<div class='clear'></div>

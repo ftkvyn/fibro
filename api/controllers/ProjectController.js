@@ -35,8 +35,8 @@ module.exports = {
 			project.neededMembers = req.body.neededMembers;
 			project.privateInformation = req.body.privateInformation;
 			project.save(function(err, project){
-				console.log('==========');
-				console.log(project);
+				// console.log('==========');
+				// console.log(project);
 				return res.send(project);	
 			});			
 		});		
@@ -117,7 +117,7 @@ module.exports = {
 	forMain: function(req, res){
 		var skip = +req.param('skip') || 0;
 		var count = +req.param('count');
-		Project.find({sort: 'createdAt DESC', limit: count, skip: skip})
+		Project.find({sort: 'updatedAt DESC', limit: count, skip: skip})
 		.exec(function(err, projects){
 			if(err){
 				console.log(err);
